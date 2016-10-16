@@ -1,4 +1,5 @@
 ﻿import { Component } from '@angular/core';
+import './rxjs-operators';
 import { OnInit } from '@angular/core';
 
 @Component({
@@ -9,5 +10,5 @@ import { OnInit } from '@angular/core';
 
 
 export class AppComponent {
-    title = 'My First Angular 2 App'
+    title = 'World Forging'
 }

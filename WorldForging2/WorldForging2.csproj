@@ -73,6 +73,7 @@
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.template.html" />
     <Content Include="app\personalCabinet\personalCabinet.component.template.html" />
+    <Content Include="app\worlds\worlds.component.template.html" />
     <Content Include="Index.html" />
     <Content Include="package.json" />
     <Content Include="packages.config" />
@@ -106,8 +107,12 @@
     <TypeScriptCompile Include="app\dashboard\dashboard.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\personalCabinet\personalCabinet.component.ts" />
+    <TypeScriptCompile Include="app\rxjs-operators.ts" />
+    <TypeScriptCompile Include="app\worldListService\world.ts" />
+    <TypeScriptCompile Include="app\worldListService\worldList.service.ts" />
     <TypeScriptCompile Include="app\usefullLinksService\link.ts" />
     <TypeScriptCompile Include="app\usefullLinksService\usefullLink.service.ts" />
+    <TypeScriptCompile Include="app\worlds\worlds.component.ts" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
