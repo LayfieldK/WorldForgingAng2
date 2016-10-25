@@ -1,14 +1,14 @@
 ﻿import {Injectable} from '@angular/core';
-import {World} from '../worldListService/world';
+import {World} from '../world';
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
-export class WorldListService {
-    private worldsUrl = 'http://localhost:51332/api/worldsapi';  // URL to web API
+export class WorldDetailsService {
+    private worldsUrl = 'http://localhost:51332/api/worldsapi/';  // URL to web API
     constructor(private http: Http) { }
-    getWorlds(): Observable<World[]> {
-        return this.http.get(this.worldsUrl)
+    getWorldDetails(worldId: Number): Observable<World> {
+        return this.http.get(`${this.worldsUrl}/${worldId}`)
             .map(this.extractData)
             .catch(this.handleError);
     }

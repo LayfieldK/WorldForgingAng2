@@ -1,12 +1,12 @@
 ﻿import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 
-import { World } from '../worldListService/world.ts';
-import { WorldListService } from '../worldListService/worldList.service';
+import { World } from '../world.ts';
+import { WorldListService } from '../services/worldList.service';
 
 @Component({
     selector: 'worlds',
-    templateUrl: '/app/worlds/worlds.component.template.html',
+    templateUrl: '/app/worlds/index/worlds.component.template.html',
     providers: [WorldListService]
 })
 

@@ -3,7 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Dashboard } from './dashboard/dashboard.component'
 import { PersonalCabinet } from './personalCabinet/personalCabinet.component'
-import { Worlds } from './worlds/worlds.component'
+import { Worlds } from './worlds/index/worlds.component'
+import { WorldDetails } from './worlds/details/worlddetails.component'
 
 const appRoutes: Routes = [
     {
@@ -17,6 +18,10 @@ const appRoutes: Routes = [
     {
         path: 'worlds',
         component: Worlds
+    },
+    {
+        path: 'worlds/:id',
+        component: WorldDetails
     }
 ];
 

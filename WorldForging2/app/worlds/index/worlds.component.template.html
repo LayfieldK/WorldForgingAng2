@@ -2,6 +2,6 @@
 
 <ul>
     <li *ngFor="let world of worlds">
-        <a [href]="world.href">{{world.name}}</a>
+        <a [routerLink]="['/worlds', world.worldId]">{{world.name}}</a><br />
     </li>
 </ul>

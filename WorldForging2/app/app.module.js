@@ -14,14 +14,15 @@ const http_1 = require('@angular/http');
 const app_component_1 = require('./app.component');
 const dashboard_component_1 = require('./dashboard/dashboard.component');
 const personalCabinet_component_1 = require('./personalCabinet/personalCabinet.component');
-const worlds_component_1 = require('./worlds/worlds.component');
+const worlds_component_1 = require('./worlds/index/worlds.component');
+const worlddetails_component_1 = require('./worlds/details/worlddetails.component');
 const app_routing_1 = require('./app.routing');
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     core_1.NgModule({
         imports: [platform_browser_1.BrowserModule, app_routing_1.routing, http_1.HttpModule, http_1.JsonpModule],
-        declarations: [app_component_1.AppComponent, dashboard_component_1.Dashboard, personalCabinet_component_1.PersonalCabinet, worlds_component_1.Worlds],
+        declarations: [app_component_1.AppComponent, dashboard_component_1.Dashboard, personalCabinet_component_1.PersonalCabinet, worlds_component_1.Worlds, worlddetails_component_1.WorldDetails],
         bootstrap: [app_component_1.AppComponent]
     }), 
     __metadata('design:paramtypes', [])

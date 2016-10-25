@@ -9,18 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-let UsefullLinkService = class UsefullLinkService {
-    GetLinks() {
-        return [
-            { name: 'Angular2 cookbook', href: 'https://angular.io/docs/ts/latest/cookbook/' },
-            { name: 'Angular2 style guide', href: 'https://github.com/johnpapa/angular-styleguide/blob/master/a2/README.md' },
-            { name: 'Angular2 installation guide', href: 'https://github.com/Drag13/WorldForging2' },
-        ];
+const worldList_service_1 = require('../services/worldList.service');
+let Worlds = class Worlds {
+    constructor(worldListService) {
+        this.worldListService = worldListService;
+        this.mode = 'Observable';
+    }
+    ngOnInit() { this.getWorlds(); }
+    getWorlds() {
+        this.worldListService.getWorlds()
+            .subscribe(worlds => this.worlds = worlds, error => this.errorMessage = error);
     }
 };
-UsefullLinkService = __decorate([
-    core_1.Injectable(), 
-    __metadata('design:paramtypes', [])
-], UsefullLinkService);
-exports.UsefullLinkService = UsefullLinkService;
-//# sourceMappingURL=usefulllink.service.js.map
+Worlds = __decorate([
+    core_1.Component({
+        selector: 'worlds',
+        templateUrl: '/app/worlds/index/worlds.component.template.html',
+        providers: [worldList_service_1.WorldListService]
+    }), 
+    __metadata('design:paramtypes', [worldList_service_1.WorldListService])
+], Worlds);
+exports.Worlds = Worlds;
+//# sourceMappingURL=worlds.component.js.map
