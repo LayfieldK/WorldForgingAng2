@@ -8,9 +8,10 @@ using WorldForgingApi.Models;
 namespace WorldForgingApi.Migrations
 {
     [DbContext(typeof(WorldForgingDBContext))]
-    partial class WorldForgingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20161114002507_AddedArticleAndStory")]
+    partial class AddedArticleAndStory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -22,12 +23,6 @@ namespace WorldForgingApi.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("EntityId");
-
-                    b.Property<string>("Text");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("UrlAffix");
 
                     b.Property<int>("WorldId");
 
@@ -474,12 +469,6 @@ namespace WorldForgingApi.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("EntityId");
-
-                    b.Property<string>("Text");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("UrlAffix");
 
                     b.Property<int>("WorldId");
 

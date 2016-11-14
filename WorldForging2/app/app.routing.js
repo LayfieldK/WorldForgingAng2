@@ -4,6 +4,10 @@ const dashboard_component_1 = require('./dashboard/dashboard.component');
 const personalCabinet_component_1 = require('./personalCabinet/personalCabinet.component');
 const worlds_component_1 = require('./worlds/index/worlds.component');
 const worlddetails_component_1 = require('./worlds/details/worlddetails.component');
+const articles_component_1 = require('./articles/index/articles.component');
+const articleDetails_component_1 = require('./articles/details/articleDetails.component');
+const stories_component_1 = require('./stories/index/stories.component');
+const storyDetails_component_1 = require('./stories/details/storyDetails.component');
 const appRoutes = [
     {
         path: '',
@@ -20,6 +24,22 @@ const appRoutes = [
     {
         path: 'worlds/:id',
         component: worlddetails_component_1.WorldDetails
+    },
+    {
+        path: 'article',
+        component: articles_component_1.Articles
+    },
+    {
+        path: 'article/:id',
+        component: articleDetails_component_1.ArticleDetails
+    },
+    {
+        path: 'story',
+        component: stories_component_1.Stories
+    },
+    {
+        path: 'stories/:id',
+        component: storyDetails_component_1.StoryDetails
     }
 ];
 exports.routing = router_1.RouterModule.forRoot(appRoutes);

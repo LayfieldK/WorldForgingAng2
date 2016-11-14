@@ -73,6 +73,10 @@
     <Content Include="app\app.component.css" />
     <Content Include="app\app.component.template.html" />
     <Content Include="app\personalCabinet\personalCabinet.component.template.html" />
+    <Content Include="app\stories\details\storyDetails.component.template.html" />
+    <Content Include="app\stories\index\stories.component.template.html" />
+    <Content Include="app\articles\details\articleDetails.component.template.html" />
+    <Content Include="app\articles\index\articles.component.template.html" />
     <Content Include="app\worlds\details\worlddetails.component.template.html" />
     <Content Include="app\worlds\index\worlds.component.template.html" />
     <Content Include="Index.html" />
@@ -109,6 +113,16 @@
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\personalCabinet\personalCabinet.component.ts" />
     <TypeScriptCompile Include="app\rxjs-operators.ts" />
+    <TypeScriptCompile Include="app\stories\details\storyDetails.component.ts" />
+    <TypeScriptCompile Include="app\stories\index\stories.component.ts" />
+    <TypeScriptCompile Include="app\stories\services\storyDetails.service.ts" />
+    <TypeScriptCompile Include="app\stories\services\storyList.service.ts" />
+    <TypeScriptCompile Include="app\stories\story.ts" />
+    <TypeScriptCompile Include="app\articles\details\articleDetails.component.ts" />
+    <TypeScriptCompile Include="app\articles\index\articles.component.ts" />
+    <TypeScriptCompile Include="app\articles\services\articleDetails.service.ts" />
+    <TypeScriptCompile Include="app\articles\services\articleList.service.ts" />
+    <TypeScriptCompile Include="app\articles\article.ts" />
     <TypeScriptCompile Include="app\worlds\services\worldDetails.service.ts" />
     <TypeScriptCompile Include="app\worlds\world.ts" />
     <TypeScriptCompile Include="app\worlds\services\worldList.service.ts" />

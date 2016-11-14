@@ -18,6 +18,10 @@ namespace WorldForgingApi.Models
 
         public DbSet<WorldForging.Models.World> Worlds { get; set; }
 
+        public DbSet<WorldForging.Models.Article> Articles { get; set; }
+
+        public DbSet<WorldForging.Models.Story> Stories { get; set; }
+
         public DbSet<WorldForging.Models.Faction> Factions { get; set; }
 
         public DbSet<WorldForging.Models.Character> Characters { get; set; }
