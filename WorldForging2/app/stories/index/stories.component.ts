@@ -2,29 +2,29 @@
 import { OnInit } from '@angular/core';
 
 import { Story } from '../story.ts';
-import { StoryListService } from '../services/storyList.service';
+import { StoryService } from '../services/storyService.service';
 
 @Component({
     selector: 'stories',
     templateUrl: '/app/stories/index/stories.component.template.html',
-    providers: [StoryListService]
+    providers: [StoryService]
 })
 
 export class Stories implements OnInit {
     errorMessage: string;
     stories: Story[];
     mode = 'Observable';
-    constructor(private storyListService: StoryListService) { }
+    constructor(private storyService: StoryService) { }
     ngOnInit() { this.getStories(); }
     getStories() {
-        this.storyListService.getStories()
+        this.storyService.getStories()
             .subscribe(
             stories => this.stories = stories,
             error => this.errorMessage = <any>error);
     }
     //addStory(name: string) {
     //    if (!name) { return; }
-    //    this.storyListService.addStory(name)
+    //    this.storyService.addStory(name)
     //        .subscribe(
     //        story => this.stories.push(story),
     //        error => this.errorMessage = <any>error);

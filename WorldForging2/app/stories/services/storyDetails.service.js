@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 const core_1 = require('@angular/core');
 const http_1 = require('@angular/http');
 const Observable_1 = require('rxjs/Observable');
-let StoryDetailsService = class StoryDetailsService {
+let StoryService = class StoryService {
     constructor(http) {
         this.http = http;
         this.storyUrl = 'http://localhost:51332/api/storyapi/'; // URL to web API
@@ -34,9 +34,9 @@ let StoryDetailsService = class StoryDetailsService {
         return Observable_1.Observable.throw(errMsg);
     }
 };
-StoryDetailsService = __decorate([
+StoryService = __decorate([
     core_1.Injectable(), 
     __metadata('design:paramtypes', [http_1.Http])
-], StoryDetailsService);
-exports.StoryDetailsService = StoryDetailsService;
+], StoryService);
+exports.StoryService = StoryService;
 //# sourceMappingURL=storyDetails.service.js.map

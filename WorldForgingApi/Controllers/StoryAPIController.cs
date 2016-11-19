@@ -37,16 +37,33 @@ namespace WorldForging.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{storyId}", Name ="GetStory")]
+        [EnableCors("MyPolicy")]
+        public Story Get(int storyId)
         {
-            return "value";
+            try
+            {
+                //return db.Stories.Find(storyId);
+                return db.Stories.Where(c => c.StoryId == storyId).First();
+            }
+            catch (Exception ex)
+            {
+                string problem = ex.Message;
+                return null;
+            }
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        [EnableCors("MyPolicy")]
+        public IActionResult Create([FromBody] Story story)
         {
+            if (story == null)
+            {
+                return BadRequest();
+            }
+            db.Stories.Add(story);
+            return CreatedAtRoute("GetStory", new { id = story.StoryId }, story);
         }
 
         // PUT api/values/5

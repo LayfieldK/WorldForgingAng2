@@ -1,0 +1,68 @@
+System.register(['@angular/core', '../services/articleDetails.service', '@angular/router'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
+    var core_1, articleDetails_service_1, router_1;
+    var ArticleDetails;
+    return {
+        setters:[
+            function (core_1_1) {
+                core_1 = core_1_1;
+            },
+            function (articleDetails_service_1_1) {
+                articleDetails_service_1 = articleDetails_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            }],
+        execute: function() {
+            ArticleDetails = (function () {
+                function ArticleDetails(articleDetailsService, route) {
+                    this.articleDetailsService = articleDetailsService;
+                    this.route = route;
+                    this.mode = 'Observable';
+                }
+                ArticleDetails.prototype.ngOnInit = function () {
+                    var _this = this;
+                    this.sub = this.route.params.subscribe(function (params) {
+                        _this.articleId = +params['id']; // (+) converts string 'id' to a number
+                        _this.getArticleDetails(_this.articleId);
+                    });
+                };
+                ArticleDetails.prototype.getArticleDetails = function (articleId) {
+                    var _this = this;
+                    this.articleDetailsService.getArticleDetails(articleId)
+                        .subscribe(function (article) { return _this.article = article; }, function (error) { return _this.errorMessage = error; });
+                };
+                //addArticle(name: string) {
+                //    if (!name) { return; }
+                //    this.articleListService.addArticle(name)
+                //        .subscribe(
+                //        article => this.articles.push(article),
+                //        error => this.errorMessage = <any>error);
+                //}
+                ArticleDetails.prototype.ngOnDestroy = function () {
+                    this.sub.unsubscribe();
+                };
+                ArticleDetails = __decorate([
+                    core_1.Component({
+                        selector: 'articleDetails',
+                        templateUrl: '/Scripts/app/articles/details/articleDetails.component.template.html',
+                        providers: [articleDetails_service_1.ArticleDetailsService]
+                    }), 
+                    __metadata('design:paramtypes', [articleDetails_service_1.ArticleDetailsService, router_1.ActivatedRoute])
+                ], ArticleDetails);
+                return ArticleDetails;
+            }());
+            exports_1("ArticleDetails", ArticleDetails);
+        }
+    }
+});

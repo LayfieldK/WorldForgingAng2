@@ -9,15 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const storyList_service_1 = require('../services/storyList.service');
+const storyService_service_1 = require('../services/storyService.service');
 let Stories = class Stories {
-    constructor(storyListService) {
-        this.storyListService = storyListService;
+    constructor(storyService) {
+        this.storyService = storyService;
         this.mode = 'Observable';
     }
     ngOnInit() { this.getStories(); }
     getStories() {
-        this.storyListService.getStories()
+        this.storyService.getStories()
             .subscribe(stories => this.stories = stories, error => this.errorMessage = error);
     }
 };
@@ -25,9 +25,9 @@ Stories = __decorate([
     core_1.Component({
         selector: 'stories',
         templateUrl: '/app/stories/index/stories.component.template.html',
-        providers: [storyList_service_1.StoryListService]
+        providers: [storyService_service_1.StoryService]
     }), 
-    __metadata('design:paramtypes', [storyList_service_1.StoryListService])
+    __metadata('design:paramtypes', [storyService_service_1.StoryService])
 ], Stories);
 exports.Stories = Stories;
 //# sourceMappingURL=stories.component.js.map

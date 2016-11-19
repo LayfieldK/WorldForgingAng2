@@ -1,0 +1,1 @@
+{"version":3,"sources":["usefullLinksService/link.ts"],"names":["Link","exports_1"],"mappings":"oIAAAA,KAAA,WAAA,QAAAA,SAGA,MAAAA,SAHAC,UAAA,OAAAD","file":"link.js","sourcesContent":["export class Link {\r\n    public href: string;\r\n    public name: string;\r\n}"]}

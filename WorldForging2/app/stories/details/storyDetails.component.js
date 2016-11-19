@@ -9,31 +9,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 const core_1 = require('@angular/core');
-const storyDetails_service_1 = require('../services/storyDetails.service');
+const storyService_service_1 = require('../services/storyService.service');
 const router_1 = require('@angular/router');
 let StoryDetails = class StoryDetails {
-    constructor(storyDetailsService, route) {
-        this.storyDetailsService = storyDetailsService;
+    constructor(storyService, route) {
+        this.storyService = storyService;
         this.route = route;
         this.mode = 'Observable';
     }
     ngOnInit() {
-        this.sub = this.route.params.subscribe(params => {
+        this.route.params.subscribe(params => {
             this.storyId = +params['id']; // (+) converts string 'id' to a number
             this.getStoryDetails(this.storyId);
         });
     }
     getStoryDetails(storyId) {
-        this.storyDetailsService.getStoryDetails(storyId)
+        this.storyService.getStoryDetails(storyId)
             .subscribe(story => this.story = story, error => this.errorMessage = error);
     }
-    //addStory(name: string) {
-    //    if (!name) { return; }
-    //    this.storyListService.addStory(name)
-    //        .subscribe(
-    //        story => this.stories.push(story),
-    //        error => this.errorMessage = <any>error);
-    //}
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
@@ -42,9 +35,9 @@ StoryDetails = __decorate([
     core_1.Component({
         selector: 'storyDetails',
         templateUrl: '/app/stories/details/storyDetails.component.template.html',
-        providers: [storyDetails_service_1.StoryDetailsService]
+        providers: [storyService_service_1.StoryService]
     }), 
-    __metadata('design:paramtypes', [storyDetails_service_1.StoryDetailsService, router_1.ActivatedRoute])
+    __metadata('design:paramtypes', [storyService_service_1.StoryService, router_1.ActivatedRoute])
 ], StoryDetails);
 exports.StoryDetails = StoryDetails;
 //# sourceMappingURL=storyDetails.component.js.map

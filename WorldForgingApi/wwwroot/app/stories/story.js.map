@@ -1,0 +1,1 @@
+{"version":3,"sources":["stories/story.ts"],"names":["Story","exports_1"],"mappings":"qIAAAA,MAAA,WAAA,QAAAA,UAIA,MAAAA,UAJAC,UAAA,QAAAD","file":"story.js","sourcesContent":["export class Story {\r\n    public storyId: Number;\r\n    public urlAffix: string\r\n    public title: string;\r\n}"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["articles/article.ts"],"names":["Article","exports_1"],"mappings":"uIAAAA,QAAA,WAAA,QAAAA,YAGA,MAAAA,YAHAC,UAAA,UAAAD","file":"article.js","sourcesContent":["export class Article {\r\n    public href: string;\r\n    public name: string;\r\n}"]}

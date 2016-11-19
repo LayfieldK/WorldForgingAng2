@@ -116,7 +116,7 @@
     <TypeScriptCompile Include="app\stories\details\storyDetails.component.ts" />
     <TypeScriptCompile Include="app\stories\index\stories.component.ts" />
     <TypeScriptCompile Include="app\stories\services\storyDetails.service.ts" />
-    <TypeScriptCompile Include="app\stories\services\storyList.service.ts" />
+    <TypeScriptCompile Include="app\stories\services\storyService.service.ts" />
     <TypeScriptCompile Include="app\stories\story.ts" />
     <TypeScriptCompile Include="app\articles\details\articleDetails.component.ts" />
     <TypeScriptCompile Include="app\articles\index\articles.component.ts" />

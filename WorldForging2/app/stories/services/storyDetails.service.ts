@@ -4,7 +4,7 @@ import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
-export class StoryDetailsService {
+export class StoryService {
     private storyUrl = 'http://localhost:51332/api/storyapi/';  // URL to web API
     constructor(private http: Http) { }
     getStoryDetails(storyId: Number): Observable<Story> {

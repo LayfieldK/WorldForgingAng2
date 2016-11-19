@@ -38,7 +38,7 @@ const appRoutes = [
         component: stories_component_1.Stories
     },
     {
-        path: 'stories/:id',
+        path: 'story/:id',
         component: storyDetails_component_1.StoryDetails
     }
 ];

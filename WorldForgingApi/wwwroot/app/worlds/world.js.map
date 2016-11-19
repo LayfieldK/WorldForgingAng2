@@ -1,0 +1,1 @@
+{"version":3,"sources":["worlds/world.ts"],"names":["World","exports_1"],"mappings":"qIAAAA,MAAA,WAAA,QAAAA,UAGA,MAAAA,UAHAC,UAAA,QAAAD","file":"world.js","sourcesContent":["export class World {\r\n    public href: string;\r\n    public name: string;\r\n}"]}
