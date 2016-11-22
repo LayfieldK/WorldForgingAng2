@@ -11,27 +11,27 @@ System.register(["@angular/core"], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var AppComponent;
+    var AboutComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            AppComponent = (function () {
-                function AppComponent() {
-                    this.title = "OpenGameList";
+            AboutComponent = (function () {
+                function AboutComponent() {
+                    this.title = "About";
                 }
-                AppComponent = __decorate([
+                AboutComponent = __decorate([
                     core_1.Component({
-                        selector: "opengamelist",
-                        template: "\n        <h1>{{title}}</h1>\n            <div class=\"menu\">\n                <a class=\"home\" [routerLink]=\"['']\">Home</a>\n                | <a class=\"about\" [routerLink]=\"['about']\">About</a>\n                | <a class=\"login\" [routerLink]=\"['login']\">Login</a>\n            </div>\n        <router-outlet></router-outlet>\n    "
+                        selector: "about",
+                        template: "\n        <h2>{{title}}</h2>\n        <div>\n            OpenGameList: a production-ready, fully-featured SPA sample powered by ASP.NET Core Web API and Angular2.\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
-                ], AppComponent);
-                return AppComponent;
+                ], AboutComponent);
+                return AboutComponent;
             }());
-            exports_1("AppComponent", AppComponent);
+            exports_1("AboutComponent", AboutComponent);
         }
     }
 });

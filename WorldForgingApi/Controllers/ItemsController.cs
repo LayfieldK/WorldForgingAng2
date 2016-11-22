@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpenGameListWebApp.ViewModels;
 using Newtonsoft.Json;
 
-namespace OpenGameListWebApp.Controllers
+namespace WorldForging.Controllers
 {
     [Route("api/[controller]")]
     public class ItemsController : Controller
