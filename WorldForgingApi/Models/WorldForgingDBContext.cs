@@ -1,10 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using WorldForging.Models;
+using WorldForging.Models.Comments;
+using WorldForging.Models.TutorialItems;
+using WorldForging.Models.Users;
 
 namespace WorldForgingApi.Models
 {
@@ -14,7 +19,31 @@ namespace WorldForgingApi.Models
             : base(options)
         { }
 
+        #region Methods
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
+            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.TutorialItems).WithOne(i => i.Author);
+            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Comments).WithOne(c => c.Author).HasPrincipalKey(u => u.Id);
+
+            modelBuilder.Entity<TutorialItem>().ToTable("TutorialItems");
+            modelBuilder.Entity<TutorialItem>().Property(i => i.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<TutorialItem>().HasOne(i => i.Author).WithMany(u => u.TutorialItems);
+            modelBuilder.Entity<TutorialItem>().HasMany(i => i.Comments).WithOne(c => c.TutorialItem);
+
+            modelBuilder.Entity<Comment>().ToTable("Comments");
+            modelBuilder.Entity<Comment>().HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Comment>().HasOne(c => c.TutorialItem).WithMany(i => i.Comments);
+            modelBuilder.Entity<Comment>().HasOne(c => c.Parent).WithMany(c => c.Children);
+            modelBuilder.Entity<Comment>().HasMany(c => c.Children).WithOne(c => c.Parent);
+        }
+        #endregion Methods
+
+        public DbSet<TutorialItem> TutorialItems { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 
         public DbSet<WorldForging.Models.World> Worlds { get; set; }
 

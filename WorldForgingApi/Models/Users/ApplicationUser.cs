@@ -44,7 +44,7 @@ namespace WorldForging.Models.Users
         /// <summary>
         /// A list of items wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
-        public virtual List<TutorialItem> Items { get; set; }
+        public virtual List<TutorialItem> TutorialItems { get; set; }
 
         /// <summary>
         /// A list of comments wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.

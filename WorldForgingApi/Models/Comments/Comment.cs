@@ -42,7 +42,7 @@ namespace WorldForging.Models.Comments
         /// Current Comment's Item: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
         [ForeignKey("ItemId")]
-        public virtual TutorialItem Item { get; set; }
+        public virtual TutorialItem TutorialItem { get; set; }
 
         /// <summary>
         /// Current Comment's Author: this property will be loaded on first use using EF's Lazy-Loading feature.

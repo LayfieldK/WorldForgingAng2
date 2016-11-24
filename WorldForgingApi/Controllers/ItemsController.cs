@@ -5,17 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OpenGameListWebApp.ViewModels;
 using Newtonsoft.Json;
+using WorldForging.Models;
+using WorldForging.Models.TutorialItems;
+using WorldForgingApi.Models;
+using AutoMapper;
 
 namespace WorldForging.Controllers
 {
     [Route("api/[controller]")]
     public class ItemsController : Controller
     {
+        #region Private Fields
+        private WorldForgingDBContext DbContext;
+        #endregion Private Fields
+
+        #region Constructor
+        public ItemsController(WorldForgingDBContext context)
+        {
+            // Dependency Injetion
+            DbContext = context;
+        }
+        #endregion Constructor
+
         #region RESTful Conventions
         /// <summary>
         /// GET: api/items
         /// </summary>
-        /// <returns>Nothing: this method will raise a HttpNotFound HTTP exception, since we're not supporting this API call.</returns>
+        /// <returns>Nothing: this method will raise a NotFound HTTP exception, since we're not supporting this API call.</returns>
         [HttpGet()]
         public IActionResult Get()
         {
@@ -30,10 +46,9 @@ namespace WorldForging.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return new JsonResult(GetSampleItems()
-                .Where(i => i.Id == id)
-                .FirstOrDefault(),
-                DefaultJsonSettings);
+            //ItemViewModel ivm = Mapper.Map<ItemViewModel>(tutorialItem);
+            var item = DbContext.TutorialItems.Where(i => i.Id == id).FirstOrDefault();
+            return new JsonResult(Mapper.Map<ItemViewModel>(item), DefaultJsonSettings);
         }
         #endregion
 
@@ -58,8 +73,8 @@ namespace WorldForging.Controllers
         public IActionResult GetLatest(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderByDescending(i => i.CreatedDate).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = DbContext.TutorialItems.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
         /// <summary>
@@ -82,8 +97,8 @@ namespace WorldForging.Controllers
         public IActionResult GetMostViewed(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderByDescending(i => i.ViewCount).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = DbContext.TutorialItems.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
         /// <summary>
@@ -106,34 +121,21 @@ namespace WorldForging.Controllers
         public IActionResult GetRandom(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = GetSampleItems().OrderBy(i => Guid.NewGuid()).Take(n);
-            return new JsonResult(items, DefaultJsonSettings);
+            var items = DbContext.TutorialItems.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
+            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
         #endregion
 
         #region Private Members
         /// <summary>
-        /// Generate a sample array of source Items to emulate a database (for testing purposes only).
+        /// Maps a collection of Item entities into a list of ItemViewModel objects.
         /// </summary>
-        /// <param name="num">The number of items to generate: default is 999</param>
-        /// <returns>a defined number of mock items (for testing purpose only)</returns>
-        private List<ItemViewModel> GetSampleItems(int num = 999)
+        /// <param name="items">An IEnumerable collection of item entities</param>
+        /// <returns>a mapped list of ItemViewModel objects</returns>
+        private List<ItemViewModel> ToItemViewModelList(IEnumerable<TutorialItem> items)
         {
-            List<ItemViewModel> lst = new List<ItemViewModel>();
-            DateTime date = new DateTime(2015, 12, 31).AddDays(-num);
-            for (int id = 1; id <= num; id++)
-            {
-                date = date.AddDays(1);
-                lst.Add(new ItemViewModel()
-                {
-                    Id = id,
-                    Title = String.Format("Item {0} Title", id),
-                    Description = String.Format("This is a sample description for item {0}: Lorem ipsum dolor sit amet.", id),
-                    CreatedDate = date,
-                    LastModifiedDate = date,
-                    ViewCount = num - id
-                });
-            }
+            var lst = new List<ItemViewModel>();
+            foreach (var i in items) lst.Add(Mapper.Map<ItemViewModel>(i));
             return lst;
         }
 

@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WorldForgingApi.Models;
 using Microsoft.EntityFrameworkCore;
+using WorldForging.Models.TutorialItems;
+using OpenGameListWebApp.ViewModels;
+using AutoMapper;
 
 namespace WorldForgingApi
 {
@@ -41,8 +44,9 @@ namespace WorldForgingApi
 
             services.AddMvc();
 
-            var connection = @"Server=(localdb)\MSSQLLocalDB;Database=WorldForging;Trusted_Connection=True;";
-            services.AddDbContext<WorldForgingDBContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<WorldForgingDBContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            // Add ApplicationDbContext's DbSeeder
+            services.AddSingleton<DbSeeder>();
 
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
@@ -55,7 +59,7 @@ namespace WorldForgingApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DbSeeder dbSeeder)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -81,6 +85,20 @@ namespace WorldForgingApi
             });
 
             app.UseMvc();
+
+            // Seed the Database (if needed)
+            try
+            {
+                dbSeeder.SeedAsync().Wait();
+            }
+            catch (AggregateException e)
+            {
+                throw new Exception(e.ToString());
+            }
+
+            Mapper.Initialize(cfg => cfg.CreateMap<TutorialItem, ItemViewModel>());
+            //ItemViewModel ivm = Mapper.Map<ItemViewModel>(tutorialItem);
+            //AutoMapper.Bind<TutorialItem, ItemViewModel>();
         }
     }
 }
