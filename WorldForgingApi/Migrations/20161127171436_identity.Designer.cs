@@ -8,9 +8,10 @@ using WorldForgingApi.Models;
 namespace WorldForgingApi.Migrations
 {
     [DbContext(typeof(WorldForgingDBContext))]
-    partial class WorldForgingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20161127171436_identity")]
+    partial class identity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")

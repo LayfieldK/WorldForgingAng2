@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", "./item.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./auth.service", "./item.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", "./item.service"], function
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, item_service_1;
+    var core_1, router_1, auth_service_1, item_service_1;
     var ItemDetailViewComponent;
     return {
         setters:[
@@ -20,12 +20,16 @@ System.register(["@angular/core", "@angular/router", "./item.service"], function
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (auth_service_1_1) {
+                auth_service_1 = auth_service_1_1;
+            },
             function (item_service_1_1) {
                 item_service_1 = item_service_1_1;
             }],
         execute: function() {
             ItemDetailViewComponent = (function () {
-                function ItemDetailViewComponent(itemService, router, activatedRoute) {
+                function ItemDetailViewComponent(authService, itemService, router, activatedRoute) {
+                    this.authService = authService;
                     this.itemService = itemService;
                     this.router = router;
                     this.activatedRoute = activatedRoute;
@@ -47,14 +51,18 @@ System.register(["@angular/core", "@angular/router", "./item.service"], function
                 };
                 ItemDetailViewComponent.prototype.onItemDetailEdit = function (item) {
                     this.router.navigate(["item/edit", item.Id]);
+                    return false;
+                };
+                ItemDetailViewComponent.prototype.onBack = function () {
+                    this.router.navigate(['']);
                 };
                 ItemDetailViewComponent = __decorate([
                     core_1.Component({
                         selector: "item-detail-view",
-                        template: "\n        <div *ngIf=\"item\" class=\"item-container\">\n          <div class=\"item-tab-menu\">\n            <span (click)=\"onItemDetailEdit(item)\">Edit</span>\n            <span class=\"selected\">View</span>\n          </div>\n          <div class=\"item-details\">\n            <div class=\"mode\">Display Mode</div>\n            <h2>{{item.Title}}</h2>\n            <p>{{item.Description}}</p>\n          </div>\n        </div>\n    ",
-                        styles: ["\n.item-container {  \n    width: 600px;\n}\n\n.item-tab-menu {\n    margin-right: 30px;\n}\n\n.item-tab-menu span {\n    background-color: #dddddd;\n    border: 1px solid #666666;\n    border-bottom: 0;\n    cursor: pointer;\n    display: block;\n    float: right;\n    margin: 0 0 -1px 5px;\n    padding: 5px 10px 4px 10px;\n    text-align: center;\n    width: 60px;\n}\n\n.item-tab-menu span.selected {\n    background-color: #eeeeee;\n    cursor: auto;\n    font-weight: bold;\n    padding-bottom: 5px;\n}\n\n.item-details {\n    background-color: #eeeeee;\n    border: 1px solid black;\n    clear: both;\n    margin: 0;\n    padding: 5px 10px;\n}\n\n.item-details * {\n    vertical-align: middle;\n}\n\n.item-details .mode {\n    font-size: 0.8em;\n    color: #777777;\n}\n\n.item-details ul li {\n    padding: 5px 0;\n}\n    "]
+                        template: "\n<div *ngIf=\"item\">\n    <h2>\n        <a href=\"javascript:void(0)\" (click)=\"onBack()\">&laquo; Back to Home</a>\n    </h2>\n    <div class=\"item-container\">\n        <ul class=\"nav nav-tabs\">\n            <li *ngIf=\"authService.isLoggedIn()\" role=\"presentation\">\n                <a href=\"javascript:void(0)\" (click)=\"onItemDetailEdit(item)\">Edit</a>\n            </li>\n            <li role=\"presentation\" class=\"active\">\n                <a href=\"javascript:void(0)\">View</a>\n            </li>\n        </ul>\n        <div class=\"panel panel-default\">\n            <div class=\"panel-body\">\n                <div class=\"item-image-panel\">\n                    <img src=\"/img/item-image-sample.png\" alt=\"{{item.Title}}\" />\n                    <div class=\"caption\">Sample image with caption.</div>\n                </div>\n                <h3>{{item.Title}}</h3>\n                <p>{{item.Description}}</p>\n                <p>{{item.Text}}</p>\n            </div>\n        </div>\n    </div>\n</div>\n    ",
+                        styles: []
                     }), 
-                    __metadata('design:paramtypes', [item_service_1.ItemService, router_1.Router, router_1.ActivatedRoute])
+                    __metadata('design:paramtypes', [auth_service_1.AuthService, item_service_1.ItemService, router_1.Router, router_1.ActivatedRoute])
                 ], ItemDetailViewComponent);
                 return ItemDetailViewComponent;
             }());

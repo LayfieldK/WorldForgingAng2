@@ -12,6 +12,11 @@ using Microsoft.EntityFrameworkCore;
 using WorldForging.Models.TutorialItems;
 using OpenGameListWebApp.ViewModels;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using WorldForging.Models.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using WorldForging.Classes;
+using Microsoft.IdentityModel.Tokens;
 
 namespace WorldForgingApi
 {
@@ -43,6 +48,18 @@ namespace WorldForgingApi
             services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
+
+            // Add EntityFramework's Identity support.
+            services.AddEntityFramework();
+
+            // Add Identity Services & Stores
+            services.AddIdentity<ApplicationUser, IdentityRole>(config => {
+                config.User.RequireUniqueEmail = true;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Cookies.ApplicationCookie.AutomaticChallenge = false;
+            })
+                .AddEntityFrameworkStores<WorldForgingDBContext>()
+                .AddDefaultTokenProviders();
 
             services.AddDbContext<WorldForgingDBContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
             // Add ApplicationDbContext's DbSeeder
@@ -81,6 +98,25 @@ namespace WorldForgingApi
                     context.Context.Response.Headers["Cache-Control"] = Configuration["StaticFiles:Headers:Cache-Control"];
                     context.Context.Response.Headers["Pragma"] = Configuration["StaticFiles:Headers:Pragma"];
                     context.Context.Response.Headers["Expires"] = Configuration["StaticFiles:Headers:Expires"];
+                }
+            });
+
+            // Add a custom Jwt Provider to generate Tokens
+            app.UseJwtProvider();
+
+            // Add the Jwt Bearer Header Authentication to validate Tokens
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                RequireHttpsMetadata = false,
+                TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = JwtProvider.SecurityKey,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = JwtProvider.Issuer,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
                 }
             });
 

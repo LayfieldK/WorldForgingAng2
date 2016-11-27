@@ -10,10 +10,11 @@ using WorldForging.Models;
 using WorldForging.Models.Comments;
 using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace WorldForgingApi.Models
 {
-    public class WorldForgingDBContext : DbContext
+    public class WorldForgingDBContext : IdentityDbContext<ApplicationUser>
     {
         public WorldForgingDBContext(DbContextOptions<WorldForgingDBContext> options)
             : base(options)
@@ -43,7 +44,7 @@ namespace WorldForgingApi.Models
 
         public DbSet<TutorialItem> TutorialItems { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<ApplicationUser> Users { get; set; }
+        
 
         public DbSet<WorldForging.Models.World> Worlds { get; set; }
 

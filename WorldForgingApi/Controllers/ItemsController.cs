@@ -9,6 +9,8 @@ using WorldForging.Models;
 using WorldForging.Models.TutorialItems;
 using WorldForgingApi.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace WorldForging.Controllers
 {
@@ -57,6 +59,7 @@ namespace WorldForging.Controllers
         /// </summary>
         /// <returns>Creates a new Item and return it accordingly.</returns>
         [HttpPost()]
+        [Authorize]
         public IActionResult Add([FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
@@ -68,8 +71,7 @@ namespace WorldForging.Controllers
                 item.CreatedDate =
                 item.LastModifiedDate = DateTime.Now;
 
-                // TODO: replace the following with the current user's id when authentication will be available.
-                item.UserId = DbContext.Users.Where(u => u.UserName == "Admin").FirstOrDefault().Id;
+                item.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 // add the new item
                 DbContext.TutorialItems.Add(item);
@@ -90,6 +92,7 @@ namespace WorldForging.Controllers
         /// </summary>
         /// <returns>Updates an existing Item and return it accordingly.</returns>
         [HttpPut("{id}")]
+        [Authorize]
         public IActionResult Update(int id, [FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
@@ -127,6 +130,7 @@ namespace WorldForging.Controllers
         /// </summary>
         /// <returns>Deletes an Item, returning a HTTP status 200 (ok) when done.</returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var item = DbContext.TutorialItems.Where(i => i.Id == id).FirstOrDefault();
