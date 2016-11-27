@@ -96,7 +96,7 @@ namespace WorldForgingApi
                 throw new Exception(e.ToString());
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<TutorialItem, ItemViewModel>());
+            Mapper.Initialize(cfg => cfg.CreateMap<TutorialItem, ItemViewModel>().ReverseMap());
             //ItemViewModel ivm = Mapper.Map<ItemViewModel>(tutorialItem);
             //AutoMapper.Bind<TutorialItem, ItemViewModel>();
         }

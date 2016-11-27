@@ -30,7 +30,7 @@ public class DbSeeder
         // Create default Users
         if (await DbContext.Users.CountAsync() == 0) CreateUsers();
         // Create default Items (if there are none) and Comments
-        if (await DbContext.Items.CountAsync() == 0) CreateTutorialItems();
+        if (await DbContext.TutorialItems.CountAsync() == 0) CreateTutorialItems();
     }
     #endregion Public Methods
 
