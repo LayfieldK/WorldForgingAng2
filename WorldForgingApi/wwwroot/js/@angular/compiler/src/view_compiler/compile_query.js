@@ -54,7 +54,7 @@ export var CompileQuery = (function () {
     CompileQuery.prototype._isStatic = function () {
         return !this._values.values.some(function (value) { return value instanceof ViewQueryValues; });
     };
-    CompileQuery.prototype.afterChildren = function (targetStaticMethod /** TODO #9100 */, targetDynamicMethod) {
+    CompileQuery.prototype.afterChildren = function (targetStaticMethod, targetDynamicMethod) {
         var values = createQueryValues(this._values);
         var updateStmts = [this.queryList.callMethod('reset', [o.literalArr(values)]).toStmt()];
         if (isPresent(this.ownerDirectiveExpression)) {
@@ -80,16 +80,16 @@ export var CompileQuery = (function () {
 function createQueryValues(viewValues) {
     return ListWrapper.flatten(viewValues.values.map(function (entry) {
         if (entry instanceof ViewQueryValues) {
-            return mapNestedViews(entry.view.declarationElement.appElement, entry.view, createQueryValues(entry));
+            return mapNestedViews(entry.view.declarationElement.viewContainer, entry.view, createQueryValues(entry));
         }
         else {
             return entry;
         }
     }));
 }
-function mapNestedViews(declarationAppElement, view, expressions) {
+function mapNestedViews(viewContainer, view, expressions) {
     var adjustedExpressions = expressions.map(function (expr) { return o.replaceVarInExpression(o.THIS_EXPR.name, o.variable('nestedView'), expr); });
-    return declarationAppElement.callMethod('mapNestedViews', [
+    return viewContainer.callMethod('mapNestedViews', [
         o.variable(view.className),
         o.fn([new o.FnParam('nestedView', view.classType)], [new o.ReturnStatement(o.literalArr(adjustedExpressions))], o.DYNAMIC_TYPE)
     ]);

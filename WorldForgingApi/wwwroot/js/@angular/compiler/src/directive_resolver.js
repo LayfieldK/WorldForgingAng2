@@ -22,6 +22,10 @@ export var DirectiveResolver = (function () {
         if (_reflector === void 0) { _reflector = reflector; }
         this._reflector = _reflector;
     }
+    DirectiveResolver.prototype.isDirective = function (type) {
+        var typeMetadata = this._reflector.annotations(resolveForwardRef(type));
+        return typeMetadata && typeMetadata.some(isDirectiveMetadata);
+    };
     /**
      * Return {@link Directive} for a given `Type`.
      */
@@ -67,6 +71,13 @@ export var DirectiveResolver = (function () {
                 else if (a instanceof HostBinding) {
                     var hostBinding = a;
                     if (hostBinding.hostPropertyName) {
+                        var startWith = hostBinding.hostPropertyName[0];
+                        if (startWith === '(') {
+                            throw new Error("@HostBinding can not bind to events. Use @HostListener instead.");
+                        }
+                        else if (startWith === '[') {
+                            throw new Error("@HostBinding parameter should be a property name, 'class.<name>', or 'attr.<name>'.");
+                        }
                         host[("[" + hostBinding.hostPropertyName + "]")] = propName;
                     }
                     else {

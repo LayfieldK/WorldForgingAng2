@@ -1,40 +1,40 @@
 {
   "_args": [
     [
-      "@angular/compiler@2.0.2",
+      "@angular/compiler@~2.2.0",
       "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi"
     ]
   ],
-  "_from": "@angular/compiler@2.0.2",
-  "_id": "@angular/compiler@2.0.2",
+  "_from": "@angular/compiler@>=2.2.0-0 <2.3.0-0",
+  "_id": "@angular/compiler@2.2.3",
   "_inCache": true,
   "_location": "/@angular/compiler",
-  "_nodeVersion": "5.4.1",
+  "_nodeVersion": "6.6.0",
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/compiler-2.0.2.tgz_1475759780254_0.7693459615111351"
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/compiler-2.2.3.tgz_1479942827686_0.7928072370123118"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angular"
   },
-  "_npmVersion": "3.9.2",
+  "_npmVersion": "3.10.3",
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/compiler",
-    "raw": "@angular/compiler@2.0.2",
-    "rawSpec": "2.0.2",
+    "raw": "@angular/compiler@~2.2.0",
+    "rawSpec": "~2.2.0",
     "scope": "@angular",
-    "spec": "2.0.2",
-    "type": "version"
+    "spec": ">=2.2.0-0 <2.3.0-0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.0.2.tgz",
-  "_shasum": "4ca4e53956cd6a36b223ce12682ba0bc289326bb",
+  "_resolved": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.2.3.tgz",
+  "_shasum": "5a96b8b6c620ffe0c3b87b2f254e588abeb77a12",
   "_shrinkwrap": null,
-  "_spec": "@angular/compiler@2.0.2",
+  "_spec": "@angular/compiler@~2.2.0",
   "_where": "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi",
   "author": {
     "name": "angular"
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "4ca4e53956cd6a36b223ce12682ba0bc289326bb",
-    "tarball": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.0.2.tgz"
+    "shasum": "5a96b8b6c620ffe0c3b87b2f254e588abeb77a12",
+    "tarball": "https://registry.npmjs.org/@angular/compiler/-/compiler-2.2.3.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "installable": true,
@@ -64,7 +64,7 @@
   "name": "@angular/compiler",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/core": "2.0.2"
+    "@angular/core": "2.2.3"
   },
   "repository": {
     "type": "git",
@@ -72,5 +72,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.0.2"
+  "version": "2.2.3"
 }

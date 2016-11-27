@@ -1,5 +1,5 @@
 /**
- * @license Angular v2.0.2
+ * @license Angular v2.2.3
  * (c) 2010-2016 Google, Inc. https://angular.io/
  * License: MIT
  */
@@ -26,165 +26,6 @@
         /** @nocollapse */
         BrowserXhr.ctorParameters = [];
         return BrowserXhr;
-    }());
-
-    /**
-     * @license
-     * Copyright Google Inc. All Rights Reserved.
-     *
-     * Use of this source code is governed by an MIT-style license that can be
-     * found in the LICENSE file at https://angular.io/license
-     */
-    var globalScope;
-    if (typeof window === 'undefined') {
-        if (typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope) {
-            // TODO: Replace any with WorkerGlobalScope from lib.webworker.d.ts #3492
-            globalScope = self;
-        }
-        else {
-            globalScope = global;
-        }
-    }
-    else {
-        globalScope = window;
-    }
-    // Need to declare a new variable for global here since TypeScript
-    // exports the original value of the symbol.
-    var global$1 = globalScope;
-    // TODO: remove calls to assert in production environment
-    // Note: Can't just export this and import in in other files
-    // as `assert` is a reserved keyword in Dart
-    global$1.assert = function assert(condition) {
-        // TODO: to be fixed properly via #2830, noop for now
-    };
-    function isPresent(obj) {
-        return obj !== undefined && obj !== null;
-    }
-    function isString(obj) {
-        return typeof obj === 'string';
-    }
-    var StringWrapper = (function () {
-        function StringWrapper() {
-        }
-        StringWrapper.fromCharCode = function (code) { return String.fromCharCode(code); };
-        StringWrapper.charCodeAt = function (s, index) { return s.charCodeAt(index); };
-        StringWrapper.split = function (s, regExp) { return s.split(regExp); };
-        StringWrapper.equals = function (s, s2) { return s === s2; };
-        StringWrapper.stripLeft = function (s, charVal) {
-            if (s && s.length) {
-                var pos = 0;
-                for (var i = 0; i < s.length; i++) {
-                    if (s[i] != charVal)
-                        break;
-                    pos++;
-                }
-                s = s.substring(pos);
-            }
-            return s;
-        };
-        StringWrapper.stripRight = function (s, charVal) {
-            if (s && s.length) {
-                var pos = s.length;
-                for (var i = s.length - 1; i >= 0; i--) {
-                    if (s[i] != charVal)
-                        break;
-                    pos--;
-                }
-                s = s.substring(0, pos);
-            }
-            return s;
-        };
-        StringWrapper.replace = function (s, from, replace) {
-            return s.replace(from, replace);
-        };
-        StringWrapper.replaceAll = function (s, from, replace) {
-            return s.replace(from, replace);
-        };
-        StringWrapper.slice = function (s, from, to) {
-            if (from === void 0) { from = 0; }
-            if (to === void 0) { to = null; }
-            return s.slice(from, to === null ? undefined : to);
-        };
-        StringWrapper.replaceAllMapped = function (s, from, cb) {
-            return s.replace(from, function () {
-                var matches = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    matches[_i - 0] = arguments[_i];
-                }
-                // Remove offset & string from the result array
-                matches.splice(-2, 2);
-                // The callback receives match, p1, ..., pn
-                return cb(matches);
-            });
-        };
-        StringWrapper.contains = function (s, substr) { return s.indexOf(substr) != -1; };
-        StringWrapper.compare = function (a, b) {
-            if (a < b) {
-                return -1;
-            }
-            else if (a > b) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
-        };
-        return StringWrapper;
-    }());
-    var NumberWrapper = (function () {
-        function NumberWrapper() {
-        }
-        NumberWrapper.toFixed = function (n, fractionDigits) { return n.toFixed(fractionDigits); };
-        NumberWrapper.equal = function (a, b) { return a === b; };
-        NumberWrapper.parseIntAutoRadix = function (text) {
-            var result = parseInt(text);
-            if (isNaN(result)) {
-                throw new Error('Invalid integer literal when parsing ' + text);
-            }
-            return result;
-        };
-        NumberWrapper.parseInt = function (text, radix) {
-            if (radix == 10) {
-                if (/^(\-|\+)?[0-9]+$/.test(text)) {
-                    return parseInt(text, radix);
-                }
-            }
-            else if (radix == 16) {
-                if (/^(\-|\+)?[0-9ABCDEFabcdef]+$/.test(text)) {
-                    return parseInt(text, radix);
-                }
-            }
-            else {
-                var result = parseInt(text, radix);
-                if (!isNaN(result)) {
-                    return result;
-                }
-            }
-            throw new Error('Invalid integer literal when parsing ' + text + ' in base ' + radix);
-        };
-        Object.defineProperty(NumberWrapper, "NaN", {
-            get: function () { return NaN; },
-            enumerable: true,
-            configurable: true
-        });
-        NumberWrapper.isNumeric = function (value) { return !isNaN(value - parseFloat(value)); };
-        NumberWrapper.isNaN = function (value) { return isNaN(value); };
-        NumberWrapper.isInteger = function (value) { return Number.isInteger(value); };
-        return NumberWrapper;
-    }());
-    function isJsObject(o) {
-        return o !== null && (typeof o === 'function' || typeof o === 'object');
-    }
-    // Can't be all uppercase as our transpiler would think it is a special directive...
-    var Json = (function () {
-        function Json() {
-        }
-        Json.parse = function (s) { return global$1.JSON.parse(s); };
-        Json.stringify = function (data) {
-            // Dart doesn't take 3 arguments
-            return global$1.JSON.stringify(data, null, 2);
-        };
-        return Json;
     }());
 
     /**
@@ -262,84 +103,13 @@
         ResponseContentType[ResponseContentType["Blob"] = 3] = "Blob";
     })(exports.ResponseContentType || (exports.ResponseContentType = {}));
 
-    // Safari and Internet Explorer do not support the iterable parameter to the
-    // Map constructor.  We work around that by manually adding the items.
-    var createMapFromPairs = (function () {
-        try {
-            if (new Map([[1, 2]]).size === 1) {
-                return function createMapFromPairs(pairs) { return new Map(pairs); };
-            }
-        }
-        catch (e) {
-        }
-        return function createMapAndPopulateFromPairs(pairs) {
-            var map = new Map();
-            for (var i = 0; i < pairs.length; i++) {
-                var pair = pairs[i];
-                map.set(pair[0], pair[1]);
-            }
-            return map;
-        };
-    })();
-    var _clearValues = (function () {
-        if ((new Map()).keys().next) {
-            return function _clearValues(m) {
-                var keyIterator = m.keys();
-                var k;
-                while (!((k = keyIterator.next()).done)) {
-                    m.set(k.value, null);
-                }
-            };
-        }
-        else {
-            return function _clearValuesWithForeEach(m) {
-                m.forEach(function (v, k) { m.set(k, null); });
-            };
-        }
-    })();
-    // Safari doesn't implement MapIterator.next(), which is used is Traceur's polyfill of Array.from
-    // TODO(mlaval): remove the work around once we have a working polyfill of Array.from
-    var _arrayFromMap = (function () {
-        try {
-            if ((new Map()).values().next) {
-                return function createArrayFromMap(m, getValues) {
-                    return getValues ? Array.from(m.values()) : Array.from(m.keys());
-                };
-            }
-        }
-        catch (e) {
-        }
-        return function createArrayFromMapWithForeach(m, getValues) {
-            var res = new Array(m.size), i = 0;
-            m.forEach(function (v, k) {
-                res[i] = getValues ? v : k;
-                i++;
-            });
-            return res;
-        };
-    })();
-    var MapWrapper = (function () {
-        function MapWrapper() {
-        }
-        MapWrapper.createFromStringMap = function (stringMap) {
-            var result = new Map();
-            for (var prop in stringMap) {
-                result.set(prop, stringMap[prop]);
-            }
-            return result;
-        };
-        MapWrapper.toStringMap = function (m) {
-            var r = {};
-            m.forEach(function (v, k) { return r[k] = v; });
-            return r;
-        };
-        MapWrapper.createFromPairs = function (pairs) { return createMapFromPairs(pairs); };
-        MapWrapper.iterable = function (m) { return m; };
-        MapWrapper.keys = function (m) { return _arrayFromMap(m, false); };
-        MapWrapper.values = function (m) { return _arrayFromMap(m, true); };
-        return MapWrapper;
-    }());
-
+    /**
+     * @license
+     * Copyright Google Inc. All Rights Reserved.
+     *
+     * Use of this source code is governed by an MIT-style license that can be
+     * found in the LICENSE file at https://angular.io/license
+     */
     /**
      * Polyfill for [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers), as
      * specified in the [Fetch Spec](https://fetch.spec.whatwg.org/#headers-class).
@@ -380,18 +150,15 @@
                 return;
             }
             if (headers instanceof Headers) {
-                headers._headers.forEach(function (value, name) {
-                    var lcName = name.toLowerCase();
-                    _this._headers.set(lcName, value);
-                    _this.mayBeSetNormalizedName(name);
+                headers.forEach(function (values, name) {
+                    values.forEach(function (value) { return _this.append(name, value); });
                 });
                 return;
             }
             Object.keys(headers).forEach(function (name) {
-                var value = headers[name];
-                var lcName = name.toLowerCase();
-                _this._headers.set(lcName, Array.isArray(value) ? value : [value]);
-                _this.mayBeSetNormalizedName(name);
+                var values = Array.isArray(headers[name]) ? headers[name] : [headers[name]];
+                _this.delete(name);
+                values.forEach(function (value) { return _this.append(name, value); });
             });
         }
         /**
@@ -414,7 +181,12 @@
          */
         Headers.prototype.append = function (name, value) {
             var values = this.getAll(name);
-            this.set(name, values === null ? [value] : values.concat([value]));
+            if (values === null) {
+                this.set(name, value);
+            }
+            else {
+                values.push(value);
+            }
         };
         /**
          * Deletes all header values for the given name.
@@ -445,19 +217,25 @@
         /**
          * Returns the names of the headers
          */
-        Headers.prototype.keys = function () { return MapWrapper.values(this._normalizedNames); };
+        Headers.prototype.keys = function () { return Array.from(this._normalizedNames.values()); };
         /**
          * Sets or overrides header value for given name.
          */
         Headers.prototype.set = function (name, value) {
-            var strValue = Array.isArray(value) ? value.join(',') : value;
-            this._headers.set(name.toLowerCase(), [strValue]);
+            if (Array.isArray(value)) {
+                if (value.length) {
+                    this._headers.set(name.toLowerCase(), [value.join(',')]);
+                }
+            }
+            else {
+                this._headers.set(name.toLowerCase(), [value]);
+            }
             this.mayBeSetNormalizedName(name);
         };
         /**
          * Returns values of all headers.
          */
-        Headers.prototype.values = function () { return MapWrapper.values(this._headers); };
+        Headers.prototype.values = function () { return Array.from(this._headers.values()); };
         /**
          * Returns string of all headers.
          */
@@ -534,12 +312,12 @@
     var ResponseOptions = (function () {
         function ResponseOptions(_a) {
             var _b = _a === void 0 ? {} : _a, body = _b.body, status = _b.status, headers = _b.headers, statusText = _b.statusText, type = _b.type, url = _b.url;
-            this.body = isPresent(body) ? body : null;
-            this.status = isPresent(status) ? status : null;
-            this.headers = isPresent(headers) ? headers : null;
-            this.statusText = isPresent(statusText) ? statusText : null;
-            this.type = isPresent(type) ? type : null;
-            this.url = isPresent(url) ? url : null;
+            this.body = body != null ? body : null;
+            this.status = status != null ? status : null;
+            this.headers = headers != null ? headers : null;
+            this.statusText = statusText != null ? statusText : null;
+            this.type = type != null ? type : null;
+            this.url = url != null ? url : null;
         }
         /**
          * Creates a copy of the `ResponseOptions` instance, using the optional input as values to
@@ -568,13 +346,12 @@
          */
         ResponseOptions.prototype.merge = function (options) {
             return new ResponseOptions({
-                body: isPresent(options) && isPresent(options.body) ? options.body : this.body,
-                status: isPresent(options) && isPresent(options.status) ? options.status : this.status,
-                headers: isPresent(options) && isPresent(options.headers) ? options.headers : this.headers,
-                statusText: isPresent(options) && isPresent(options.statusText) ? options.statusText :
-                    this.statusText,
-                type: isPresent(options) && isPresent(options.type) ? options.type : this.type,
-                url: isPresent(options) && isPresent(options.url) ? options.url : this.url,
+                body: options && options.body != null ? options.body : this.body,
+                status: options && options.status != null ? options.status : this.status,
+                headers: options && options.headers != null ? options.headers : this.headers,
+                statusText: options && options.statusText != null ? options.statusText : this.statusText,
+                type: options && options.type != null ? options.type : this.type,
+                url: options && options.url != null ? options.url : this.url,
             });
         };
         return ResponseOptions;
@@ -680,15 +457,25 @@
     }());
 
     function normalizeMethodName(method) {
-        if (isString(method)) {
-            var originalMethod = method;
-            method = method
-                .replace(/(\w)(\w*)/g, function (g0, g1, g2) { return g1.toUpperCase() + g2.toLowerCase(); });
-            method = exports.RequestMethod[method];
-            if (typeof method !== 'number')
-                throw new Error("Invalid request method. The method \"" + originalMethod + "\" is not supported.");
+        if (typeof method !== 'string')
+            return method;
+        switch (method.toUpperCase()) {
+            case 'GET':
+                return exports.RequestMethod.Get;
+            case 'POST':
+                return exports.RequestMethod.Post;
+            case 'PUT':
+                return exports.RequestMethod.Put;
+            case 'DELETE':
+                return exports.RequestMethod.Delete;
+            case 'OPTIONS':
+                return exports.RequestMethod.Options;
+            case 'HEAD':
+                return exports.RequestMethod.Head;
+            case 'PATCH':
+                return exports.RequestMethod.Patch;
         }
-        return method;
+        throw new Error("Invalid request method. The method \"" + method + "\" is not supported.");
     }
     var isSuccess = function (status) { return (status >= 200 && status < 300); };
     function getResponseURL(xhr) {
@@ -896,11 +683,11 @@
          * Attempts to return body as parsed `JSON` object, or raises an exception.
          */
         Body.prototype.json = function () {
-            if (isString(this._body)) {
-                return Json.parse(this._body);
+            if (typeof this._body === 'string') {
+                return JSON.parse(this._body);
             }
             if (this._body instanceof ArrayBuffer) {
-                return Json.parse(this.text());
+                return JSON.parse(this.text());
             }
             return this._body;
         };
@@ -917,8 +704,8 @@
             if (this._body === null) {
                 return '';
             }
-            if (isJsObject(this._body)) {
-                return Json.stringify(this._body);
+            if (typeof this._body === 'object') {
+                return JSON.stringify(this._body, null, 2);
             }
             return this._body.toString();
         };
@@ -1000,8 +787,9 @@
     var JSONP_HOME = '__ng_jsonp__';
     var _jsonpConnections = null;
     function _getJsonpConnections() {
+        var w = typeof window == 'object' ? window : {};
         if (_jsonpConnections === null) {
-            _jsonpConnections = global$1[JSONP_HOME] = {};
+            _jsonpConnections = w[JSONP_HOME] = {};
         }
         return _jsonpConnections;
     }
@@ -1086,7 +874,7 @@
                 var callback = _dom.requestCallback(_this._id);
                 var url = req.url;
                 if (url.indexOf('=JSONP_CALLBACK&') > -1) {
-                    url = StringWrapper.replace(url, '=JSONP_CALLBACK&', "=" + callback + "&");
+                    url = url.replace('=JSONP_CALLBACK&', "=" + callback + "&");
                 }
                 else if (url.lastIndexOf('=JSONP_CALLBACK') === url.length - '=JSONP_CALLBACK'.length) {
                     url = url.substring(0, url.length - '=JSONP_CALLBACK'.length) + ("=" + callback);
@@ -1099,14 +887,14 @@
                     _dom.cleanup(script);
                     if (!_this._finished) {
                         var responseOptions_1 = new ResponseOptions({ body: JSONP_ERR_NO_CALLBACK, type: exports.ResponseType.Error, url: url });
-                        if (isPresent(baseResponseOptions)) {
+                        if (baseResponseOptions) {
                             responseOptions_1 = baseResponseOptions.merge(responseOptions_1);
                         }
                         responseObserver.error(new Response(responseOptions_1));
                         return;
                     }
                     var responseOptions = new ResponseOptions({ body: _this._responseData, url: url });
-                    if (isPresent(_this.baseResponseOptions)) {
+                    if (_this.baseResponseOptions) {
                         responseOptions = _this.baseResponseOptions.merge(responseOptions);
                     }
                     responseObserver.next(new Response(responseOptions));
@@ -1118,7 +906,7 @@
                     _this.readyState = exports.ReadyState.Done;
                     _dom.cleanup(script);
                     var responseOptions = new ResponseOptions({ body: error.message, type: exports.ResponseType.Error });
-                    if (isPresent(baseResponseOptions)) {
+                    if (baseResponseOptions) {
                         responseOptions = baseResponseOptions.merge(responseOptions);
                     }
                     responseObserver.error(new Response(responseOptions));
@@ -1130,9 +918,7 @@
                     _this.readyState = exports.ReadyState.Cancelled;
                     script.removeEventListener('load', onLoad);
                     script.removeEventListener('error', onError);
-                    if (isPresent(script)) {
-                        _this._dom.cleanup(script);
-                    }
+                    _this._dom.cleanup(script);
                 };
             });
         }
@@ -1197,31 +983,37 @@
             this.response = new rxjs_Observable.Observable(function (responseObserver) {
                 var _xhr = browserXHR.build();
                 _xhr.open(exports.RequestMethod[req.method].toUpperCase(), req.url);
-                if (isPresent(req.withCredentials)) {
+                if (req.withCredentials != null) {
                     _xhr.withCredentials = req.withCredentials;
                 }
                 // load event handler
                 var onLoad = function () {
-                    // responseText is the old-school way of retrieving response (supported by IE8 & 9)
-                    // response/responseType properties were introduced in ResourceLoader Level2 spec (supported
-                    // by IE10)
-                    var body = _xhr.response === undefined ? _xhr.responseText : _xhr.response;
-                    // Implicitly strip a potential XSSI prefix.
-                    if (isString(body))
-                        body = body.replace(XSSI_PREFIX, '');
-                    var headers = Headers.fromResponseHeaderString(_xhr.getAllResponseHeaders());
-                    var url = getResponseURL(_xhr);
                     // normalize IE9 bug (http://bugs.jquery.com/ticket/1450)
                     var status = _xhr.status === 1223 ? 204 : _xhr.status;
+                    var body = null;
+                    // HTTP 204 means no content
+                    if (status !== 204) {
+                        // responseText is the old-school way of retrieving response (supported by IE8 & 9)
+                        // response/responseType properties were introduced in ResourceLoader Level2 spec
+                        // (supported by IE10)
+                        body = _xhr.response == null ? _xhr.responseText : _xhr.response;
+                        // Implicitly strip a potential XSSI prefix.
+                        if (typeof body === 'string') {
+                            body = body.replace(XSSI_PREFIX, '');
+                        }
+                    }
                     // fix status code when it is 0 (0 status is undocumented).
                     // Occurs when accessing file resources or on Android 4.1 stock browser
                     // while retrieving files from application cache.
                     if (status === 0) {
                         status = body ? 200 : 0;
                     }
+                    var headers = Headers.fromResponseHeaderString(_xhr.getAllResponseHeaders());
+                    // IE 9 does not provide the way to get URL of response
+                    var url = getResponseURL(_xhr) || req.url;
                     var statusText = _xhr.statusText || 'OK';
                     var responseOptions = new ResponseOptions({ body: body, status: status, headers: headers, statusText: statusText, url: url });
-                    if (isPresent(baseResponseOptions)) {
+                    if (baseResponseOptions != null) {
                         responseOptions = baseResponseOptions.merge(responseOptions);
                     }
                     var response = new Response(responseOptions);
@@ -1242,17 +1034,17 @@
                         status: _xhr.status,
                         statusText: _xhr.statusText,
                     });
-                    if (isPresent(baseResponseOptions)) {
+                    if (baseResponseOptions != null) {
                         responseOptions = baseResponseOptions.merge(responseOptions);
                     }
                     responseObserver.error(new Response(responseOptions));
                 };
                 _this.setDetectedContentType(req, _xhr);
-                if (isPresent(req.headers)) {
+                if (req.headers != null) {
                     req.headers.forEach(function (values, name) { return _xhr.setRequestHeader(name, values.join(',')); });
                 }
                 // Select the correct buffer type to store the response
-                if (isPresent(req.responseType) && isPresent(_xhr.responseType)) {
+                if (req.responseType != null && _xhr.responseType != null) {
                     switch (req.responseType) {
                         case exports.ResponseContentType.ArrayBuffer:
                             _xhr.responseType = 'arraybuffer';
@@ -1280,9 +1072,9 @@
                 };
             });
         }
-        XHRConnection.prototype.setDetectedContentType = function (req /** TODO #9100 */, _xhr /** TODO #9100 */) {
+        XHRConnection.prototype.setDetectedContentType = function (req /** TODO Request */, _xhr /** XMLHttpRequest */) {
             // Skip if a custom Content-Type header is provided
-            if (isPresent(req.headers) && isPresent(req.headers.get('Content-Type'))) {
+            if (req.headers != null && req.headers.get('Content-Type') != null) {
                 return;
             }
             // Set the detected content type
@@ -1328,7 +1120,7 @@
         }
         CookieXSRFStrategy.prototype.configureRequest = function (req) {
             var xsrfToken = _angular_platformBrowser.__platform_browser_private__.getDOM().getCookie(this._cookieName);
-            if (xsrfToken && !req.headers.has(this._headerName)) {
+            if (xsrfToken) {
                 req.headers.set(this._headerName, xsrfToken);
             }
         };
@@ -1423,15 +1215,14 @@
     var RequestOptions = (function () {
         function RequestOptions(_a) {
             var _b = _a === void 0 ? {} : _a, method = _b.method, headers = _b.headers, body = _b.body, url = _b.url, search = _b.search, withCredentials = _b.withCredentials, responseType = _b.responseType;
-            this.method = isPresent(method) ? normalizeMethodName(method) : null;
-            this.headers = isPresent(headers) ? headers : null;
-            this.body = isPresent(body) ? body : null;
-            this.url = isPresent(url) ? url : null;
-            this.search = isPresent(search) ?
-                (isString(search) ? new URLSearchParams((search)) : (search)) :
-                null;
-            this.withCredentials = isPresent(withCredentials) ? withCredentials : null;
-            this.responseType = isPresent(responseType) ? responseType : null;
+            this.method = method != null ? normalizeMethodName(method) : null;
+            this.headers = headers != null ? headers : null;
+            this.body = body != null ? body : null;
+            this.url = url != null ? url : null;
+            this.search =
+                search != null ? (typeof search === 'string' ? new URLSearchParams(search) : search) : null;
+            this.withCredentials = withCredentials != null ? withCredentials : null;
+            this.responseType = responseType != null ? responseType : null;
         }
         /**
          * Creates a copy of the `RequestOptions` instance, using the optional input as values to override
@@ -1460,18 +1251,17 @@
          */
         RequestOptions.prototype.merge = function (options) {
             return new RequestOptions({
-                method: isPresent(options) && isPresent(options.method) ? options.method : this.method,
-                headers: isPresent(options) && isPresent(options.headers) ? options.headers : this.headers,
-                body: isPresent(options) && isPresent(options.body) ? options.body : this.body,
-                url: isPresent(options) && isPresent(options.url) ? options.url : this.url,
-                search: isPresent(options) && isPresent(options.search) ?
-                    (isString(options.search) ? new URLSearchParams((options.search)) :
-                        (options.search).clone()) :
+                method: options && options.method != null ? options.method : this.method,
+                headers: options && options.headers != null ? options.headers : this.headers,
+                body: options && options.body != null ? options.body : this.body,
+                url: options && options.url != null ? options.url : this.url,
+                search: options && options.search != null ?
+                    (typeof options.search === 'string' ? new URLSearchParams(options.search) :
+                        options.search.clone()) :
                     this.search,
-                withCredentials: isPresent(options) && isPresent(options.withCredentials) ?
-                    options.withCredentials :
+                withCredentials: options && options.withCredentials != null ? options.withCredentials :
                     this.withCredentials,
-                responseType: isPresent(options) && isPresent(options.responseType) ? options.responseType :
+                responseType: options && options.responseType != null ? options.responseType :
                     this.responseType
             });
         };
@@ -1595,11 +1385,11 @@
             // TODO: assert that url is present
             var url = requestOptions.url;
             this.url = requestOptions.url;
-            if (isPresent(requestOptions.search)) {
+            if (requestOptions.search) {
                 var search = requestOptions.search.toString();
                 if (search.length > 0) {
                     var prefix = '?';
-                    if (StringWrapper.contains(this.url, '?')) {
+                    if (this.url.indexOf('?') != -1) {
                         prefix = (this.url[this.url.length - 1] == '&') ? '' : '&';
                     }
                     // TODO: just delete search-query-looking string in url?
@@ -1610,7 +1400,6 @@
             this.method = normalizeMethodName(requestOptions.method);
             // TODO(jeffbcross): implement behavior
             // Defaults to 'omit', consistent with browser
-            // TODO(jeffbcross): implement behavior
             this.headers = new Headers(requestOptions.headers);
             this.contentType = this.detectContentType();
             this.withCredentials = requestOptions.withCredentials;
@@ -1686,11 +1475,11 @@
         };
         return Request;
     }(Body));
-    var noop$1 = function () { };
-    var w = typeof window == 'object' ? window : noop$1;
-    var FormData = w['FormData'] || noop$1;
-    var Blob$1 = w['Blob'] || noop$1;
-    var ArrayBuffer$1 = w['ArrayBuffer'] || noop$1;
+    var noop = function () { };
+    var w = typeof window == 'object' ? window : noop;
+    var FormData = w['FormData'] || noop;
+    var Blob$1 = w['Blob'] || noop;
+    var ArrayBuffer$1 = w['ArrayBuffer'] || noop;
 
     /**
      * @license
@@ -1709,7 +1498,7 @@
     }
     function mergeOptions(defaultOpts, providedOpts, method, url) {
         var newOptions = defaultOpts;
-        if (isPresent(providedOpts)) {
+        if (providedOpts) {
             // Hack so Dart can used named parameters
             return newOptions.merge(new RequestOptions({
                 method: providedOpts.method || method,
@@ -1721,12 +1510,7 @@
                 responseType: providedOpts.responseType
             }));
         }
-        if (isPresent(method)) {
-            return newOptions.merge(new RequestOptions({ method: method, url: url }));
-        }
-        else {
-            return newOptions.merge(new RequestOptions({ url: url }));
-        }
+        return newOptions.merge(new RequestOptions({ method: method, url: url }));
     }
     /**
      * Performs http requests using `XMLHttpRequest` as the default backend.
@@ -1801,7 +1585,7 @@
          */
         Http.prototype.request = function (url, options) {
             var responseObservable;
-            if (isString(url)) {
+            if (typeof url === 'string') {
                 responseObservable = httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Get, url)));
             }
             else if (url instanceof Request) {
@@ -1816,43 +1600,43 @@
          * Performs a request with `get` http method.
          */
         Http.prototype.get = function (url, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Get, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Get, url)));
         };
         /**
          * Performs a request with `post` http method.
          */
         Http.prototype.post = function (url, body, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Post, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Post, url)));
         };
         /**
          * Performs a request with `put` http method.
          */
         Http.prototype.put = function (url, body, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Put, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Put, url)));
         };
         /**
          * Performs a request with `delete` http method.
          */
         Http.prototype.delete = function (url, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Delete, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Delete, url)));
         };
         /**
          * Performs a request with `patch` http method.
          */
         Http.prototype.patch = function (url, body, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Patch, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions.merge(new RequestOptions({ body: body })), options, exports.RequestMethod.Patch, url)));
         };
         /**
          * Performs a request with `head` http method.
          */
         Http.prototype.head = function (url, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Head, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Head, url)));
         };
         /**
          * Performs a request with `options` http method.
          */
         Http.prototype.options = function (url, options) {
-            return httpRequest(this._backend, new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Options, url)));
+            return this.request(new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Options, url)));
         };
         Http.decorators = [
             { type: _angular_core.Injectable },
@@ -1888,7 +1672,7 @@
          */
         Jsonp.prototype.request = function (url, options) {
             var responseObservable;
-            if (isString(url)) {
+            if (typeof url === 'string') {
                 url =
                     new Request(mergeOptions(this._defaultOptions, options, exports.RequestMethod.Get, url));
             }

@@ -1,40 +1,40 @@
 {
   "_args": [
     [
-      "@angular/platform-browser@2.0.2",
+      "@angular/platform-browser@~2.2.0",
       "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi"
     ]
   ],
-  "_from": "@angular/platform-browser@2.0.2",
-  "_id": "@angular/platform-browser@2.0.2",
+  "_from": "@angular/platform-browser@>=2.2.0-0 <2.3.0-0",
+  "_id": "@angular/platform-browser@2.2.3",
   "_inCache": true,
   "_location": "/@angular/platform-browser",
-  "_nodeVersion": "5.4.1",
+  "_nodeVersion": "6.6.0",
   "_npmOperationalInternal": {
-    "host": "packages-16-east.internal.npmjs.com",
-    "tmp": "tmp/platform-browser-2.0.2.tgz_1475759799655_0.4836408121045679"
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/platform-browser-2.2.3.tgz_1479942838286_0.7761566750705242"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angular"
   },
-  "_npmVersion": "3.9.2",
+  "_npmVersion": "3.10.3",
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/platform-browser",
-    "raw": "@angular/platform-browser@2.0.2",
-    "rawSpec": "2.0.2",
+    "raw": "@angular/platform-browser@~2.2.0",
+    "rawSpec": "~2.2.0",
     "scope": "@angular",
-    "spec": "2.0.2",
-    "type": "version"
+    "spec": ">=2.2.0-0 <2.3.0-0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-2.0.2.tgz",
-  "_shasum": "25b754bfc426ee5a761b0b47fc677cd7d8ae41d2",
+  "_resolved": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-2.2.3.tgz",
+  "_shasum": "f48d2452a6dfebc0d41274f0e3a02ba89c01b2b6",
   "_shrinkwrap": null,
-  "_spec": "@angular/platform-browser@2.0.2",
+  "_spec": "@angular/platform-browser@~2.2.0",
   "_where": "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi",
   "author": {
     "name": "angular"
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "25b754bfc426ee5a761b0b47fc677cd7d8ae41d2",
-    "tarball": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-2.0.2.tgz"
+    "shasum": "f48d2452a6dfebc0d41274f0e3a02ba89c01b2b6",
+    "tarball": "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-2.2.3.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "installable": true,
@@ -64,8 +64,8 @@
   "name": "@angular/platform-browser",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/common": "2.0.2",
-    "@angular/core": "2.0.2"
+    "@angular/common": "2.2.3",
+    "@angular/core": "2.2.3"
   },
   "repository": {
     "type": "git",
@@ -73,5 +73,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.0.2"
+  "version": "2.2.3"
 }

@@ -1,40 +1,40 @@
 {
   "_args": [
     [
-      "@angular/common@2.0.2",
+      "@angular/common@~2.2.0",
       "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi"
     ]
   ],
-  "_from": "@angular/common@2.0.2",
-  "_id": "@angular/common@2.0.2",
+  "_from": "@angular/common@>=2.2.0-0 <2.3.0-0",
+  "_id": "@angular/common@2.2.3",
   "_inCache": true,
   "_location": "/@angular/common",
-  "_nodeVersion": "5.4.1",
+  "_nodeVersion": "6.6.0",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/common-2.0.2.tgz_1475759773742_0.9361756527796388"
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/common-2.2.3.tgz_1479942822498_0.23985517141409218"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angular"
   },
-  "_npmVersion": "3.9.2",
+  "_npmVersion": "3.10.3",
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/common",
-    "raw": "@angular/common@2.0.2",
-    "rawSpec": "2.0.2",
+    "raw": "@angular/common@~2.2.0",
+    "rawSpec": "~2.2.0",
     "scope": "@angular",
-    "spec": "2.0.2",
-    "type": "version"
+    "spec": ">=2.2.0-0 <2.3.0-0",
+    "type": "range"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/common/-/common-2.0.2.tgz",
-  "_shasum": "b4a28f7568a511f596dc2dd4e2551830642cd4f4",
+  "_resolved": "https://registry.npmjs.org/@angular/common/-/common-2.2.3.tgz",
+  "_shasum": "0d26bdfdea362ed32e436ced4f31bb69a9d7b9e4",
   "_shrinkwrap": null,
-  "_spec": "@angular/common@2.0.2",
+  "_spec": "@angular/common@~2.2.0",
   "_where": "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi",
   "author": {
     "name": "angular"
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "b4a28f7568a511f596dc2dd4e2551830642cd4f4",
-    "tarball": "https://registry.npmjs.org/@angular/common/-/common-2.0.2.tgz"
+    "shasum": "0d26bdfdea362ed32e436ced4f31bb69a9d7b9e4",
+    "tarball": "https://registry.npmjs.org/@angular/common/-/common-2.2.3.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "installable": true,
@@ -64,7 +64,7 @@
   "name": "@angular/common",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/core": "2.0.2"
+    "@angular/core": "2.2.3"
   },
   "repository": {
     "type": "git",
@@ -72,5 +72,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.0.2"
+  "version": "2.2.3"
 }
