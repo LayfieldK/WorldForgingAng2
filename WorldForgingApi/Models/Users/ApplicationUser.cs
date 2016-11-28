@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Comments;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OpenIddict;
 
 namespace WorldForging.Models.Users
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : OpenIddictUser
     {
         #region Constructor
         public ApplicationUser()

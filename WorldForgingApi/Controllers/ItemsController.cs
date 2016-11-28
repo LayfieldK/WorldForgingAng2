@@ -11,18 +11,16 @@ using WorldForgingApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using WorldForging.Models.Users;
 
 namespace WorldForging.Controllers
 {
-    [Route("api/[controller]")]
-    public class ItemsController : Controller
+    public class ItemsController : BaseController
     {
-        #region Private Fields
-        private WorldForgingDBContext DbContext;
-        #endregion Private Fields
-
+        
         #region Constructor
-        public ItemsController(WorldForgingDBContext context)
+        public ItemsController(WorldForgingDBContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager) : base(context, signInManager,userManager)
         {
             // Dependency Injetion
             DbContext = context;
@@ -60,7 +58,7 @@ namespace WorldForging.Controllers
         /// <returns>Creates a new Item and return it accordingly.</returns>
         [HttpPost()]
         [Authorize]
-        public IActionResult Add([FromBody]ItemViewModel ivm)
+        public async Task<IActionResult> Add([FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
             {
@@ -71,7 +69,7 @@ namespace WorldForging.Controllers
                 item.CreatedDate =
                 item.LastModifiedDate = DateTime.Now;
 
-                item.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                item.UserId = await GetCurrentUserId();
 
                 // add the new item
                 DbContext.TutorialItems.Add(item);
@@ -236,20 +234,6 @@ namespace WorldForging.Controllers
             var lst = new List<ItemViewModel>();
             foreach (var i in items) lst.Add(Mapper.Map<ItemViewModel>(i));
             return lst;
-        }
-
-        /// <summary>
-        /// Returns a suitable JsonSerializerSettings object that can be used to generate the JsonResult return value for this Controller's methods.
-        /// </summary>
-        private JsonSerializerSettings DefaultJsonSettings
-        {
-            get
-            {
-                return new JsonSerializerSettings()
-                {
-                    Formatting = Formatting.Indented
-                };
-            }
         }
 
         /// <summary>

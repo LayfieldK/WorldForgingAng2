@@ -32,7 +32,11 @@ namespace WorldForgingApi
             if (env.IsEnvironment("Development"))
             {
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
-                builder.AddApplicationInsightsSettings(developerMode: true);
+                //builder.AddApplicationInsightsSettings(developerMode: true);
+
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
+
             }
 
             builder.AddEnvironmentVariables();
@@ -44,8 +48,11 @@ namespace WorldForgingApi
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add a reference to the Configuration object for DI
+            services.AddSingleton<IConfiguration>( c => { return Configuration; });
+
             // Add framework services.
-            services.AddApplicationInsightsTelemetry(Configuration);
+            //services.AddApplicationInsightsTelemetry(Configuration);
 
             services.AddMvc();
 
@@ -62,6 +69,31 @@ namespace WorldForgingApi
                 .AddDefaultTokenProviders();
 
             services.AddDbContext<WorldForgingDBContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+
+            // Register the OpenIddict services, including the default Entity Framework stores.
+            services.AddOpenIddict< ApplicationUser, WorldForgingDBContext>()
+                // Integrate with EFCore
+                .AddEntityFramework<WorldForgingDBContext>()
+                // Use Json Web Tokens (JWT)
+                .UseJsonWebTokens()
+                // Set a custom token endpoint (default is /connect/token)
+                .EnableTokenEndpoint(Configuration["Authentication:OpenIddict:TokenEndPoint"])
+                // Set a custom auth endpoint (default is /connect/authorize)
+                .EnableAuthorizationEndpoint(Configuration["Authentication:OpenIddict:AuthorizationEndPoint"])
+                // Allow client applications to use the grant_type=password flow.
+                .AllowPasswordFlow()
+                // Enable support for both authorization & implicit flows
+                .AllowAuthorizationCodeFlow()
+                .AllowImplicitFlow()
+                // Allow the client to refresh tokens.
+                .AllowRefreshTokenFlow()
+                // Disable the HTTPS requirement (not recommended in production)
+                .DisableHttpsRequirement()
+                // Register a new ephemeral key for development.
+                // We will register a X.509 certificate in production.
+                .AddEphemeralSigningKey();
+
+
             // Add ApplicationDbContext's DbSeeder
             services.AddSingleton<DbSeeder>();
 
@@ -81,9 +113,9 @@ namespace WorldForgingApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseApplicationInsightsRequestTelemetry();
+            //app.UseApplicationInsightsRequestTelemetry();
 
-            app.UseApplicationInsightsExceptionTelemetry();
+            //app.UseApplicationInsightsExceptionTelemetry();
 
             // Configure a rewrite rule to auto-lookup for standard default files such as index.html. 
             app.UseDefaultFiles();
@@ -101,8 +133,48 @@ namespace WorldForgingApi
                 }
             });
 
-            // Add a custom Jwt Provider to generate Tokens
-            app.UseJwtProvider();
+            // Add the AspNetCore.Identity middleware (required for external auth providers)
+            // IMPORTANT: This must be placed *BEFORE* OpenIddict and any external provider's middleware
+            app.UseIdentity();
+
+            // Add external authentication middleware below. 
+            // To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                AppId = Configuration["FacebookAppId"],
+                AppSecret = Configuration["FacebookAppSecret"],
+                CallbackPath = "/signin-facebook",
+                Scope = { "email" }
+            });
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ClientId = Configuration["GoogleClientId"],
+                ClientSecret = Configuration["GoogleClientSecret"],
+                CallbackPath = "/signin-google",
+                Scope = { "email" }
+            });
+
+            app.UseTwitterAuthentication(new TwitterOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ConsumerKey = Configuration["TwitterConsumerKey"],
+                ConsumerSecret = Configuration["TwitterConsumerSecret"],
+                CallbackPath = "/signin-twitter"
+            });
+
+            //// Add a custom Jwt Provider to generate Tokens
+            //app.UseJwtProvider();
+
+            // Add OpenIddict middleware
+            // Note: UseOpenIddict() must be registered after app.UseIdentity() and the external social providers.
+            app.UseOpenIddict();
+
 
             // Add the Jwt Bearer Header Authentication to validate Tokens
             app.UseJwtBearerAuthentication(new JwtBearerOptions()
@@ -110,11 +182,12 @@ namespace WorldForgingApi
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 RequireHttpsMetadata = false,
+                Authority = Configuration["Authentication:OpenIddict:Authority"],
                 TokenValidationParameters = new TokenValidationParameters()
                 {
-                    IssuerSigningKey = JwtProvider.SecurityKey,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = JwtProvider.Issuer,
+                    //IssuerSigningKey = JwtProvider.SecurityKey,
+                    //ValidateIssuerSigningKey = true,
+                    //ValidIssuer = JwtProvider.Issuer,
                     ValidateIssuer = false,
                     ValidateAudience = false
                 }

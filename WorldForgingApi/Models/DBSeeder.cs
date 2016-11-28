@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using OpenIddict;
+using CryptoHelper;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +11,7 @@ using WorldForging.Models.Comments;
 using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
 using WorldForgingApi.Models;
+using Microsoft.Extensions.Configuration;
 
 public class DbSeeder
 {
@@ -16,14 +19,16 @@ public class DbSeeder
     private WorldForgingDBContext DbContext;
     private RoleManager<IdentityRole> RoleManager;
     private UserManager<ApplicationUser> UserManager;
+    private IConfiguration Configuration;
     #endregion Private Members
 
     #region Constructor
-    public DbSeeder(WorldForgingDBContext dbContext, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+    public DbSeeder(WorldForgingDBContext dbContext, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager, IConfiguration configuration)
     {
         DbContext = dbContext;
         RoleManager = roleManager;
         UserManager = userManager;
+        Configuration = configuration;
     }
     #endregion Constructor
 
@@ -32,6 +37,8 @@ public class DbSeeder
     {
         // Create the Db if it doesn’t exist
         DbContext.Database.EnsureCreated();
+        // Create default Application
+        if (!DbContext.Applications.Any()) CreateApplication();
         // Create default Users
         if (await DbContext.Users.CountAsync() == 0) await CreateUsersAsync();
         // Create default Items (if there are none) and Comments
@@ -40,6 +47,20 @@ public class DbSeeder
     #endregion Public Methods
 
     #region Seed Methods
+    private void CreateApplication()
+    {
+        DbContext.Applications.Add(new OpenIddictApplication
+        {
+            Id = Configuration["Authentication:OpenIddict:ApplicationId"],
+            DisplayName = Configuration["Authentication:OpenIddict:DisplayName"],
+            RedirectUri = Configuration["Authentication:OpenIddict:TokenEndPoint"],
+            LogoutRedirectUri = "/",
+            ClientId = Configuration["Authentication:OpenIddict:ClientId"],
+            ClientSecret = Crypto.HashPassword(Configuration["Authentication:OpenIddict:ClientSecret"]),
+            Type = OpenIddictConstants.ClientTypes.Public
+        });
+        DbContext.SaveChanges();
+    }
     private async Task CreateUsersAsync()
     {
         // local variables
