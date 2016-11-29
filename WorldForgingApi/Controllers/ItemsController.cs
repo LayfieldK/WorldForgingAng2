@@ -11,22 +11,23 @@ using WorldForgingApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using WorldForging.Models.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace WorldForging.Controllers
 {
     [Route("api/[controller]")]
-    public class ItemsController : Controller
+    public class ItemsController : BaseController
     {
-        #region Private Fields
-        private WorldForgingDBContext DbContext;
-        #endregion Private Fields
-
         #region Constructor
-        public ItemsController(WorldForgingDBContext context)
-        {
-            // Dependency Injetion
-            DbContext = context;
-        }
+        public ItemsController(
+            WorldForgingDBContext context,
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager) : base(
+            context,
+            signInManager,
+            userManager)
+        { }
         #endregion Constructor
 
         #region RESTful Conventions
@@ -60,7 +61,7 @@ namespace WorldForging.Controllers
         /// <returns>Creates a new Item and return it accordingly.</returns>
         [HttpPost()]
         [Authorize]
-        public IActionResult Add([FromBody]ItemViewModel ivm)
+        public async Task<IActionResult> Add([FromBody]ItemViewModel ivm)
         {
             if (ivm != null)
             {
@@ -71,7 +72,7 @@ namespace WorldForging.Controllers
                 item.CreatedDate =
                 item.LastModifiedDate = DateTime.Now;
 
-                item.UserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                item.UserId = await GetCurrentUserId();
 
                 // add the new item
                 DbContext.TutorialItems.Add(item);

@@ -31,6 +31,8 @@ namespace WorldForgingApi
 
             if (env.IsEnvironment("Development"))
             {
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
@@ -133,6 +135,41 @@ namespace WorldForgingApi
 
             //// Add a custom Jwt Provider to generate Tokens
             //app.UseJwtProvider();
+
+            // Add the AspNetCore.Identity middleware (required for external auth providers)
+            // IMPORTANT: This must be placed *BEFORE* OpenIddict and any external provider's middleware
+            app.UseIdentity();
+
+            // Add external authentication middleware below. 
+            // To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                AppId = Configuration["FacebookAppId"],
+                AppSecret = Configuration["FacebookAppSecret"],
+                CallbackPath = "/signin-facebook",
+                Scope = { "email" }
+            });
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ClientId = Configuration["GoogleClientId"],
+                ClientSecret = Configuration["GoogleClientSecret"],
+                CallbackPath = "/signin-google",
+                Scope = { "email" }
+            });
+
+            app.UseTwitterAuthentication(new TwitterOptions()
+            {
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                ConsumerKey = Configuration["TwitterConsumerKey"],
+                ConsumerSecret = Configuration["TwitterConsumerSecret"],
+                CallbackPath = "/signin-twitter"
+            });
 
             // Add OpenIddict middleware
             // Note: UseOpenIddict() must be registered after app.UseIdentity() and the external social providers.
