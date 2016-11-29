@@ -11,10 +11,11 @@ using WorldForging.Models.Comments;
 using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OpenIddict;
 
 namespace WorldForgingApi.Models
 {
-    public class WorldForgingDBContext : IdentityDbContext<ApplicationUser>
+    public class WorldForgingDBContext : OpenIddictDbContext<ApplicationUser>
     {
         public WorldForgingDBContext(DbContextOptions<WorldForgingDBContext> options)
             : base(options)
