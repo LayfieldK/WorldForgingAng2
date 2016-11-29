@@ -50,7 +50,10 @@ import {AuthService} from "./auth.service";
 export class AppComponent {
     title = "OpenGameList";
 
-    constructor(public router: Router, public authService: AuthService, public zone: NgZone) { 
+    constructor(
+        public router: Router,
+        public authService: AuthService,
+        public zone: NgZone) {
         if (!(<any>window).externalProviderLogin) {
             var self = this;
             (<any>window).externalProviderLogin = function (auth) {

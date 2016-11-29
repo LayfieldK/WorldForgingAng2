@@ -6,21 +6,23 @@ import {AuthService} from "./auth.service";
 @Component({
     selector: "login",
     template: `
-    <div class="login-container">
-      <h2 class="form-login-heading">Login</h2>
-      <div class="alert alert-danger" role="alert" *ngIf="loginError"><strong>Warning:</strong> Username or Password mismatch</div>
-      <form class="form-login" [formGroup]="loginForm" (submit)="performLogin($event)">
+<div class="login-container">
+    <h2 class="form-login-heading">Login</h2>
+    <div class="alert alert-danger" role="alert" *ngIf="loginError">
+        <strong>Warning:</strong> Username or Password mismatch
+    </div>
+    <form class="form-login" [formGroup]="loginForm" (submit)="performLogin($event)">
         <input formControlName="username" type="text" class="form-control" placeholder="Your username or e-mail address" required autofocus />
         <input formControlName="password" type="password" class="form-control" placeholder="Your password" required />
         <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me">
-            Remember me
-          </label>
+            <label>
+                <input type="checkbox" value="remember-me">
+                Remember me
+            </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form>
-<button class="btn btn-sm btn-default btn-block" type="submit" (click)="callExternalLogin('Facebook')">
+    </form>
+    <button class="btn btn-sm btn-default btn-block" type="submit" (click)="callExternalLogin('Facebook')">
         Login with Facebook
     </button>
     <button class="btn btn-sm btn-default btn-block" type="submit" (click)="callExternalLogin('Google')">
@@ -29,7 +31,7 @@ import {AuthService} from "./auth.service";
     <button class="btn btn-sm btn-default btn-block" type="submit" (click)="callExternalLogin('Twitter')">
         Login with Twitter
     </button>
-    </div>
+</div>
     `
 })
 
@@ -43,9 +45,6 @@ export class LoginComponent {
         private fb: FormBuilder,
         private router: Router,
         private authService: AuthService) {
-        if (this.authService.isLoggedIn()) {
-            this.router.navigate([""]);
-        }
         this.loginForm = fb.group({
             username: ["", Validators.required],
             password: ["", Validators.required]
@@ -70,6 +69,7 @@ export class LoginComponent {
                 this.loginError = true;
             });
     }
+
 
     callExternalLogin(providerName: string) {
         var url = "api/Accounts/ExternalLogin/" + providerName;

@@ -11,20 +11,22 @@ using WorldForgingApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 using WorldForging.Models.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace WorldForging.Controllers
 {
     public class ItemsController : BaseController
     {
-        
         #region Constructor
-        public ItemsController(WorldForgingDBContext context, SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager) : base(context, signInManager,userManager)
-        {
-            // Dependency Injetion
-            DbContext = context;
-        }
+        public ItemsController(
+            WorldForgingDBContext context,
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager) : base(
+            context,
+            signInManager,
+            userManager)
+        { }
         #endregion Constructor
 
         #region RESTful Conventions

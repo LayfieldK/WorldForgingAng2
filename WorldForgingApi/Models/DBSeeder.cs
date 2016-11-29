@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CryptoHelper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 using OpenIddict;
-using CryptoHelper;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,6 +62,7 @@ public class DbSeeder
         });
         DbContext.SaveChanges();
     }
+
     private async Task CreateUsersAsync()
     {
         // local variables

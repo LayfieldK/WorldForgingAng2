@@ -31,6 +31,8 @@ namespace WorldForgingApi
 
             if (env.IsEnvironment("Development"))
             {
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 //builder.AddApplicationInsightsSettings(developerMode: true);
 
@@ -49,7 +51,10 @@ namespace WorldForgingApi
         public void ConfigureServices(IServiceCollection services)
         {
             // Add a reference to the Configuration object for DI
-            services.AddSingleton<IConfiguration>( c => { return Configuration; });
+            services.AddSingleton<IConfiguration>(
+                c => { return Configuration; }
+                );
+
 
             // Add framework services.
             //services.AddApplicationInsightsTelemetry(Configuration);
@@ -71,7 +76,7 @@ namespace WorldForgingApi
             services.AddDbContext<WorldForgingDBContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
             // Register the OpenIddict services, including the default Entity Framework stores.
-            services.AddOpenIddict< ApplicationUser, WorldForgingDBContext>()
+            services.AddOpenIddict<ApplicationUser, WorldForgingDBContext>()
                 // Integrate with EFCore
                 .AddEntityFramework<WorldForgingDBContext>()
                 // Use Json Web Tokens (JWT)
@@ -92,7 +97,6 @@ namespace WorldForgingApi
                 // Register a new ephemeral key for development.
                 // We will register a X.509 certificate in production.
                 .AddEphemeralSigningKey();
-
 
             // Add ApplicationDbContext's DbSeeder
             services.AddSingleton<DbSeeder>();
@@ -133,6 +137,9 @@ namespace WorldForgingApi
                 }
             });
 
+            //// Add a custom Jwt Provider to generate Tokens
+            //app.UseJwtProvider();
+
             // Add the AspNetCore.Identity middleware (required for external auth providers)
             // IMPORTANT: This must be placed *BEFORE* OpenIddict and any external provider's middleware
             app.UseIdentity();
@@ -168,13 +175,9 @@ namespace WorldForgingApi
                 CallbackPath = "/signin-twitter"
             });
 
-            //// Add a custom Jwt Provider to generate Tokens
-            //app.UseJwtProvider();
-
             // Add OpenIddict middleware
             // Note: UseOpenIddict() must be registered after app.UseIdentity() and the external social providers.
             app.UseOpenIddict();
-
 
             // Add the Jwt Bearer Header Authentication to validate Tokens
             app.UseJwtBearerAuthentication(new JwtBearerOptions()
@@ -182,7 +185,7 @@ namespace WorldForgingApi
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 RequireHttpsMetadata = false,
-                Authority = Configuration["Authentication:OpenIddict:Authority"],
+                Authority=Configuration["Authentication:OpenIddict:Authority"],
                 TokenValidationParameters = new TokenValidationParameters()
                 {
                     //IssuerSigningKey = JwtProvider.SecurityKey,

@@ -6,12 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using OpenGameListWebApp.ViewModels;
-using WorldForging.Models.Users;
 using WorldForgingApi.Models;
-using WorldForging.Controllers;
+using WorldForging.Models.Users;
 
-namespace OpenGameListWebApp.Controllers
+namespace WorldForging.Controllers
 {
     public class AccountsController : BaseController
     {

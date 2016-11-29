@@ -51,7 +51,7 @@ namespace WorldForging.Controllers
             {
                 // external provider
                 var user = await UserManager.FindByLoginAsync(
-                    info.LoginProvider,
+                    info.LoginProvider, 
                     info.ProviderKey);
                 if (user == null) throw new NotSupportedException();
                 return user.Id;
