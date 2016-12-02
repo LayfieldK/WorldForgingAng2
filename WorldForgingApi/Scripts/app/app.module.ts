@@ -14,6 +14,7 @@ import {ItemDetailEditComponent} from "./item-detail-edit.component";
 import {ItemListComponent} from "./item-list.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
+import {UserEditComponent} from "./user-edit.component";
 
 import {AppRouting} from "./app.routing";
 import {AuthHttp} from "./auth.http";
@@ -30,7 +31,8 @@ AboutComponent,
         ItemDetailViewComponent,
         ItemDetailEditComponent,
         LoginComponent,
-        PageNotFoundComponent
+        PageNotFoundComponent,
+        UserEditComponent
     ],
     // modules
     imports: [

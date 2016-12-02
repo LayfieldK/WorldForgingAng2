@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using OpenGameListWebApp.ViewModels;
+using WorldForging.ViewModels;
 using Newtonsoft.Json;
 using WorldForging.Models;
 using WorldForging.Models.TutorialItems;

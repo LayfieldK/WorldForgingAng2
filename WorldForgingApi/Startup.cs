@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using WorldForgingApi.Models;
 using Microsoft.EntityFrameworkCore;
 using WorldForging.Models.TutorialItems;
-using OpenGameListWebApp.ViewModels;
+using WorldForging.ViewModels;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using WorldForging.Models.Users;
@@ -68,6 +68,8 @@ namespace WorldForgingApi
             services.AddIdentity<ApplicationUser, IdentityRole>(config => {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+                config.Password.RequireDigit = false;
                 config.Cookies.ApplicationCookie.AutomaticChallenge = false;
             })
                 .AddEntityFrameworkStores<WorldForgingDBContext>()

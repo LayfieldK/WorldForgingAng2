@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace OpenGameListWebApp.ViewModels
+namespace WorldForging.ViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
     public class ItemViewModel
