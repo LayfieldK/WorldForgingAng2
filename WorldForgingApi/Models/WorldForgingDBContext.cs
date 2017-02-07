@@ -8,7 +8,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using WorldForging.Models;
 using WorldForging.Models.Comments;
-using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OpenIddict;
@@ -27,29 +26,27 @@ namespace WorldForgingApi.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>().ToTable("Users");
-            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.TutorialItems).WithOne(i => i.Author);
+            modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Articles).WithOne(i => i.Author);
             modelBuilder.Entity<ApplicationUser>().HasMany(u => u.Comments).WithOne(c => c.Author).HasPrincipalKey(u => u.Id);
 
-            modelBuilder.Entity<TutorialItem>().ToTable("TutorialItems");
-            modelBuilder.Entity<TutorialItem>().Property(i => i.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<TutorialItem>().HasOne(i => i.Author).WithMany(u => u.TutorialItems);
-            modelBuilder.Entity<TutorialItem>().HasMany(i => i.Comments).WithOne(c => c.TutorialItem);
+            modelBuilder.Entity<Article>().ToTable("Articles");
+            modelBuilder.Entity<Article>().Property(i => i.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Article>().HasOne(i => i.Author).WithMany(u => u.Articles);
+            modelBuilder.Entity<Article>().HasMany(i => i.Comments).WithOne(c => c.Article);
 
             modelBuilder.Entity<Comment>().ToTable("Comments");
             modelBuilder.Entity<Comment>().HasOne(c => c.Author).WithMany(u => u.Comments).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Comment>().HasOne(c => c.TutorialItem).WithMany(i => i.Comments);
+            modelBuilder.Entity<Comment>().HasOne(c => c.Article).WithMany(i => i.Comments);
             modelBuilder.Entity<Comment>().HasOne(c => c.Parent).WithMany(c => c.Children);
             modelBuilder.Entity<Comment>().HasMany(c => c.Children).WithOne(c => c.Parent);
         }
         #endregion Methods
 
-        public DbSet<TutorialItem> TutorialItems { get; set; }
+        public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
         
 
         public DbSet<WorldForging.Models.World> Worlds { get; set; }
-
-        public DbSet<WorldForging.Models.Article> Articles { get; set; }
 
         public DbSet<WorldForging.Models.Story> Stories { get; set; }
 

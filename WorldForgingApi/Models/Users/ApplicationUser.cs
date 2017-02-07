@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Comments;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using OpenIddict;
@@ -46,7 +45,7 @@ namespace WorldForging.Models.Users
         /// <summary>
         /// A list of items wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
-        public virtual List<TutorialItem> TutorialItems { get; set; }
+        public virtual List<Article> Articles { get; set; }
 
         /// <summary>
         /// A list of comments wrote by this user: this property will be loaded on first use using EF's Lazy-Loading feature.

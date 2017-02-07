@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
 
 namespace WorldForging.Models.Comments
@@ -42,7 +41,7 @@ namespace WorldForging.Models.Comments
         /// Current Comment's Item: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
         [ForeignKey("ItemId")]
-        public virtual TutorialItem TutorialItem { get; set; }
+        public virtual Article Article { get; set; }
 
         /// <summary>
         /// Current Comment's Author: this property will be loaded on first use using EF's Lazy-Loading feature.

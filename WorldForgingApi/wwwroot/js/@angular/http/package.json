@@ -2,23 +2,23 @@
   "_args": [
     [
       "@angular/http@~2.2.0",
-      "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi"
+      "F:\\Visual Studio Projects\\WorldForgingAng2\\WorldForgingApi"
     ]
   ],
   "_from": "@angular/http@>=2.2.0-0 <2.3.0-0",
-  "_id": "@angular/http@2.2.3",
+  "_id": "@angular/http@2.2.4",
   "_inCache": true,
   "_location": "/@angular/http",
-  "_nodeVersion": "6.6.0",
+  "_nodeVersion": "6.2.0",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/http-2.2.3.tgz_1479942836548_0.11895256745629013"
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/http-2.2.4.tgz_1480548312981_0.927597489906475"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angular"
   },
-  "_npmVersion": "3.10.3",
+  "_npmVersion": "3.8.9",
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/http",
@@ -31,11 +31,11 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/http/-/http-2.2.3.tgz",
-  "_shasum": "84941d638c961ebae248091d6d51ac6f241be882",
+  "_resolved": "https://registry.npmjs.org/@angular/http/-/http-2.2.4.tgz",
+  "_shasum": "ccfeb3f805e0628f6bb9efa129ef432d79548c63",
   "_shrinkwrap": null,
   "_spec": "@angular/http@~2.2.0",
-  "_where": "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi",
+  "_where": "F:\\Visual Studio Projects\\WorldForgingAng2\\WorldForgingApi",
   "author": {
     "name": "angular"
   },
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "84941d638c961ebae248091d6d51ac6f241be882",
-    "tarball": "https://registry.npmjs.org/@angular/http/-/http-2.2.3.tgz"
+    "shasum": "ccfeb3f805e0628f6bb9efa129ef432d79548c63",
+    "tarball": "https://registry.npmjs.org/@angular/http/-/http-2.2.4.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "installable": true,
@@ -64,8 +64,8 @@
   "name": "@angular/http",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/core": "2.2.3",
-    "@angular/platform-browser": "2.2.3",
+    "@angular/core": "2.2.4",
+    "@angular/platform-browser": "2.2.4",
     "rxjs": "5.0.0-beta.12"
   },
   "repository": {
@@ -74,5 +74,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.2.3"
+  "version": "2.2.4"
 }

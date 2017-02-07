@@ -8,10 +8,10 @@ using Newtonsoft.Json;
 namespace WorldForging.ViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class ItemViewModel
+    public class ArticleViewModel
     {
         #region Constructor
-        public ItemViewModel()
+        public ArticleViewModel()
         {
 
         }

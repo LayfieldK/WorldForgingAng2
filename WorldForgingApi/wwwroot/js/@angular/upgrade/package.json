@@ -2,23 +2,23 @@
   "_args": [
     [
       "@angular/upgrade@~2.2.0",
-      "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi"
+      "F:\\Visual Studio Projects\\WorldForgingAng2\\WorldForgingApi"
     ]
   ],
   "_from": "@angular/upgrade@>=2.2.0-0 <2.3.0-0",
-  "_id": "@angular/upgrade@2.2.3",
+  "_id": "@angular/upgrade@2.2.4",
   "_inCache": true,
   "_location": "/@angular/upgrade",
-  "_nodeVersion": "6.6.0",
+  "_nodeVersion": "6.2.0",
   "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/upgrade-2.2.3.tgz_1479942854528_0.16148362797684968"
+    "host": "packages-18-east.internal.npmjs.com",
+    "tmp": "tmp/upgrade-2.2.4.tgz_1480548339075_0.7379621674772352"
   },
   "_npmUser": {
     "email": "angular-core+npm@google.com",
     "name": "angular"
   },
-  "_npmVersion": "3.10.3",
+  "_npmVersion": "3.8.9",
   "_phantomChildren": {},
   "_requested": {
     "name": "@angular/upgrade",
@@ -31,11 +31,11 @@
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/@angular/upgrade/-/upgrade-2.2.3.tgz",
-  "_shasum": "fb3137886b9349e6245bec4428bd6f9addf7994f",
+  "_resolved": "https://registry.npmjs.org/@angular/upgrade/-/upgrade-2.2.4.tgz",
+  "_shasum": "f825b2fd6d133bdff9a759566809e4af635288be",
   "_shrinkwrap": null,
   "_spec": "@angular/upgrade@~2.2.0",
-  "_where": "F:\\Visual Studio Projects\\WorldForging2\\WorldForgingApi",
+  "_where": "F:\\Visual Studio Projects\\WorldForgingAng2\\WorldForgingApi",
   "author": {
     "name": "angular"
   },
@@ -47,8 +47,8 @@
   "devDependencies": {},
   "directories": {},
   "dist": {
-    "shasum": "fb3137886b9349e6245bec4428bd6f9addf7994f",
-    "tarball": "https://registry.npmjs.org/@angular/upgrade/-/upgrade-2.2.3.tgz"
+    "shasum": "f825b2fd6d133bdff9a759566809e4af635288be",
+    "tarball": "https://registry.npmjs.org/@angular/upgrade/-/upgrade-2.2.4.tgz"
   },
   "homepage": "https://github.com/angular/angular#readme",
   "installable": true,
@@ -64,10 +64,10 @@
   "name": "@angular/upgrade",
   "optionalDependencies": {},
   "peerDependencies": {
-    "@angular/compiler": "2.2.3",
-    "@angular/core": "2.2.3",
-    "@angular/platform-browser": "2.2.3",
-    "@angular/platform-browser-dynamic": "2.2.3"
+    "@angular/compiler": "2.2.4",
+    "@angular/core": "2.2.4",
+    "@angular/platform-browser": "2.2.4",
+    "@angular/platform-browser-dynamic": "2.2.4"
   },
   "repository": {
     "type": "git",
@@ -75,5 +75,5 @@
   },
   "scripts": {},
   "typings": "index.d.ts",
-  "version": "2.2.3"
+  "version": "2.2.4"
 }

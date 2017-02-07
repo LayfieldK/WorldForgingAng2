@@ -541,7 +541,7 @@ namespace WorldForgingApi.Migrations
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("WorldForging.Models.TutorialItems.TutorialItem", b =>
+            modelBuilder.Entity("WorldForging.Models.Articles.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -572,7 +572,7 @@ namespace WorldForgingApi.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("TutorialItems");
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("WorldForging.Models.Users.ApplicationUser", b =>
@@ -687,7 +687,7 @@ namespace WorldForgingApi.Migrations
 
             modelBuilder.Entity("WorldForging.Models.Comments.Comment", b =>
                 {
-                    b.HasOne("WorldForging.Models.TutorialItems.TutorialItem", "TutorialItem")
+                    b.HasOne("WorldForging.Models.Articles.Article", "Article")
                         .WithMany("Comments")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -935,10 +935,10 @@ namespace WorldForgingApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WorldForging.Models.TutorialItems.TutorialItem", b =>
+            modelBuilder.Entity("WorldForging.Models.Articles.Article", b =>
                 {
                     b.HasOne("WorldForging.Models.Users.ApplicationUser", "Author")
-                        .WithMany("TutorialItems")
+                        .WithMany("Articles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

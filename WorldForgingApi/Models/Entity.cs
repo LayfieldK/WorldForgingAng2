@@ -6,10 +6,6 @@ namespace WorldForging.Models
     {
         public int EntityId { get; set; }
 
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
         public int? WorldId { get; set; }
         public World World { get; set; }
 

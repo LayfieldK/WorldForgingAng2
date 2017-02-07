@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using WorldForging.ViewModels;
 using Newtonsoft.Json;
 using WorldForging.Models;
-using WorldForging.Models.TutorialItems;
 using WorldForgingApi.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -16,10 +15,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WorldForging.Controllers
 {
-    public class ItemsController : BaseController
+    public class ArticlesController : BaseController
     {
         #region Constructor
-        public ItemsController(
+        public ArticlesController(
             WorldForgingDBContext context,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager) : base(
@@ -31,7 +30,7 @@ namespace WorldForging.Controllers
 
         #region RESTful Conventions
         /// <summary>
-        /// GET: api/items
+        /// GET: api/articles
         /// </summary>
         /// <returns>Nothing: this method will raise a NotFound HTTP exception, since we're not supporting this API call.</returns>
         [HttpGet()]
@@ -41,46 +40,46 @@ namespace WorldForging.Controllers
         }
 
         /// <summary>
-        /// GET: api/items/{id}
+        /// GET: api/articles/{id}
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>A Json-serialized object representing a single item.</returns>
+        /// <returns>A Json-serialized object representing a single article.</returns>
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            //ItemViewModel ivm = Mapper.Map<ItemViewModel>(tutorialItem);
-            var item = DbContext.TutorialItems.Where(i => i.Id == id).FirstOrDefault();
-            if (item != null) return new JsonResult(Mapper.Map<ItemViewModel>(item), DefaultJsonSettings);
-            else return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });
+            //ArticleViewModel avm = Mapper.Map<ArticleViewModel>(Article);
+            var article = DbContext.Articles.Where(i => i.Id == id).FirstOrDefault();
+            if (article != null) return new JsonResult(Mapper.Map<ArticleViewModel>(article), DefaultJsonSettings);
+            else return NotFound(new { Error = String.Format("Article ID {0} has not been found", id) });
         }
 
         /// <summary>
-        /// POST: api/items
+        /// POST: api/articles
         /// </summary>
-        /// <returns>Creates a new Item and return it accordingly.</returns>
+        /// <returns>Creates a new article and return it accordingly.</returns>
         [HttpPost()]
         [Authorize]
-        public async Task<IActionResult> Add([FromBody]ItemViewModel ivm)
+        public async Task<IActionResult> Add([FromBody]ArticleViewModel ivm)
         {
             if (ivm != null)
             {
-                // create a new Item with the client-sent json data
-                var item = Mapper.Map<TutorialItem>(ivm);
+                // create a new article with the client-sent json data
+                var article = Mapper.Map<Article>(ivm);
 
                 // override any property that could be wise to set from server-side only
-                item.CreatedDate =
-                item.LastModifiedDate = DateTime.Now;
+                article.CreatedDate =
+                article.LastModifiedDate = DateTime.Now;
 
-                item.UserId = await GetCurrentUserId();
+                article.UserId = await GetCurrentUserId();
 
-                // add the new item
-                DbContext.TutorialItems.Add(item);
+                // add the new article
+                DbContext.Articles.Add(article);
 
                 // persist the changes into the Database.
                 DbContext.SaveChanges();
 
-                // return the newly-created Item to the client.
-                return new JsonResult(Mapper.Map<ItemViewModel>(item), DefaultJsonSettings);
+                // return the newly-created article to the client.
+                return new JsonResult(Mapper.Map<ArticleViewModel>(article), DefaultJsonSettings);
             }
 
             // return a generic HTTP Status 500 (Not Found) if the client payload is invalid.
@@ -88,56 +87,56 @@ namespace WorldForging.Controllers
         }
 
         /// <summary>
-        /// PUT: api/items/{id}
+        /// PUT: api/articles/{id}
         /// </summary>
-        /// <returns>Updates an existing Item and return it accordingly.</returns>
+        /// <returns>Updates an existing article and return it accordingly.</returns>
         [HttpPut("{id}")]
         [Authorize]
-        public IActionResult Update(int id, [FromBody]ItemViewModel ivm)
+        public IActionResult Update(int id, [FromBody]ArticleViewModel ivm)
         {
             if (ivm != null)
             {
-                var item = DbContext.TutorialItems.Where(i => i.Id == id).FirstOrDefault();
-                if (item != null)
+                var article = DbContext.Articles.Where(i => i.Id == id).FirstOrDefault();
+                if (article != null)
                 {
                     // handle the update (on per-property basis)
-                    item.UserId = ivm.UserId;
-                    item.Description = ivm.Description;
-                    item.Flags = ivm.Flags;
-                    item.Notes = ivm.Notes;
-                    item.Text = ivm.Text;
-                    item.Title = ivm.Title;
-                    item.Type = ivm.Type;
+                    article.UserId = ivm.UserId;
+                    article.Description = ivm.Description;
+                    article.Flags = ivm.Flags;
+                    article.Notes = ivm.Notes;
+                    article.Text = ivm.Text;
+                    article.Title = ivm.Title;
+                    article.Type = ivm.Type;
 
                     // override any property that could be wise to set from server-side only
-                    item.LastModifiedDate = DateTime.Now;
+                    article.LastModifiedDate = DateTime.Now;
 
                     // persist the changes into the Database.
                     DbContext.SaveChanges();
 
-                    // return the updated Item to the client.
-                    return new JsonResult(Mapper.Map<ItemViewModel>(item), DefaultJsonSettings);
+                    // return the updated article to the client.
+                    return new JsonResult(Mapper.Map<ArticleViewModel>(article), DefaultJsonSettings);
                 }
             }
 
-            // return a HTTP Status 404 (Not Found) if we couldn't find a suitable item.
-            return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });
+            // return a HTTP Status 404 (Not Found) if we couldn't find a suitable article.
+            return NotFound(new { Error = String.Format("article ID {0} has not been found", id) });
         }
 
 
         /// <summary>
-        /// DELETE: api/items/{id}
+        /// DELETE: api/articles/{id}
         /// </summary>
-        /// <returns>Deletes an Item, returning a HTTP status 200 (ok) when done.</returns>
+        /// <returns>Deletes an article, returning a HTTP status 200 (ok) when done.</returns>
         [HttpDelete("{id}")]
         [Authorize]
         public IActionResult Delete(int id)
         {
-            var item = DbContext.TutorialItems.Where(i => i.Id == id).FirstOrDefault();
-            if (item != null)
+            var article = DbContext.Articles.Where(i => i.Id == id).FirstOrDefault();
+            if (article != null)
             {
                 // remove the item to delete from the DbContext.
-                DbContext.TutorialItems.Remove(item);
+                DbContext.Articles.Remove(item);
 
                 // persist the changes into the Database.
                 DbContext.SaveChanges();
@@ -172,7 +171,7 @@ namespace WorldForging.Controllers
         public IActionResult GetLatest(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.TutorialItems.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
+            var items = DbContext.Articles.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
             return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
@@ -196,7 +195,7 @@ namespace WorldForging.Controllers
         public IActionResult GetMostViewed(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.TutorialItems.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
+            var items = DbContext.Articles.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
             return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
 
@@ -220,7 +219,7 @@ namespace WorldForging.Controllers
         public IActionResult GetRandom(int n)
         {
             if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.TutorialItems.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
+            var items = DbContext.Articles.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
             return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
         }
         #endregion
@@ -231,10 +230,10 @@ namespace WorldForging.Controllers
         /// </summary>
         /// <param name="items">An IEnumerable collection of item entities</param>
         /// <returns>a mapped list of ItemViewModel objects</returns>
-        private List<ItemViewModel> ToItemViewModelList(IEnumerable<TutorialItem> items)
+        private List<ArticleViewModel> ToItemViewModelList(IEnumerable<Article> items)
         {
-            var lst = new List<ItemViewModel>();
-            foreach (var i in items) lst.Add(Mapper.Map<ItemViewModel>(i));
+            var lst = new List<ArticleViewModel>();
+            foreach (var i in items) lst.Add(Mapper.Map<ArticleViewModel>(i));
             return lst;
         }
 

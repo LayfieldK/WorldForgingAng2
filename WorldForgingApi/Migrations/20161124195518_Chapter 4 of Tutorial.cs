@@ -29,7 +29,7 @@ namespace WorldForgingApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TutorialItems",
+                name: "Articles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -47,9 +47,9 @@ namespace WorldForgingApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TutorialItems", x => x.Id);
+                    table.PrimaryKey("PK_Articles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TutorialItems_Users_UserId",
+                        name: "FK_Articles_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -75,9 +75,9 @@ namespace WorldForgingApi.Migrations
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_TutorialItems_ItemId",
+                        name: "FK_Comments_Articles_Id",
                         column: x => x.ItemId,
-                        principalTable: "TutorialItems",
+                        principalTable: "Articles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -110,8 +110,8 @@ namespace WorldForgingApi.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TutorialItems_UserId",
-                table: "TutorialItems",
+                name: "IX_Articles_UserId",
+                table: "Articles",
                 column: "UserId");
         }
 
@@ -121,7 +121,7 @@ namespace WorldForgingApi.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "TutorialItems");
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Users");

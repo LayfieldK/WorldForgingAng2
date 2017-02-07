@@ -9,10 +9,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using WorldForging.Models.Comments;
-using WorldForging.Models.TutorialItems;
 using WorldForging.Models.Users;
 using WorldForgingApi.Models;
-using Microsoft.Extensions.Configuration;
+using WorldForging.Models;
 
 public class DbSeeder
 {
@@ -79,7 +78,7 @@ public class DbSeeder
         var user_Admin = new ApplicationUser()
         {
             UserName = "Admin",
-            Email = "admin@opengamelist.com",
+            Email = "admin@worldforging.com",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         };
@@ -87,7 +86,7 @@ public class DbSeeder
         // Insert "Admin" into the Database and also assign the "Administrator" role to him.
         if (await UserManager.FindByIdAsync(user_Admin.Id) == null)
         {
-            await UserManager.CreateAsync(user_Admin, "Pass4Admin");
+            await UserManager.CreateAsync(user_Admin, "password");
             await UserManager.AddToRoleAsync(user_Admin, role_Administrators);
             // Remove Lockout and E-Mail confirmation.
             user_Admin.EmailConfirmed = true;
@@ -96,28 +95,28 @@ public class DbSeeder
 
 #if DEBUG
         // Create some sample registered user accounts (if they don't exist already)
-        var user_Ryan = new ApplicationUser()
+        var user1 = new ApplicationUser()
         {
-            UserName = "Ryan",
-            Email = "ryan@opengamelist.com",
+            UserName = "User1",
+            Email = "User1@worldforging.com",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate,
             EmailConfirmed = true,
             LockoutEnabled = false
         };
-        var user_Solice = new ApplicationUser()
+        var user2 = new ApplicationUser()
         {
-            UserName = "Solice",
-            Email = "solice@opengamelist.com",
+            UserName = "User2",
+            Email = "User2@worldforging.com",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate,
             EmailConfirmed = true,
             LockoutEnabled = false
         };
-        var user_Vodan = new ApplicationUser()
+        var user3 = new ApplicationUser()
         {
-            UserName = "Vodan",
-            Email = "vodan@opengamelist.com",
+            UserName = "User3",
+            Email = "User3@worldforging.com",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate,
             EmailConfirmed = true,
@@ -125,29 +124,29 @@ public class DbSeeder
         };
 
         // Insert sample registered users into the Database and also assign the "Registered" role to him.
-        if (await UserManager.FindByIdAsync(user_Ryan.Id) == null)
+        if (await UserManager.FindByIdAsync(user1.Id) == null)
         {
-            await UserManager.CreateAsync(user_Ryan, "Pass4Ryan");
-            await UserManager.AddToRoleAsync(user_Ryan, role_Registered);
+            await UserManager.CreateAsync(user1, "password");
+            await UserManager.AddToRoleAsync(user1, role_Registered);
             // Remove Lockout and E-Mail confirmation.
-            user_Ryan.EmailConfirmed = true;
-            user_Ryan.LockoutEnabled = false;
+            user1.EmailConfirmed = true;
+            user1.LockoutEnabled = false;
         }
-        if (await UserManager.FindByIdAsync(user_Solice.Id) == null)
+        if (await UserManager.FindByIdAsync(user2.Id) == null)
         {
-            await UserManager.CreateAsync(user_Solice, "Pass4Solice");
-            await UserManager.AddToRoleAsync(user_Solice, role_Registered);
+            await UserManager.CreateAsync(user2, "password");
+            await UserManager.AddToRoleAsync(user2, role_Registered);
             // Remove Lockout and E-Mail confirmation.
-            user_Solice.EmailConfirmed = true;
-            user_Solice.LockoutEnabled = false;
+            user2.EmailConfirmed = true;
+            user2.LockoutEnabled = false;
         }
-        if (await UserManager.FindByIdAsync(user_Vodan.Id) == null)
+        if (await UserManager.FindByIdAsync(user3.Id) == null)
         {
-            await UserManager.CreateAsync(user_Vodan, "Pass4Vodan");
-            await UserManager.AddToRoleAsync(user_Vodan, role_Registered);
+            await UserManager.CreateAsync(user3, "password");
+            await UserManager.AddToRoleAsync(user3, role_Registered);
             // Remove Lockout and E-Mail confirmation.
-            user_Vodan.EmailConfirmed = true;
-            user_Vodan.LockoutEnabled = false;
+            user3.EmailConfirmed = true;
+            user3.LockoutEnabled = false;
         }
 #endif
         await DbContext.SaveChangesAsync();
@@ -165,85 +164,56 @@ public class DbSeeder
         var num = 1000;  // create 1000 sample items
         for (int id = 1; id <= num; id++)
         {
-            DbContext.TutorialItems.Add(GetSampleItem(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
+            DbContext.Articles.Add(GetSampleItem(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
         }
 #endif
 
-        EntityEntry<TutorialItem> e1 = DbContext.TutorialItems.Add(new TutorialItem()
+        EntityEntry<Article> e1 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
-            Title = "Magarena",
-            Description = "Single-player fantasy card game similar to Magic: The Gathering",
-            Text = @"Loosely based on Magic: The Gathering, the game lets you play against a computer opponent or another human being. 
-                                The game features a well-developed AI, an intuitive and clear interface and an enticing level of gameplay.",
-            Notes = "This is a sample record created by the Code-First Configuration class",
-            ViewCount = 2343,
+            Title = "Earth",
+            Description = "Humanity's home planet.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
 
-        EntityEntry<TutorialItem> e2 = DbContext.TutorialItems.Add(new TutorialItem()
+        EntityEntry<Article> e2 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
-            Title = "Minetest",
-            Description = "Open-Source alternative to Minecraft",
-            Text = @"The Minetest gameplay is very similar to Minecraft's: you are playing in a 3D open world, where you can create and/or remove various types of blocks. 
-                        Minetest feature both single-player and multi-player game modes. 
-                        It also has support for custom mods, additional texture packs and other custom/personalization options. 
-                        Minetest has been released in 2015 under GNU Lesser General Public License.",
-            Notes = "This is a sample record created by the Code-First Configuration class",
-            ViewCount = 4180,
+            Title = "Faction 1",
+            Description = "One of the factions in the story.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
 
-        EntityEntry<TutorialItem> e3 = DbContext.TutorialItems.Add(new TutorialItem()
+        EntityEntry<Article> e3 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
-            Title = "Relic Hunters Zero",
-            Description = "A free game about shooting evil space ducks with tiny, cute guns.",
-            Text = @"Relic Hunters Zero is fast, tactical and also very smooth to play. 
-                        It also enables the users to look at the source code, so they can can get creative and keep this game alive, fun and free for years to come.
-                        The game is also available on Steam.",
-            Notes = "This is a sample record created by the Code-First Configuration class",
-            ViewCount = 5203,
+            Title = "Character 1",
+            Description = "A character who serves on Ship 1 and is a part of Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
 
-        EntityEntry<TutorialItem> e4 = DbContext.TutorialItems.Add(new TutorialItem()
+        EntityEntry<Article> e4 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
-            Title = "SuperTux",
-            Description = "A classic 2D jump and run, side-scrolling game similar to the Super Mario series.",
-            Text = @"The game is currently under Milestone 3. The Milestone 2, which is currently out, features the following:
-                        - a nearly completely rewritten game engine based on OpenGL, OpenAL, SDL2, ...
-                        - support for translations
-                        - in-game manager for downloadable add-ons and translations
-                        - Bonus Island III, a for now unfinished Forest Island and the development levels in Incubator Island
-                        - a final boss in Icy Island
-                        - new and improved soundtracks and sound effects
-                        ... and much more! 
-                        The game has been released under the GNU GPL license.",
-            Notes = "This is a sample record created by the Code-First Configuration class",
-            ViewCount = 9602,
+            Title = "Ship 1",
+            Description = "The flagship of Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
 
-        EntityEntry<TutorialItem> e5 = DbContext.TutorialItems.Add(new TutorialItem()
+        EntityEntry<Article> e5 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
-            Title = "Scrabble3D",
-            Description = "A 3D-based revamp to the classic Scrabble game.",
-            Text = @"Scrabble3D extends the gameplay of the classic game Scrabble by adding a new whole third dimension. 
-                        Other than playing left to right or top to bottom, you'll be able to place your tiles above or beyond other tiles. 
-                        Since the game features more fields, it also uses a larger letter set.
-                        You can either play against the computer, players from your LAN or from the Internet. 
-                        The game also features a set of game servers where you can challenge players from all over the world and get ranked into an official, ELO-based rating/ladder system.
-                        ",
-            Notes = "This is a sample record created by the Code-First Configuration class",
-            ViewCount = 6754,
+            Title = "Species 2",
+            Description = "A primitive race discovered by Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
@@ -270,9 +240,9 @@ public class DbSeeder
     /// <param name="id">the item ID</param>
     /// <param name="createdDate">the item CreatedDate</param>
     /// <returns></returns>
-    private TutorialItem GetSampleItem(int id, string authorId, int viewCount, DateTime createdDate)
+    private Article GetSampleItem(int id, string authorId, int viewCount, DateTime createdDate)
     {
-        return new TutorialItem()
+        return new Article()
         {
             UserId = authorId,
             Title = String.Format("Item {0} Title", id),

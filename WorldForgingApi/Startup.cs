@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using WorldForgingApi.Models;
 using Microsoft.EntityFrameworkCore;
-using WorldForging.Models.TutorialItems;
 using WorldForging.ViewModels;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -17,6 +16,7 @@ using WorldForging.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using WorldForging.Classes;
 using Microsoft.IdentityModel.Tokens;
+using WorldForging.Models;
 
 namespace WorldForgingApi
 {
@@ -210,9 +210,9 @@ namespace WorldForgingApi
                 throw new Exception(e.ToString());
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<TutorialItem, ItemViewModel>().ReverseMap());
-            //ItemViewModel ivm = Mapper.Map<ItemViewModel>(tutorialItem);
-            //AutoMapper.Bind<TutorialItem, ItemViewModel>();
+            Mapper.Initialize(cfg => cfg.CreateMap<Article, ArticleViewModel>().ReverseMap());
+            //ItemViewModel ivm = Mapper.Map<ItemViewModel>(Article);
+            //AutoMapper.Bind<Article, ItemViewModel>();
         }
     }
 }
