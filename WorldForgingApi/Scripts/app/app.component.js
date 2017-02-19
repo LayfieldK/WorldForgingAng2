@@ -29,7 +29,7 @@ System.register(["@angular/core", "@angular/router", "./auth.service"], function
                     this.router = router;
                     this.authService = authService;
                     this.zone = zone;
-                    this.title = "OpenGameList";
+                    this.title = "World Forging";
                     if (!window.externalProviderLogin) {
                         var self = this;
                         window.externalProviderLogin = function (auth) {
@@ -60,7 +60,7 @@ System.register(["@angular/core", "@angular/router", "./auth.service"], function
                 };
                 AppComponent = __decorate([
                     core_1.Component({
-                        selector: "opengamelist",
+                        selector: "worldforging",
                         template: "\n<nav class=\"navbar navbar-default navbar-fixed-top\">\n    <div class=\"container-fluid\">\n        <input type=\"checkbox\" id=\"navbar-toggle-cbox\">\n        <div class=\"navbar-header\">\n            <label for=\"navbar-toggle-cbox\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#navbar\" aria-expanded=\"false\" aria-controls=\"navbar\">\n                <span class=\"sr-only\">Toggle navigation</span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n                <span class=\"icon-bar\"></span>\n            </label>\n            <a class=\"navbar-brand\" href=\"javascript:void(0)\">\n                <img alt=\"logo\" src=\"/img/logo.svg\" />\n            </a>\n        </div>\n        <div class=\"collapse navbar-collapse\" id=\"navbar\">\n            <ul class=\"nav navbar-nav\">\n\n                <!-- Navigation commands for everyone -->\n                <li [class.active]=\"isActive([''])\">\n                    <a class=\"home\" [routerLink]=\"['']\">Home</a>\n                </li>\n                <li [class.active]=\"isActive(['about'])\">\n                    <a class=\"about\" [routerLink]=\"['about']\">About</a>\n                </li>\n\n                <!-- Navigation commands for authenticated users -->\n                <li *ngIf=\"authService.isLoggedIn()\" [class.active]=\"isActive(['item/edit', 0])\">\n                    <a class=\"add\" [routerLink]=\"['item/edit', 0]\">Add New</a>\n                </li>\n\n                <!-- Account-related commands -->\n                <li *ngIf=\"!authService.isLoggedIn()\" class=\"right\" [class.active]=\"isActive(['login']) || isActive(['register'])\">\n                    <a class=\"login\" [routerLink]=\"['login']\">Login / Register</a>\n                </li>\n                <li *ngIf=\"authService.isLoggedIn()\" class=\"right\">\n                    <a class=\"logout\" href=\"javascript:void(0)\" (click)=\"logout()\">Logout</a>\n                </li>\n                <li *ngIf=\"authService.isLoggedIn()\" class=\"right\" [class.active]=\"isActive(['account'])\">\n                    <a [routerLink]=\"['account']\">Edit Account</a>\n                </li>\n\n            </ul>\n        </div>\n    </div>\n</nav>\n<h1 class=\"header\">{{title}}</h1>\n<div class=\"main-container\">\n    <router-outlet></router-outlet>\n</div>\n    "
                     }), 
                     __metadata('design:paramtypes', [router_1.Router, auth_service_1.AuthService, core_1.NgZone])

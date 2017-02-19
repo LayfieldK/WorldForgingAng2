@@ -1,20 +1,20 @@
 ﻿import {Component, OnInit} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
-import {Item} from "./item";
+import {Article} from "./article";
 import {AuthService} from "./auth.service";
-import {ItemService} from "./item.service";
+import {ArticleService} from "./article.service";
 
 @Component({
-    selector: "item-detail-view",
+    selector: "article-detail-view",
     template: `
-<div *ngIf="item">
+<div *ngIf="article">
     <h2>
         <a href="javascript:void(0)" (click)="onBack()">&laquo; Back to Home</a>
     </h2>
-    <div class="item-container">
+    <div class="article-container">
         <ul class="nav nav-tabs">
             <li *ngIf="authService.isLoggedIn()" role="presentation">
-                <a href="javascript:void(0)" (click)="onItemDetailEdit(item)">Edit</a>
+                <a href="javascript:void(0)" (click)="onArticleDetailEdit(article)">Edit</a>
             </li>
             <li role="presentation" class="active">
                 <a href="javascript:void(0)">View</a>
@@ -22,13 +22,13 @@ import {ItemService} from "./item.service";
         </ul>
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="item-image-panel">
-                    <img src="/img/item-image-sample.png" alt="{{item.Title}}" />
+                <div class="article-image-panel">
+                    <img src="/img/article-image-sample.png" alt="{{article.Title}}" />
                     <div class="caption">Sample image with caption.</div>
                 </div>
-                <h3>{{item.Title}}</h3>
-                <p>{{item.Description}}</p>
-                <p>{{item.Text}}</p>
+                <h3>{{article.Title}}</h3>
+                <p>{{article.Description}}</p>
+                <p>{{article.Text}}</p>
             </div>
         </div>
     </div>
@@ -37,25 +37,25 @@ import {ItemService} from "./item.service";
     styles: []
 })
 
-export class ItemDetailViewComponent {
-    item: Item;
+export class ArticleDetailViewComponent {
+    article: Article;
 
     constructor(
         private authService: AuthService,
-        private itemService: ItemService,
+        private articleService: ArticleService,
         private router: Router,
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
         var id = +this.activatedRoute.snapshot.params["id"];
         if (id) {
-            this.itemService.get(id).subscribe(
-                item => this.item = item
+            this.articleService.get(id).subscribe(
+                article => this.article = article
             );
         }
         else if (id === 0) {
             console.log("id is 0: switching to edit mode...");
-            this.router.navigate(["item/edit", 0]);
+            this.router.navigate(["article/edit", 0]);
         }
         else {
             console.log("Invalid id: routing back to home...");
@@ -63,8 +63,8 @@ export class ItemDetailViewComponent {
         }
     }
 
-    onItemDetailEdit(item: Item) {
-        this.router.navigate(["item/edit", item.Id]);
+    onArticleDetailEdit(article: Article) {
+        this.router.navigate(["article/edit", article.Id]);
         return false;
     }
 

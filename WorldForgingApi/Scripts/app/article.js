@@ -1,19 +1,19 @@
 System.register([], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var Item;
+    var Article;
     return {
         setters:[],
         execute: function() {
-            Item = (function () {
-                function Item(Id, Title, Description) {
+            Article = (function () {
+                function Article(Id, Title, Description) {
                     this.Id = Id;
                     this.Title = Title;
                     this.Description = Description;
                 }
-                return Item;
+                return Article;
             }());
-            exports_1("Item", Item);
+            exports_1("Article", Article);
         }
     }
 });

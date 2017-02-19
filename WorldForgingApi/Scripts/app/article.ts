@@ -1,4 +1,4 @@
-﻿export class Item {
+﻿export class Article {
     constructor(
         public Id: number,
         public Title: string,

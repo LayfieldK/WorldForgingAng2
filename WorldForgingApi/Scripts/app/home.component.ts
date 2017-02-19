@@ -4,17 +4,16 @@
     selector: "home",
     template: `
 <h2>
-    A non-comprehensive directory of open-source video games
-    available on the web
+    A world building tool for creating relationships between your characters, locations, events, and stories.
 </h2>
 <div class="col-md-4">
-    <item-list class="latest"></item-list>
+    <article-list class="latest"></article-list>
 </div>
 <div class="col-md-4">
-    <item-list class="most-viewed"></item-list>
+    <article-list class="most-viewed"></article-list>
 </div>
 <div class="col-md-4">
-    <item-list class="random"></item-list>
+    <article-list class="random"></article-list>
 </div>
     `,
     styles: []

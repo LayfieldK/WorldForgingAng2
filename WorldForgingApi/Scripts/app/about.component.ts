@@ -5,7 +5,7 @@
     template: `
         <h2>{{title}}</h2>
         <div>
-            OpenGameList: a production-ready, fully-featured SPA sample powered by ASP.NET Core Web API and Angular2.
+            World Forging: a world building tool that allows you to create relationships between characters, locations, events, and stories.
         </div>
     `
 })

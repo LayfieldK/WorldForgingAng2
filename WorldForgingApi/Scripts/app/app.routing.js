@@ -1,7 +1,7 @@
-System.register(["@angular/router", "./about.component", "./home.component", "./item-detail-edit.component", "./item-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./about.component", "./home.component", "./article-detail-edit.component", "./article-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, about_component_1, home_component_1, item_detail_edit_component_1, item_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1;
+    var router_1, about_component_1, home_component_1, article_detail_edit_component_1, article_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1;
     var appRoutes, AppRoutingProviders, AppRouting;
     return {
         setters:[
@@ -14,11 +14,11 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
             function (home_component_1_1) {
                 home_component_1 = home_component_1_1;
             },
-            function (item_detail_edit_component_1_1) {
-                item_detail_edit_component_1 = item_detail_edit_component_1_1;
+            function (article_detail_edit_component_1_1) {
+                article_detail_edit_component_1 = article_detail_edit_component_1_1;
             },
-            function (item_detail_view_component_1_1) {
-                item_detail_view_component_1 = item_detail_view_component_1_1;
+            function (article_detail_view_component_1_1) {
+                article_detail_view_component_1 = article_detail_view_component_1_1;
             },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
@@ -56,12 +56,12 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
                     component: user_edit_component_1.UserEditComponent
                 },
                 {
-                    path: "item/edit/:id",
-                    component: item_detail_edit_component_1.ItemDetailEditComponent
+                    path: "article/edit/:id",
+                    component: article_detail_edit_component_1.ArticleDetailEditComponent
                 },
                 {
-                    path: "item/view/:id",
-                    component: item_detail_view_component_1.ItemDetailViewComponent
+                    path: "article/view/:id",
+                    component: article_detail_view_component_1.ArticleDetailViewComponent
                 },
                 {
                     path: '**',

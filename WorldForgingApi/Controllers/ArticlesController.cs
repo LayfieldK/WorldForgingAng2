@@ -136,7 +136,7 @@ namespace WorldForging.Controllers
             if (article != null)
             {
                 // remove the item to delete from the DbContext.
-                DbContext.Articles.Remove(item);
+                DbContext.Articles.Remove(article);
 
                 // persist the changes into the Database.
                 DbContext.SaveChanges();
@@ -145,102 +145,102 @@ namespace WorldForging.Controllers
                 return new OkResult();
             }
 
-            // return a HTTP Status 404 (Not Found) if we couldn't find a suitable item.
-            return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });
+            // return a HTTP Status 404 (Not Found) if we couldn't find a suitable article.
+            return NotFound(new { Error = String.Format("Article ID {0} has not been found", id) });
         }
         #endregion
 
         #region Attribute-based Routing
         /// <summary>
-        /// GET: api/items/GetLatest
+        /// GET: api/articles/GetLatest
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of a default number of Json-serialized objects representing the last inserted items.</returns>
+        /// <returns>An array of a default number of Json-serialized objects representing the last inserted articles.</returns>
         [HttpGet("GetLatest")]
         public IActionResult GetLatest()
         {
-            return GetLatest(DefaultNumberOfItems);
+            return GetLatest(DefaultNumberOfArticles);
         }
 
         /// <summary>
-        /// GET: api/items/GetLatest/{n}
+        /// GET: api/articles/GetLatest/{n}
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of {n} Json-serialized objects representing the last inserted items.</returns>
+        /// <returns>An array of {n} Json-serialized objects representing the last inserted articles.</returns>
         [HttpGet("GetLatest/{n}")]
         public IActionResult GetLatest(int n)
         {
-            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.Articles.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
-            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
+            if (n > MaxNumberOfArticles) n = MaxNumberOfArticles;
+            var articles = DbContext.Articles.OrderByDescending(i => i.CreatedDate).Take(n).ToArray();
+            return new JsonResult(ToArticleViewModelList(articles), DefaultJsonSettings);
         }
 
         /// <summary>
-        /// GET: api/items/GetMostViewed
+        /// GET: api/articles/GetMostViewed
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of a default number of Json-serialized objects representing the items with most user views.</returns>
+        /// <returns>An array of a default number of Json-serialized objects representing the articles with most user views.</returns>
         [HttpGet("GetMostViewed")]
         public IActionResult GetMostViewed()
         {
-            return GetMostViewed(DefaultNumberOfItems);
+            return GetMostViewed(DefaultNumberOfArticles);
         }
 
         /// <summary>
-        /// GET: api/items/GetMostViewed/{n}
+        /// GET: api/articles/GetMostViewed/{n}
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of {n} Json-serialized objects representing the items with most user views.</returns>
+        /// <returns>An array of {n} Json-serialized objects representing the articles with most user views.</returns>
         [HttpGet("GetMostViewed/{n}")]
         public IActionResult GetMostViewed(int n)
         {
-            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.Articles.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
-            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
+            if (n > MaxNumberOfArticles) n = MaxNumberOfArticles;
+            var articles = DbContext.Articles.OrderByDescending(i => i.ViewCount).Take(n).ToArray();
+            return new JsonResult(ToArticleViewModelList(articles), DefaultJsonSettings);
         }
 
         /// <summary>
-        /// GET: api/items/GetRandom
+        /// GET: api/articles/GetRandom
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of a default number of Json-serialized objects representing some randomly-picked items.</returns>
+        /// <returns>An array of a default number of Json-serialized objects representing some randomly-picked articles.</returns>
         [HttpGet("GetRandom")]
         public IActionResult GetRandom()
         {
-            return GetRandom(DefaultNumberOfItems);
+            return GetRandom(DefaultNumberOfArticles);
         }
 
         /// <summary>
-        /// GET: api/items/GetRandom/{n}
+        /// GET: api/articles/GetRandom/{n}
         /// ROUTING TYPE: attribute-based
         /// </summary>
-        /// <returns>An array of {n} Json-serialized objects representing some randomly-picked items.</returns>
+        /// <returns>An array of {n} Json-serialized objects representing some randomly-picked articles.</returns>
         [HttpGet("GetRandom/{n}")]
         public IActionResult GetRandom(int n)
         {
-            if (n > MaxNumberOfItems) n = MaxNumberOfItems;
-            var items = DbContext.Articles.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
-            return new JsonResult(ToItemViewModelList(items), DefaultJsonSettings);
+            if (n > MaxNumberOfArticles) n = MaxNumberOfArticles;
+            var articles = DbContext.Articles.OrderBy(i => Guid.NewGuid()).Take(n).ToArray();
+            return new JsonResult(ToArticleViewModelList(articles), DefaultJsonSettings);
         }
         #endregion
 
         #region Private Members
         /// <summary>
-        /// Maps a collection of Item entities into a list of ItemViewModel objects.
+        /// Maps a collection of Article entities into a list of ArticleViewModel objects.
         /// </summary>
-        /// <param name="items">An IEnumerable collection of item entities</param>
-        /// <returns>a mapped list of ItemViewModel objects</returns>
-        private List<ArticleViewModel> ToItemViewModelList(IEnumerable<Article> items)
+        /// <param name="articles">An IEnumerable collection of article entities</param>
+        /// <returns>a mapped list of ArticleViewModel objects</returns>
+        private List<ArticleViewModel> ToArticleViewModelList(IEnumerable<Article> articles)
         {
             var lst = new List<ArticleViewModel>();
-            foreach (var i in items) lst.Add(Mapper.Map<ArticleViewModel>(i));
+            foreach (var i in articles) lst.Add(Mapper.Map<ArticleViewModel>(i));
             return lst;
         }
 
         /// <summary>
-        /// Returns the default number of items to retrieve when using the parameterless overloads of the API methods retrieving item lists.
+        /// Returns the default number of articles to retrieve when using the parameterless overloads of the API methods retrieving article lists.
         /// </summary>
-        private int DefaultNumberOfItems
+        private int DefaultNumberOfArticles
         {
             get
             {
@@ -249,9 +249,9 @@ namespace WorldForging.Controllers
         }
 
         /// <summary>
-        /// Returns the maximum number of items to retrieve when using the API methods retrieving item lists.
+        /// Returns the maximum number of articles to retrieve when using the API methods retrieving article lists.
         /// </summary>
-        private int MaxNumberOfItems
+        private int MaxNumberOfArticles
         {
             get
             {

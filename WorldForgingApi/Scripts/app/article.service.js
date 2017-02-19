@@ -11,7 +11,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, http_1, Observable_1, auth_http_1;
-    var ItemService;
+    var ArticleService;
     return {
         setters:[
             function (core_1_1) {
@@ -27,13 +27,13 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                 auth_http_1 = auth_http_1_1;
             }],
         execute: function() {
-            ItemService = (function () {
-                function ItemService(http) {
+            ArticleService = (function () {
+                function ArticleService(http) {
                     this.http = http;
-                    this.baseUrl = "api/items/"; // web api URL
+                    this.baseUrl = "api/articles/"; // web api URL
                 }
-                // calls the [GET] /api/items/GetLatest/{n} Web API method to retrieve the latest items.
-                ItemService.prototype.getLatest = function (num) {
+                // calls the [GET] /api/articles/GetLatest/{n} Web API method to retrieve the latest articles.
+                ArticleService.prototype.getLatest = function (num) {
                     var url = this.baseUrl + "GetLatest/";
                     if (num != null) {
                         url += num;
@@ -42,8 +42,8 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [GET] /api/items/GetMostViewed/{n} Web API method to retrieve the most viewed items.
-                ItemService.prototype.getMostViewed = function (num) {
+                // calls the [GET] /api/articles/GetMostViewed/{n} Web API method to retrieve the most viewed articles.
+                ArticleService.prototype.getMostViewed = function (num) {
                     var url = this.baseUrl + "GetMostViewed/";
                     if (num != null) {
                         url += num;
@@ -52,8 +52,8 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [GET] /api/items/GetRandom/{n} Web API method to retrieve n random items.
-                ItemService.prototype.getRandom = function (num) {
+                // calls the [GET] /api/articles/GetRandom/{n} Web API method to retrieve n random articles.
+                ArticleService.prototype.getRandom = function (num) {
                     var url = this.baseUrl + "GetRandom/";
                     if (num != null) {
                         url += num;
@@ -62,8 +62,8 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [GET] /api/items/{id} Web API method to retrieve the item with the given id.
-                ItemService.prototype.get = function (id) {
+                // calls the [GET] /api/articles/{id} Web API method to retrieve the article with the given id.
+                ArticleService.prototype.get = function (id) {
                     if (id == null) {
                         throw new Error("id is required.");
                     }
@@ -72,46 +72,46 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [POST] /api/items/ Web API method to add a new item.
-                ItemService.prototype.add = function (item) {
+                // calls the [POST] /api/articles/ Web API method to add a new article.
+                ArticleService.prototype.add = function (article) {
                     var url = this.baseUrl;
-                    return this.http.post(url, JSON.stringify(item), this.getRequestOptions())
+                    return this.http.post(url, JSON.stringify(article), this.getRequestOptions())
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [PUT] /api/items/{id} Web API method to update an existing item.
-                ItemService.prototype.update = function (item) {
-                    var url = this.baseUrl + item.Id;
-                    return this.http.put(url, JSON.stringify(item), this.getRequestOptions())
+                // calls the [PUT] /api/articles/{id} Web API method to update an existing article.
+                ArticleService.prototype.update = function (article) {
+                    var url = this.baseUrl + article.Id;
+                    return this.http.put(url, JSON.stringify(article), this.getRequestOptions())
                         .map(function (response) { return response.json(); })
                         .catch(this.handleError);
                 };
-                // calls the [DELETE] /api/items/{id} Web API method to delete the item with the given id.
-                ItemService.prototype.delete = function (id) {
+                // calls the [DELETE] /api/articles/{id} Web API method to delete the article with the given id.
+                ArticleService.prototype.delete = function (id) {
                     var url = this.baseUrl + id;
                     return this.http.delete(url)
                         .catch(this.handleError);
                 };
                 // returns a viable RequestOptions object to handle Json requests
-                ItemService.prototype.getRequestOptions = function () {
+                ArticleService.prototype.getRequestOptions = function () {
                     return new http_1.RequestOptions({
                         headers: new http_1.Headers({
                             "Content-Type": "application/json"
                         })
                     });
                 };
-                ItemService.prototype.handleError = function (error) {
+                ArticleService.prototype.handleError = function (error) {
                     // output errors to the console.
                     console.error(error);
                     return Observable_1.Observable.throw(error.json().error || "Server error");
                 };
-                ItemService = __decorate([
+                ArticleService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [auth_http_1.AuthHttp])
-                ], ItemService);
-                return ItemService;
+                ], ArticleService);
+                return ArticleService;
             }());
-            exports_1("ItemService", ItemService);
+            exports_1("ArticleService", ArticleService);
         }
     }
 });

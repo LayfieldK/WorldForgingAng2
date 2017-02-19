@@ -25,7 +25,7 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                 HomeComponent = __decorate([
                     core_1.Component({
                         selector: "home",
-                        template: "\n<h2>\n    A non-comprehensive directory of open-source video games\n    available on the web\n</h2>\n<div class=\"col-md-4\">\n    <item-list class=\"latest\"></item-list>\n</div>\n<div class=\"col-md-4\">\n    <item-list class=\"most-viewed\"></item-list>\n</div>\n<div class=\"col-md-4\">\n    <item-list class=\"random\"></item-list>\n</div>\n    ",
+                        template: "\n<h2>\n    A world building tool for creating relationships between your characters, locations, events, and stories.\n</h2>\n<div class=\"col-md-4\">\n    <article-list class=\"latest\"></article-list>\n</div>\n<div class=\"col-md-4\">\n    <article-list class=\"most-viewed\"></article-list>\n</div>\n<div class=\"col-md-4\">\n    <article-list class=\"random\"></article-list>\n</div>\n    ",
                         styles: []
                     }), 
                     __metadata('design:paramtypes', [])

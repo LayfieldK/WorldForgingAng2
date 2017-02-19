@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 
 @Component({
-    selector: "opengamelist",
+    selector: "worldforging",
     template: `
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -58,7 +58,7 @@ import {AuthService} from "./auth.service";
 })
 
 export class AppComponent {
-    title = "OpenGameList";
+    title = "World Forging";
 
     constructor(
         public router: Router,

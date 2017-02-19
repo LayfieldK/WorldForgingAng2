@@ -9,9 +9,9 @@ import "rxjs/Rx";
 import {AboutComponent} from "./about.component";
 import {AppComponent} from "./app.component";
 import {HomeComponent} from "./home.component";
-import {ItemDetailViewComponent} from "./item-detail-view.component";
-import {ItemDetailEditComponent} from "./item-detail-edit.component";
-import {ItemListComponent} from "./item-list.component";
+import {ArticleDetailViewComponent} from "./article-detail-view.component";
+import {ArticleDetailEditComponent} from "./article-detail-edit.component";
+import {ArticleListComponent} from "./article-list.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
@@ -19,7 +19,7 @@ import {UserEditComponent} from "./user-edit.component";
 import {AppRouting} from "./app.routing";
 import {AuthHttp} from "./auth.http";
 import {AuthService} from "./auth.service";
-import {ItemService} from "./item.service";
+import {ArticleService} from "./article.service";
 
 @NgModule({
     // directives, components, and pipes
@@ -27,9 +27,9 @@ import {ItemService} from "./item.service";
 AboutComponent,
         AppComponent,
         HomeComponent,
-        ItemListComponent,
-        ItemDetailViewComponent,
-        ItemDetailEditComponent,
+        ArticleListComponent,
+        ArticleDetailViewComponent,
+        ArticleDetailEditComponent,
         LoginComponent,
         PageNotFoundComponent,
         UserEditComponent
@@ -46,7 +46,7 @@ AboutComponent,
     // providers
     providers: [
         AuthHttp,
-        ItemService,
+        ArticleService,
         AuthService
     ],
     bootstrap: [

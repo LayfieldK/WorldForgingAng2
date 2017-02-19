@@ -3,8 +3,8 @@ import {Routes, RouterModule} from "@angular/router";
 
 import {AboutComponent} from "./about.component";
 import {HomeComponent} from "./home.component";
-import {ItemDetailEditComponent} from "./item-detail-edit.component";
-import {ItemDetailViewComponent} from "./item-detail-view.component";
+import {ArticleDetailEditComponent} from "./article-detail-edit.component";
+import {ArticleDetailViewComponent} from "./article-detail-view.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
@@ -35,12 +35,12 @@ const appRoutes: Routes = [
         component: UserEditComponent
     },
     {
-        path: "item/edit/:id",
-        component: ItemDetailEditComponent
+        path: "article/edit/:id",
+        component: ArticleDetailEditComponent
     },
     {
-        path: "item/view/:id",
-        component: ItemDetailViewComponent
+        path: "article/view/:id",
+        component: ArticleDetailViewComponent
     },
     {
         path: '**',

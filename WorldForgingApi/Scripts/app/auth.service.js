@@ -38,7 +38,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                     var data = {
                         username: username,
                         password: password,
-                        client_id: "OpenGameList",
+                        client_id: "WorldForging",
                         // required when signing up with username/password
                         grant_type: "password",
                         // space-separated list of scopes for which the token is issued

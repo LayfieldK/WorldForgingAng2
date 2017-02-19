@@ -25,7 +25,7 @@ System.register(["@angular/core"], function(exports_1, context_1) {
                 AboutComponent = __decorate([
                     core_1.Component({
                         selector: "about",
-                        template: "\n        <h2>{{title}}</h2>\n        <div>\n            OpenGameList: a production-ready, fully-featured SPA sample powered by ASP.NET Core Web API and Angular2.\n        </div>\n    "
+                        template: "\n        <h2>{{title}}</h2>\n        <div>\n            World Forging: a world building tool that allows you to create relationships between characters, locations, events, and stories.\n        </div>\n    "
                     }), 
                     __metadata('design:paramtypes', [])
                 ], AboutComponent);
