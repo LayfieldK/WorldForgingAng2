@@ -12,6 +12,9 @@ import {HomeComponent} from "./home.component";
 import {ArticleDetailViewComponent} from "./article-detail-view.component";
 import {ArticleDetailEditComponent} from "./article-detail-edit.component";
 import {ArticleListComponent} from "./article-list.component";
+import {StoryDetailViewComponent} from "./story-detail-view.component";
+import {StoryDetailEditComponent} from "./story-detail-edit.component";
+import {StoryListComponent} from "./story-list.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
@@ -20,6 +23,7 @@ import {AppRouting} from "./app.routing";
 import {AuthHttp} from "./auth.http";
 import {AuthService} from "./auth.service";
 import {ArticleService} from "./article.service";
+import {StoryService} from "./story.service";
 
 @NgModule({
     // directives, components, and pipes
@@ -30,6 +34,9 @@ AboutComponent,
         ArticleListComponent,
         ArticleDetailViewComponent,
         ArticleDetailEditComponent,
+        StoryListComponent,
+        StoryDetailViewComponent,
+        StoryDetailEditComponent,
         LoginComponent,
         PageNotFoundComponent,
         UserEditComponent
@@ -47,6 +54,7 @@ AboutComponent,
     providers: [
         AuthHttp,
         ArticleService,
+        StoryService,
         AuthService
     ],
     bootstrap: [

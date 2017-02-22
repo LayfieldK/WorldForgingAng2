@@ -33,6 +33,7 @@ h2 {
   font-style: italic;
   color: #666666;
 }
+story-list,
 article-list {
   border: 0;
   margin: 0;
@@ -40,27 +41,34 @@ article-list {
   vertical-align: top;
   display: block;
 }
+story-list.latest,
 article-list.latest {
   background-color: #f6f6f6;
 }
+story-list.latest h3,
 article-list.latest h3 {
   background-color: #5a4d74;
   background-image: url(/img/latest-icon.png);
 }
+story-list.most-viewed,
 article-list.most-viewed {
   background-color: #f0f0f0;
 }
+story-list.most-viewed h3,
 article-list.most-viewed h3 {
   background-color: #4d6552;
   background-image: url(/img/most-viewed-icon.png);
 }
+story-list.random,
 article-list.random {
   background-color: #e9e9e9;
 }
+story-list.random h3,
 article-list.random h3 {
   background-color: #703535;
   background-image: url(/img/random-icon.png);
 }
+story-list h3,
 article-list h3 {
   color: #fefefe;
   margin: 0;
@@ -68,25 +76,30 @@ article-list h3 {
   background-repeat: no-repeat;
   background-position: 97% center;
 }
+story-list ul,
 article-list ul {
   list-style-type: none;
   padding: 15px;
 }
+story-list ul li,
 article-list ul li {
   cursor: pointer;
   margin-top: 20px;
   padding-top: 15px;
   border-top: 1px solid #c7c7c7;
 }
+story-list ul li:first-child,
 article-list ul li:first-child {
   margin-top: 0;
   padding-top: 0;
   border-top-width: 0;
 }
+story-list ul li .title,
 article-list ul li .title {
   font-size: 1.3em;
   font-weight: bold;
 }
+story-list ul li .description,
 article-list ul li .description {
   margin-top: 3px;
   font-size: 15px;
@@ -97,23 +110,31 @@ article-list ul li .description {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+.story-container,
 .article-container {
   margin: 0 20px;
 }
+.story-container .nav.nav-tabs,
 .article-container .nav.nav-tabs {
   padding-right: 20px;
 }
+.story-container .nav.nav-tabs li,
 .article-container .nav.nav-tabs li {
   float: right;
 }
+.story-container .nav.nav-tabs li.active a,
 .article-container .nav.nav-tabs li.active a {
   font-weight: bold;
   background-color: #f9f9f9;
 }
+.story-container .panel.panel-default,
 .article-container .panel.panel-default {
   background-color: #f9f9f9;
   border-top-width: 0;
 }
+.story-container .panel.panel-default .story-image-panel,
+.article-container .panel.panel-default .story-image-panel,
+.story-container .panel.panel-default .article-image-panel,
 .article-container .panel.panel-default .article-image-panel {
   width: 170px;
   min-height: 170px;
@@ -122,23 +143,32 @@ article-list ul li .description {
   background-color: #f2f2f2;
   border: 1px solid #cccccc;
 }
+.story-container .panel.panel-default .story-image-panel img,
+.article-container .panel.panel-default .story-image-panel img,
+.story-container .panel.panel-default .article-image-panel img,
 .article-container .panel.panel-default .article-image-panel img {
   width: 150px;
   height: 150px;
   border: 1px solid #e6e6e6;
 }
+.story-container .panel.panel-default .story-image-panel .caption,
+.article-container .panel.panel-default .story-image-panel .caption,
+.story-container .panel.panel-default .article-image-panel .caption,
 .article-container .panel.panel-default .article-image-panel .caption {
   margin-top: 5px;
   text-align: center;
   font-size: 0.8em;
 }
+.story-container .panel.panel-default h3,
 .article-container .panel.panel-default h3 {
   margin: 10px 0 20px 0;
   font-weight: bold;
 }
+form.story-detail-edit .empty-field,
 form.article-detail-edit .empty-field {
   color: #f04124;
 }
+form.story-detail-edit .form-group label,
 form.article-detail-edit .form-group label {
   font-size: 14px;
   font-weight: bold;
@@ -147,15 +177,19 @@ form.article-detail-edit .form-group label {
   line-height: 1.4em;
   padding: 5px 10px;
 }
+form.story-detail-edit .form-group textarea#input-description,
 form.article-detail-edit .form-group textarea#input-description {
   height: 80px;
 }
+form.story-detail-edit .form-group textarea#input-text,
 form.article-detail-edit .form-group textarea#input-text {
   height: 150px;
 }
+form.story-detail-edit .commands,
 form.article-detail-edit .commands {
   text-align: right;
 }
+form.story-detail-edit .commands input[type="button"],
 form.article-detail-edit .commands input[type="button"] {
   margin-left: 5px;
 }

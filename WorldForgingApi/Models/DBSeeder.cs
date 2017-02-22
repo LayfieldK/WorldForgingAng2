@@ -42,7 +42,9 @@ public class DbSeeder
         // Create default Users
         if (await DbContext.Users.CountAsync() == 0) await CreateUsersAsync();
         // Create default Items (if there are none) and Comments
-        if (await DbContext.Items.CountAsync() == 0) CreateItems();
+        if (await DbContext.Items.CountAsync() == 0) CreateArticles();
+
+        if (await DbContext.Items.CountAsync() == 0) CreateStories();
     }
     #endregion Public Methods
 
@@ -152,7 +154,7 @@ public class DbSeeder
         await DbContext.SaveChangesAsync();
     }
 
-    private void CreateItems()
+    private void CreateArticles()
     {
         // local variables
         DateTime createdDate = new DateTime(2016, 03, 01, 12, 30, 00);
@@ -164,7 +166,7 @@ public class DbSeeder
         var num = 1000;  // create 1000 sample items
         for (int id = 1; id <= num; id++)
         {
-            DbContext.Articles.Add(GetSampleItem(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
+            DbContext.Articles.Add(GetSampleArticle(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
         }
 #endif
 
@@ -230,6 +232,89 @@ public class DbSeeder
         }
         DbContext.SaveChanges();
     }
+    private void CreateStories()
+    {
+        // local variables
+        DateTime createdDate = new DateTime(2016, 03, 01, 12, 30, 00);
+        DateTime lastModifiedDate = DateTime.Now;
+
+        var authorId = DbContext.Users.Where(u => u.UserName == "Admin").FirstOrDefault().Id;
+
+#if DEBUG
+        var num = 1000;  // create 1000 sample items
+        for (int id = 1; id <= num; id++)
+        {
+            DbContext.Stories.Add(GetSampleStory(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
+        }
+#endif
+
+        EntityEntry<Story> e1 = DbContext.Stories.Add(new Story()
+        {
+            UserId = authorId,
+            Title = "Earth",
+            Description = "Humanity's home planet.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
+            Genre = "Science Fiction",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Story> e2 = DbContext.Stories.Add(new Story()
+        {
+            UserId = authorId,
+            Title = "Faction 1",
+            Description = "One of the factions in the story.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
+            Genre = "Fantasy",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Story> e3 = DbContext.Stories.Add(new Story()
+        {
+            UserId = authorId,
+            Title = "Character 1",
+            Description = "A character who serves on Ship 1 and is a part of Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
+            Genre = "Science Fiction",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Story> e4 = DbContext.Stories.Add(new Story()
+        {
+            UserId = authorId,
+            Title = "Ship 1",
+            Description = "The flagship of Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
+            Genre = "Fantasy",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Story> e5 = DbContext.Stories.Add(new Story()
+        {
+            UserId = authorId,
+            Title = "Species 2",
+            Description = "A primitive race discovered by Faction 1.",
+            Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
+            Genre = "Science Fiction",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        // Create default Comments (if there are none)
+        if (DbContext.Comments.Count() == 0)
+        {
+            int numComments = 10;   // comments per item
+            for (int i = 1; i <= numComments; i++) DbContext.Comments.Add(GetSampleComment(i, e1.Entity.Id, authorId, createdDate.AddDays(i)));
+            for (int i = 1; i <= numComments; i++) DbContext.Comments.Add(GetSampleComment(i, e2.Entity.Id, authorId, createdDate.AddDays(i)));
+            for (int i = 1; i <= numComments; i++) DbContext.Comments.Add(GetSampleComment(i, e3.Entity.Id, authorId, createdDate.AddDays(i)));
+            for (int i = 1; i <= numComments; i++) DbContext.Comments.Add(GetSampleComment(i, e4.Entity.Id, authorId, createdDate.AddDays(i)));
+            for (int i = 1; i <= numComments; i++) DbContext.Comments.Add(GetSampleComment(i, e5.Entity.Id, authorId, createdDate.AddDays(i)));
+        }
+        DbContext.SaveChanges();
+    }
     #endregion Seed Methods
 
     #region Utility Methods
@@ -240,13 +325,35 @@ public class DbSeeder
     /// <param name="id">the item ID</param>
     /// <param name="createdDate">the item CreatedDate</param>
     /// <returns></returns>
-    private Article GetSampleItem(int id, string authorId, int viewCount, DateTime createdDate)
+    private Article GetSampleArticle(int id, string authorId, int viewCount, DateTime createdDate)
     {
         return new Article()
         {
             UserId = authorId,
             Title = String.Format("Item {0} Title", id),
             Description = String.Format("This is a sample description for item {0}: Lorem ipsum dolor sit amet.", id),
+            Notes = "This is a sample record created by the Code-First Configuration class",
+            ViewCount = viewCount,
+            CreatedDate = createdDate,
+            LastModifiedDate = createdDate
+        };
+    }
+
+    /// <summary>
+    /// Generate a sample story to populate the DB.
+    /// </summary>
+    /// <param name="userId">the author ID</param>
+    /// <param name="id">the item ID</param>
+    /// <param name="createdDate">the item CreatedDate</param>
+    /// <returns></returns>
+    private Story GetSampleStory(int id, string authorId, int viewCount, DateTime createdDate)
+    {
+        return new Story()
+        {
+            UserId = authorId,
+            Title = String.Format("Item {0} Title", id),
+            Description = String.Format("This is a sample description for item {0}: Lorem ipsum dolor sit amet.", id),
+            Genre = "Science Fiction",
             Notes = "This is a sample record created by the Code-First Configuration class",
             ViewCount = viewCount,
             CreatedDate = createdDate,

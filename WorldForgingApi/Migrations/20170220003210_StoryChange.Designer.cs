@@ -8,9 +8,10 @@ using WorldForgingApi.Models;
 namespace WorldForgingApi.Migrations
 {
     [DbContext(typeof(WorldForgingDBContext))]
-    partial class WorldForgingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170220003210_StoryChange")]
+    partial class StoryChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -708,8 +709,6 @@ namespace WorldForgingApi.Migrations
                     b.Property<int?>("EntityId");
 
                     b.Property<int>("Flags");
-
-                    b.Property<string>("Genre");
 
                     b.Property<DateTime>("LastModifiedDate");
 

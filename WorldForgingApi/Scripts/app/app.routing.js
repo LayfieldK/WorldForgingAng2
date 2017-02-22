@@ -1,7 +1,7 @@
-System.register(["@angular/router", "./about.component", "./home.component", "./article-detail-edit.component", "./article-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./about.component", "./home.component", "./article-detail-edit.component", "./article-detail-view.component", "./story-detail-edit.component", "./story-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, about_component_1, home_component_1, article_detail_edit_component_1, article_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1;
+    var router_1, about_component_1, home_component_1, article_detail_edit_component_1, article_detail_view_component_1, story_detail_edit_component_1, story_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1;
     var appRoutes, AppRoutingProviders, AppRouting;
     return {
         setters:[
@@ -19,6 +19,12 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
             },
             function (article_detail_view_component_1_1) {
                 article_detail_view_component_1 = article_detail_view_component_1_1;
+            },
+            function (story_detail_edit_component_1_1) {
+                story_detail_edit_component_1 = story_detail_edit_component_1_1;
+            },
+            function (story_detail_view_component_1_1) {
+                story_detail_view_component_1 = story_detail_view_component_1_1;
             },
             function (login_component_1_1) {
                 login_component_1 = login_component_1_1;
@@ -62,6 +68,14 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
                 {
                     path: "article/view/:id",
                     component: article_detail_view_component_1.ArticleDetailViewComponent
+                },
+                {
+                    path: "story/edit/:id",
+                    component: story_detail_edit_component_1.StoryDetailEditComponent
+                },
+                {
+                    path: "story/view/:id",
+                    component: story_detail_view_component_1.StoryDetailViewComponent
                 },
                 {
                     path: '**',

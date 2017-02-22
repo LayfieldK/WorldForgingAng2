@@ -187,7 +187,7 @@ namespace WorldForgingApi
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 RequireHttpsMetadata = false,
-                Authority=Configuration["Authentication:OpenIddict:Authority"],
+                Authority = Configuration["Authentication:OpenIddict:Authority"],
                 TokenValidationParameters = new TokenValidationParameters()
                 {
                     //IssuerSigningKey = JwtProvider.SecurityKey,
@@ -210,7 +210,12 @@ namespace WorldForgingApi
                 throw new Exception(e.ToString());
             }
 
-            Mapper.Initialize(cfg => cfg.CreateMap<Article, ArticleViewModel>().ReverseMap());
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<Article, ArticleViewModel>().ReverseMap();
+                cfg.CreateMap<Story, StoryViewModel>().ReverseMap();
+            });
+            
             //ItemViewModel ivm = Mapper.Map<ItemViewModel>(Article);
             //AutoMapper.Bind<Article, ItemViewModel>();
         }

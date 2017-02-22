@@ -5,6 +5,8 @@ import {AboutComponent} from "./about.component";
 import {HomeComponent} from "./home.component";
 import {ArticleDetailEditComponent} from "./article-detail-edit.component";
 import {ArticleDetailViewComponent} from "./article-detail-view.component";
+import {StoryDetailEditComponent} from "./story-detail-edit.component";
+import {StoryDetailViewComponent} from "./story-detail-view.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
@@ -41,6 +43,14 @@ const appRoutes: Routes = [
     {
         path: "article/view/:id",
         component: ArticleDetailViewComponent
+    },
+    {
+        path: "story/edit/:id",
+        component: StoryDetailEditComponent
+    },
+    {
+        path: "story/view/:id",
+        component: StoryDetailViewComponent
     },
     {
         path: '**',

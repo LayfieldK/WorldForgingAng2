@@ -15,6 +15,15 @@
 <div class="col-md-4">
     <article-list class="random"></article-list>
 </div>
+<div class="col-md-4">
+    <story-list class="latest"></story-list>
+</div>
+<div class="col-md-4">
+    <story-list class="most-viewed"></story-list>
+</div>
+<div class="col-md-4">
+    <story-list class="random"></story-list>
+</div>
     `,
     styles: []
 })

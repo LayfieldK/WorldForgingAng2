@@ -49,7 +49,7 @@ h2 {
 }
 
 // article-list component(s) styling
-article-list {
+story-list, article-list {
     border: 0;
     margin: 0;
     padding: 0;
@@ -117,7 +117,7 @@ article-list {
 // Item Detail View & Edit components styling
 @color-panel: #f9f9f9;
 
-.article-container {
+.story-container, .article-container {
     margin: 0 20px;
     .nav.nav-tabs {
         padding-right: 20px;
@@ -132,7 +132,7 @@ article-list {
     .panel.panel-default {
         background-color: @color-panel;
         border-top-width: 0;
-        .article-image-panel {
+        .story-image-panel, .article-image-panel {
             width: 170px;
             min-height: 170px;
             float: right;
@@ -158,7 +158,7 @@ article-list {
 }
 
 // Form styling for article-detail-edit component
-form.article-detail-edit {
+form.story-detail-edit, form.article-detail-edit {
     .empty-field {
         color: #f04124;
     }

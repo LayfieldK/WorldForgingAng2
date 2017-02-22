@@ -5,7 +5,7 @@ import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export class StoryService {
-    private storyUrl = 'http://localhost:14600/api/storyapi/';  // URL to web API
+    private storyUrl = 'http://localhost:14600/api/stories/';  // URL to web API
     constructor(private http: Http) { }
     getStoryDetails(storyId: Number): Observable<Story> {
         return this.http.get(`${this.storyUrl}/${storyId}`)

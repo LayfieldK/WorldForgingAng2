@@ -27,7 +27,7 @@ System.register(['@angular/core', '@angular/http', 'rxjs/Observable'], function(
             StoryService = (function () {
                 function StoryService(http) {
                     this.http = http;
-                    this.storyUrl = 'http://localhost:51332/api/storyapi'; // URL to web API
+                    this.storyUrl = 'http://localhost:51332/api/stories'; // URL to web API
                 }
                 StoryService.prototype.getStories = function () {
                     return this.http.get(this.storyUrl)
