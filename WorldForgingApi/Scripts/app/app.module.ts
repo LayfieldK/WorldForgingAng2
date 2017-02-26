@@ -18,6 +18,7 @@ import {StoryListComponent} from "./story-list.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
+import {SearchComponent} from "./search.component";
 
 import {AppRouting} from "./app.routing";
 import {AuthHttp} from "./auth.http";
@@ -39,7 +40,8 @@ AboutComponent,
         StoryDetailEditComponent,
         LoginComponent,
         PageNotFoundComponent,
-        UserEditComponent
+        UserEditComponent,
+        SearchComponent
     ],
     // modules
     imports: [

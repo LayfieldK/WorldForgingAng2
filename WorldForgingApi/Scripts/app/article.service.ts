@@ -37,6 +37,13 @@ export class ArticleService {
             .catch(this.handleError);
     }
 
+    search(term: string): Observable<Article[]> {
+        var url = this.baseUrl + "Search/" + term;
+        return this.http
+                   .get(url)
+                   .map(response => <Article[]>response.json());
+    }
+
     // calls the [GET] /api/articles/{id} Web API method to retrieve the article with the given id.
     get(id: number) {
         if (id == null) { throw new Error("id is required."); }

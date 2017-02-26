@@ -50,6 +50,7 @@ import {AuthService} from "./auth.service";
         </div>
     </div>
 </nav>
+<article-search></article-search>
 <h1 class="header">{{title}}</h1>
 <div class="main-container">
     <router-outlet></router-outlet>
