@@ -218,7 +218,7 @@ namespace WorldForging.Controllers
         [HttpGet("Search/{term}")]
         public IActionResult Search(string term)
         {
-            var articles = DbContext.Articles.Where(i => i.Title == term).Take(DefaultNumberOfArticles).ToArray();
+            var articles = DbContext.Articles.Where(i => i.Title.Contains(term)).Take(DefaultNumberOfArticles).ToArray();
             return new JsonResult(ToArticleViewModelList(articles), DefaultJsonSettings);
         }
 

@@ -66,7 +66,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                     var url = this.baseUrl + "Search/" + term;
                     return this.http
                         .get(url)
-                        .map(function (response) { return response.json().data; });
+                        .map(function (response) { return response.json(); });
                 };
                 // calls the [GET] /api/articles/{id} Web API method to retrieve the article with the given id.
                 ArticleService.prototype.get = function (id) {

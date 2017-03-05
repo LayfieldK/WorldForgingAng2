@@ -72,6 +72,12 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                         .map(function (res) { return res.json(); })
                         .catch(this.handleError);
                 };
+                StoryService.prototype.search = function (term) {
+                    var url = this.baseUrl + "Search/" + term;
+                    return this.http
+                        .get(url)
+                        .map(function (response) { return response.json(); });
+                };
                 // calls the [POST] /api/stories/ Web API method to add a new story.
                 StoryService.prototype.add = function (story) {
                     var url = this.baseUrl;

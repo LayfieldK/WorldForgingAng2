@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", 'rxjs/Observable', 'rxjs/Subject', 'rxjs/add/observable/of', 'rxjs/add/operator/catch', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/distinctUntilChanged', "./article.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", 'rxjs/Observable', 'rxjs/Subject', 'rxjs/add/observable/of', 'rxjs/add/operator/catch', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/distinctUntilChanged', "./article.service", "./story.service"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/router", 'rxjs/Observable', 'rxjs/Su
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, Observable_1, Subject_1, article_service_1;
+    var core_1, router_1, Observable_1, Subject_1, article_service_1, story_service_1;
     var SearchComponent;
     return {
         setters:[
@@ -32,11 +32,15 @@ System.register(["@angular/core", "@angular/router", 'rxjs/Observable', 'rxjs/Su
             function (_4) {},
             function (article_service_1_1) {
                 article_service_1 = article_service_1_1;
+            },
+            function (story_service_1_1) {
+                story_service_1 = story_service_1_1;
             }],
         execute: function() {
             SearchComponent = (function () {
-                function SearchComponent(articleService, router) {
+                function SearchComponent(articleService, storyService, router) {
                     this.articleService = articleService;
+                    this.storyService = storyService;
                     this.router = router;
                     this.searchTerms = new Subject_1.Subject();
                 }
@@ -57,19 +61,34 @@ System.register(["@angular/core", "@angular/router", 'rxjs/Observable', 'rxjs/Su
                         console.log(error);
                         return Observable_1.Observable.of([]);
                     });
+                    this.stories = this.searchTerms
+                        .debounceTime(300) // wait 300ms after each keystroke before considering the term
+                        .distinctUntilChanged() // ignore if next search term is same as previous
+                        .switchMap(function (term) { return term // switch to new observable each time the term changes
+                        ? _this.storyService.search(term)
+                        : Observable_1.Observable.of([]); })
+                        .catch(function (error) {
+                        // TODO: add real error handling
+                        console.log(error);
+                        return Observable_1.Observable.of([]);
+                    });
                 };
-                SearchComponent.prototype.gotoDetail = function (article) {
+                SearchComponent.prototype.gotoArticle = function (article) {
                     var link = ['article/view', article.Id];
+                    this.router.navigate(link);
+                };
+                SearchComponent.prototype.gotoStory = function (story) {
+                    var link = ['story/view', story.Id];
                     this.router.navigate(link);
                 };
                 SearchComponent = __decorate([
                     core_1.Component({
                         selector: "article-search",
-                        template: "\n        <div id=\"search-component\">\n          <h4>Search</h4>\n          <input #searchBox id=\"search-box\" (keyup)=\"search(searchBox.value)\" />\n          <div>\n            <div *ngFor=\"let article of articles | async\"\n                 (click)=\"gotoDetail(article)\" class=\"search-result\" >\n              {{article.Title}}\n            </div>\n          </div>\n        </div>\n    ",
-                        styles: ["\n        .search-result{\n          border-bottom: 1px solid gray;\n          border-left: 1px solid gray;\n          border-right: 1px solid gray;\n          width:195px;\n          height: 20px;\n          padding: 5px;\n          background-color: white;\n          cursor: pointer;\n        }\n        #search-box{\n          width: 200px;\n          height: 20px;\n        }\n    "],
-                        providers: [article_service_1.ArticleService]
+                        template: "\n        <div id=\"search-component\">\n          <h4>Search</h4>\n          <input #searchBox id=\"search-box\" (keyup)=\"search(searchBox.value)\" />\n          <div id=\"search-results\">\n            <div *ngIf=\"(articles | async) && (articles | async)?.length != 0\" class=\"search-result\" >\n              Articles\n            </div>\n            <div *ngFor=\"let article of articles | async\"\n                 (click)=\"gotoArticle(article)\" class=\"search-result\" >\n              {{article.Title}}\n            </div>\n            <div *ngIf=\"(stories | async) && (stories | async)?.length != 0\" class=\"search-result\" >\n              Stories\n            </div>\n            <div *ngFor=\"let story of stories | async\"\n                 (click)=\"gotoStory(story)\" class=\"search-result\" >\n              {{story.Title}}\n            </div>\n          </div>\n        </div>\n    ",
+                        styles: ["\n        .search-result{\n          border-bottom: 1px solid gray;\n          border-left: 1px solid gray;\n          border-right: 1px solid gray;\n          width:195px;\n          height: 32px;\n          padding: 5px;\n          background-color: white;\n          cursor: pointer;\n        }\n        #search-box{\n          width: 200px;\n          height: 20px;\n        }\n        #search-component{\n          margin-top:46px;\n        }\n        #search-results{\n          position:absolute;\n        }\n    "],
+                        providers: [article_service_1.ArticleService, story_service_1.StoryService]
                     }), 
-                    __metadata('design:paramtypes', [article_service_1.ArticleService, router_1.Router])
+                    __metadata('design:paramtypes', [article_service_1.ArticleService, story_service_1.StoryService, router_1.Router])
                 ], SearchComponent);
                 return SearchComponent;
             }());

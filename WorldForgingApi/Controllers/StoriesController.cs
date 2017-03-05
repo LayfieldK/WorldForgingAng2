@@ -211,6 +211,19 @@ namespace WorldForging.Controllers
         }
 
         /// <summary>
+        /// GET: api/articles/Search
+        /// ROUTING TYPE: attribute-based
+        /// </summary>
+        /// <returns>An array of a default number of Json-serialized objects matching the provided search terms.</returns>
+        [HttpGet("Search/{term}")]
+        public IActionResult Search(string term)
+        {
+            var stories = DbContext.Stories.Where(i => i.Title.Contains(term)).Take(DefaultNumberOfStories).ToArray();
+            return new JsonResult(ToStoryViewModelList(stories), DefaultJsonSettings);
+        }
+
+
+        /// <summary>
         /// GET: api/stories/GetRandom/{n}
         /// ROUTING TYPE: attribute-based
         /// </summary>

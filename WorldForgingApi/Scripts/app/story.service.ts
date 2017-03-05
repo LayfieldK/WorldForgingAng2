@@ -46,6 +46,13 @@ export class StoryService {
             .catch(this.handleError);
     }
 
+    search(term: string): Observable<Story[]> {
+        var url = this.baseUrl + "Search/" + term;
+        return this.http
+                   .get(url)
+                   .map(response => <Story[]>response.json());
+    }
+
     // calls the [POST] /api/stories/ Web API method to add a new story.
     add(story: Story) {
         var url = this.baseUrl;

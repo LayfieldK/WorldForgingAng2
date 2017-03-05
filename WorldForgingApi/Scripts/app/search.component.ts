@@ -13,6 +13,9 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {Article} from "./article";
 import {ArticleService} from "./article.service";
 
+import {Story} from "./story";
+import {StoryService} from "./story.service";
+
 @Component({
     selector: "article-search",
     template: `
@@ -20,9 +23,19 @@ import {ArticleService} from "./article.service";
           <h4>Search</h4>
           <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
           <div id="search-results">
+            <div *ngIf="(articles | async) && (articles | async)?.length != 0" class="search-result category" >
+              Articles
+            </div>
             <div *ngFor="let article of articles | async"
-                 (click)="gotoDetail(article)" class="search-result" >
+                 (click)="gotoArticle(article); searchBox.value = ''; search(searchBox.value);" class="search-result" >
               {{article.Title}}
+            </div>
+            <div *ngIf="(stories | async) && (stories | async)?.length != 0" class="search-result category" >
+              Stories
+            </div>
+            <div *ngFor="let story of stories | async"
+                 (click)="gotoStory(story); searchBox.value = ''; search(searchBox.value);" class="search-result" >
+              {{story.Title}}
             </div>
           </div>
         </div>
@@ -38,6 +51,9 @@ import {ArticleService} from "./article.service";
           background-color: white;
           cursor: pointer;
         }
+        .search-result.category{
+          background-color: lightblue;
+        }
         #search-box{
           width: 200px;
           height: 20px;
@@ -47,16 +63,19 @@ import {ArticleService} from "./article.service";
         }
         #search-results{
           position:absolute;
+          z-index:99;
         }
     `],
-    providers: [ArticleService]
+    providers: [ArticleService, StoryService]
 })
 
 export class SearchComponent implements OnInit {
     articles: Observable<Article[]>;
+    stories: Observable<Story[]>;
     private searchTerms = new Subject<string>();
     constructor(
         private articleService: ArticleService,
+        private storyService: StoryService,
         private router: Router) {}
     // Push a search term into the observable stream.
     search(term: string): void {
@@ -76,9 +95,26 @@ export class SearchComponent implements OnInit {
             console.log(error);
             return Observable.of<Article[]>([]);
             });
+        this.stories = this.searchTerms
+            .debounceTime(300)        // wait 300ms after each keystroke before considering the term
+            .distinctUntilChanged()   // ignore if next search term is same as previous
+            .switchMap(term => term   // switch to new observable each time the term changes
+            // return the http search observable
+            ? this.storyService.search(term)
+            // or the observable of empty heroes if there was no search term
+            : Observable.of<Story[]>([]))
+            .catch(error => {
+            // TODO: add real error handling
+            console.log(error);
+            return Observable.of<Story[]>([]);
+            });
     }
-    gotoDetail(article: Article): void {
+    gotoArticle(article: Article): void {
         let link = ['article/view', article.Id];
+        this.router.navigate(link);
+    }
+    gotoStory(story: Story): void {
+        let link = ['story/view', story.Id];
         this.router.navigate(link);
     }
 }
