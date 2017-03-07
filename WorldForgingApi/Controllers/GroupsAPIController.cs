@@ -81,7 +81,7 @@ namespace WorldForging.Controllers
                 return BadRequest(ModelState);
             }
 
-            createGroupModel.VMEntity.WorldId = createGroupModel.WorldId;
+            //createGroupModel.VMEntity.WorldId = createGroupModel.WorldId;
             db.Entities.Add(createGroupModel.VMEntity);
             createGroupModel.VMGroup.Entity = createGroupModel.VMEntity;
             db.Groups.Add(createGroupModel.VMGroup);

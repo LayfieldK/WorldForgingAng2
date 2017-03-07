@@ -82,7 +82,9 @@ namespace WorldForgingApi.Models
 
         public DbSet<WorldForging.Models.EntityRelationship> EntityRelationships { get; set; }
 
-        public DbSet<WorldForging.Models.EntityEntity> EntityEntities { get; set; }
+        public DbSet<WorldForging.Models.Relationship> Relationships { get; set; }
+
+        public DbSet<WorldForging.Models.EntityType> EntityTypes { get; set; }
     }
 
     public static class Extensions

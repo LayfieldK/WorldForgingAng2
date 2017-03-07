@@ -81,7 +81,7 @@ namespace WorldForging.Controllers
                 return BadRequest(ModelState);
             }
 
-            createItemModel.VMEntity.WorldId = createItemModel.WorldId;
+            //createItemModel.VMEntity.WorldId = createItemModel.WorldId;
             db.Entities.Add(createItemModel.VMEntity);
             createItemModel.VMItem.Entity = createItemModel.VMEntity;
             db.Items.Add(createItemModel.VMItem);

@@ -85,7 +85,7 @@ namespace WorldForging.Controllers
             //db.Characters.Add(character);
             //await db.SaveChangesAsync();
 
-            createCharacterModel.VMEntity.WorldId = createCharacterModel.WorldId;
+            //createCharacterModel.VMEntity.WorldId = createCharacterModel.WorldId;
             db.Entities.Add(createCharacterModel.VMEntity);
             createCharacterModel.VMCharacter.Entity = createCharacterModel.VMEntity;
             db.Characters.Add(createCharacterModel.VMCharacter);

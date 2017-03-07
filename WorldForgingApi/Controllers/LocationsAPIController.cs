@@ -81,7 +81,7 @@ namespace WorldForging.Controllers
                 return BadRequest(ModelState);
             }
 
-            createLocationModel.VMEntity.WorldId = createLocationModel.WorldId;
+            //createLocationModel.VMEntity.WorldId = createLocationModel.WorldId;
             db.Entities.Add(createLocationModel.VMEntity);
             createLocationModel.VMLocation.Entity = createLocationModel.VMEntity;
             db.Locations.Add(createLocationModel.VMLocation);

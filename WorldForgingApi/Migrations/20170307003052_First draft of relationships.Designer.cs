@@ -8,9 +8,10 @@ using WorldForgingApi.Models;
 namespace WorldForgingApi.Migrations
 {
     [DbContext(typeof(WorldForgingDBContext))]
-    partial class WorldForgingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170307003052_First draft of relationships")]
+    partial class Firstdraftofrelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -420,28 +421,12 @@ namespace WorldForgingApi.Migrations
 
             modelBuilder.Entity("WorldForging.Models.Entity", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EntityId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<int?>("EntityTypeId");
-
-                    b.Property<DateTime>("LastModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
 
                     b.Property<int?>("WorldId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("EntityTypeId");
-
-                    b.HasIndex("UserId");
+                    b.HasKey("EntityId");
 
                     b.HasIndex("WorldId");
 
@@ -525,9 +510,9 @@ namespace WorldForgingApi.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int?>("Entity1Id");
+                    b.Property<int?>("Entity1EntityId");
 
-                    b.Property<int?>("Entity2Id");
+                    b.Property<int?>("Entity2EntityId");
 
                     b.Property<int?>("InverseEntityRelationshipId");
 
@@ -540,9 +525,9 @@ namespace WorldForgingApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Entity1Id");
+                    b.HasIndex("Entity1EntityId");
 
-                    b.HasIndex("Entity2Id");
+                    b.HasIndex("Entity2EntityId");
 
                     b.HasIndex("InverseEntityRelationshipId");
 
@@ -551,31 +536,6 @@ namespace WorldForgingApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("EntityRelationships");
-                });
-
-            modelBuilder.Entity("WorldForging.Models.EntityType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("LastModifiedDate");
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<string>("QueryCode")
-                        .IsRequired();
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("EntityTypes");
                 });
 
             modelBuilder.Entity("WorldForging.Models.Faction", b =>
@@ -1077,16 +1037,7 @@ namespace WorldForgingApi.Migrations
 
             modelBuilder.Entity("WorldForging.Models.Entity", b =>
                 {
-                    b.HasOne("WorldForging.Models.EntityType", "EntityType")
-                        .WithMany()
-                        .HasForeignKey("EntityTypeId");
-
-                    b.HasOne("WorldForging.Models.Users.ApplicationUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("WorldForging.Models.World")
+                    b.HasOne("WorldForging.Models.World", "World")
                         .WithMany("Entities")
                         .HasForeignKey("WorldId");
                 });
@@ -1142,11 +1093,11 @@ namespace WorldForgingApi.Migrations
                 {
                     b.HasOne("WorldForging.Models.Entity", "Entity1")
                         .WithMany()
-                        .HasForeignKey("Entity1Id");
+                        .HasForeignKey("Entity1EntityId");
 
                     b.HasOne("WorldForging.Models.Entity", "Entity2")
                         .WithMany()
-                        .HasForeignKey("Entity2Id");
+                        .HasForeignKey("Entity2EntityId");
 
                     b.HasOne("WorldForging.Models.EntityRelationship", "InverseEntityRelationship")
                         .WithMany()
@@ -1156,14 +1107,6 @@ namespace WorldForgingApi.Migrations
                         .WithMany()
                         .HasForeignKey("RelationshipId");
 
-                    b.HasOne("WorldForging.Models.Users.ApplicationUser", "Author")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WorldForging.Models.EntityType", b =>
-                {
                     b.HasOne("WorldForging.Models.Users.ApplicationUser", "Author")
                         .WithMany()
                         .HasForeignKey("UserId")

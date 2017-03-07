@@ -12,6 +12,7 @@ using WorldForging.Models.Comments;
 using WorldForging.Models.Users;
 using WorldForgingApi.Models;
 using WorldForging.Models;
+using System.Collections.Generic;
 
 public class DbSeeder
 {
@@ -42,7 +43,7 @@ public class DbSeeder
         // Create default Users
         if (await DbContext.Users.CountAsync() == 0) await CreateUsersAsync();
         // Create default Items (if there are none) and Comments
-        if (await DbContext.Items.CountAsync() == 0) CreateArticles();
+        if (await DbContext.Entities.CountAsync() == 0) CreateEntities();
 
         if (await DbContext.Items.CountAsync() == 0) CreateStories();
     }
@@ -154,7 +155,7 @@ public class DbSeeder
         await DbContext.SaveChangesAsync();
     }
 
-    private void CreateArticles()
+    private void CreateEntities()
     {
         // local variables
         DateTime createdDate = new DateTime(2016, 03, 01, 12, 30, 00);
@@ -162,14 +163,102 @@ public class DbSeeder
 
         var authorId = DbContext.Users.Where(u => u.UserName == "Admin").FirstOrDefault().Id;
 
+        //add entity types
+        EntityEntry<EntityType> type1 = DbContext.EntityTypes.Add(new EntityType()
+        {
+            UserId = authorId,
+            Name = "Location",
+            QueryCode = "location",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<EntityType> type2 = DbContext.EntityTypes.Add(new EntityType()
+        {
+            UserId = authorId,
+            Name = "Character",
+            QueryCode = "character",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<EntityType> type3 = DbContext.EntityTypes.Add(new EntityType()
+        {
+            UserId = authorId,
+            Name = "Group",
+            QueryCode = "group",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<EntityType> type4 = DbContext.EntityTypes.Add(new EntityType()
+        {
+            UserId = authorId,
+            Name = "Item",
+            QueryCode = "item",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        //add entities
+        EntityEntry<Entity> ent1 = DbContext.Entities.Add(new Entity()
+        {
+            UserId = authorId,
+            Name = "Earth",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            EntityType = type1.Entity
+            //EntityTypes = new List<EntityType>() { type1.Entity}
+        });
+
+        EntityEntry<Entity> ent2 = DbContext.Entities.Add(new Entity()
+        {
+            UserId = authorId,
+            Name = "Faction 1",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            EntityType = type3.Entity
+            //EntityTypes = new List<EntityType>() { type3.Entity }
+        });
+
+        EntityEntry<Entity> ent3 = DbContext.Entities.Add(new Entity()
+        {
+            UserId = authorId,
+            Name = "Character 1",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            EntityType = type2.Entity
+            //EntityTypes = new List<EntityType>() { type2.Entity }
+        });
+
+        EntityEntry<Entity> ent4 = DbContext.Entities.Add(new Entity()
+        {
+            UserId = authorId,
+            Name = "Ship 1",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            EntityType = type4.Entity
+            //EntityTypes = new List<EntityType>() { type4.Entity }
+        });
+
+        EntityEntry<Entity> ent5 = DbContext.Entities.Add(new Entity()
+        {
+            UserId = authorId,
+            Name = "Species 2",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            EntityType = type3.Entity
+            //EntityTypes = new List<EntityType>() { type3.Entity }
+        });
+
 #if DEBUG
-        var num = 1000;  // create 1000 sample items
+        var num = 1000;  // create 1000 sample articles
         for (int id = 1; id <= num; id++)
         {
             DbContext.Articles.Add(GetSampleArticle(id, authorId, num - id, new DateTime(2015, 12, 31).AddDays(-num)));
         }
 #endif
-
+        //create articles for existing entities
         EntityEntry<Article> e1 = DbContext.Articles.Add(new Article()
         {
             UserId = authorId,
@@ -177,7 +266,8 @@ public class DbSeeder
             Description = "Humanity's home planet.",
             Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
-            LastModifiedDate = lastModifiedDate
+            LastModifiedDate = lastModifiedDate,
+            Entity=ent1.Entity
         });
 
         EntityEntry<Article> e2 = DbContext.Articles.Add(new Article()
@@ -187,7 +277,8 @@ public class DbSeeder
             Description = "One of the factions in the story.",
             Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
-            LastModifiedDate = lastModifiedDate
+            LastModifiedDate = lastModifiedDate,
+            Entity = ent2.Entity
         });
 
         EntityEntry<Article> e3 = DbContext.Articles.Add(new Article()
@@ -197,7 +288,8 @@ public class DbSeeder
             Description = "A character who serves on Ship 1 and is a part of Faction 1.",
             Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
-            LastModifiedDate = lastModifiedDate
+            LastModifiedDate = lastModifiedDate,
+            Entity = ent3.Entity
         });
 
         EntityEntry<Article> e4 = DbContext.Articles.Add(new Article()
@@ -207,7 +299,8 @@ public class DbSeeder
             Description = "The flagship of Faction 1.",
             Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
-            LastModifiedDate = lastModifiedDate
+            LastModifiedDate = lastModifiedDate,
+            Entity = ent4.Entity
         });
 
         EntityEntry<Article> e5 = DbContext.Articles.Add(new Article()
@@ -217,7 +310,8 @@ public class DbSeeder
             Description = "A primitive race discovered by Faction 1.",
             Text = @"Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  Test text.  ",
             CreatedDate = createdDate,
-            LastModifiedDate = lastModifiedDate
+            LastModifiedDate = lastModifiedDate,
+            Entity = ent5.Entity
         });
 
         // Create default Comments (if there are none)

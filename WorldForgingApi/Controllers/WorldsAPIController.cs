@@ -52,14 +52,14 @@ namespace WorldForging.Controllers
 
             var worldDetailsVM = new WorldsDetailsViewModel();
             worldDetailsVM.World = world;
-            worldDetailsVM.Entities = db.Entities.Where(c => c.WorldId == worldId).ToList();
-            worldDetailsVM.Characters = db.Characters.Where(c => c.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Races = db.Races.Where(c => c.Group.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Locations = db.Locations.Where(c => c.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Items = db.Items.Where(c => c.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Groups = db.Groups.Where(c => c.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Events = db.Events.Where(c => c.Entity.WorldId == worldId).ToList();
-            worldDetailsVM.Subjects = db.Subjects.Where(c => c.WorldId == worldId).ToList();
+            //worldDetailsVM.Entities = db.Entities.Where(c => c.WorldId == worldId).ToList();
+            //worldDetailsVM.Characters = db.Characters.Where(c => c.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Races = db.Races.Where(c => c.Group.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Locations = db.Locations.Where(c => c.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Items = db.Items.Where(c => c.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Groups = db.Groups.Where(c => c.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Events = db.Events.Where(c => c.Entity.WorldId == worldId).ToList();
+            //worldDetailsVM.Subjects = db.Subjects.Where(c => c.WorldId == worldId).ToList();
 
             return Ok(worldDetailsVM);
         }
