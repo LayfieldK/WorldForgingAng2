@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {AuthService} from "./auth.service";
 
 @Component({
-    selector: "worldforging",
+    selector: "worldforging", 
     template: `
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
