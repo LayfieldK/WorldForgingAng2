@@ -2,8 +2,8 @@
 import {NgModule} from "@angular/core";
 import {BrowserModule} from "@angular/platform-browser";
 import {HttpModule} from "@angular/http";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {RouterModule} from "@angular/router";
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { RouterModule } from "@angular/router";
 import "rxjs/Rx";
 
 import {AboutComponent} from "./about.component";
@@ -18,7 +18,8 @@ import {StoryListComponent} from "./story-list.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
 import {UserEditComponent} from "./user-edit.component";
-import {SearchComponent} from "./search.component";
+import { SearchComponent } from "./search.component";
+import { DummyComponent } from "./dummy.component";
 
 import {AppRouting} from "./app.routing";
 import {AuthHttp} from "./auth.http";
@@ -29,7 +30,7 @@ import {StoryService} from "./story.service";
 @NgModule({
     // directives, components, and pipes
     declarations: [
-AboutComponent,
+        AboutComponent,
         AppComponent,
         HomeComponent,
         ArticleListComponent,
@@ -41,7 +42,8 @@ AboutComponent,
         LoginComponent,
         PageNotFoundComponent,
         UserEditComponent,
-        SearchComponent
+        SearchComponent,
+        DummyComponent
     ],
     // modules
     imports: [

@@ -1,6 +1,5 @@
-System.register(['@angular/core', '../services/storyService.service'], function(exports_1, context_1) {
+System.register(["@angular/core", "../services/storyService.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(['@angular/core', '../services/storyService.service'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, storyService_service_1;
-    var Stories;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, storyService_service_1, Stories;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (storyService_service_1_1) {
                 storyService_service_1 = storyService_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             Stories = (function () {
                 function Stories(storyService) {
                     this.storyService = storyService;
@@ -32,17 +32,17 @@ System.register(['@angular/core', '../services/storyService.service'], function(
                     this.storyService.getStories()
                         .subscribe(function (stories) { return _this.stories = stories; }, function (error) { return _this.errorMessage = error; });
                 };
-                Stories = __decorate([
-                    core_1.Component({
-                        selector: 'stories',
-                        templateUrl: '/Scripts/app/stories/index/stories.component.template.html',
-                        providers: [storyService_service_1.StoryService]
-                    }), 
-                    __metadata('design:paramtypes', [storyService_service_1.StoryService])
-                ], Stories);
                 return Stories;
             }());
+            Stories = __decorate([
+                core_1.Component({
+                    selector: 'stories',
+                    templateUrl: '/Scripts/app/stories/index/stories.component.template.html',
+                    providers: [storyService_service_1.StoryService]
+                }),
+                __metadata("design:paramtypes", [storyService_service_1.StoryService])
+            ], Stories);
             exports_1("Stories", Stories);
         }
-    }
+    };
 });

@@ -31,8 +31,8 @@ import {AuthService} from "./auth.service";
                 </li>
 
                 <!-- Navigation commands for authenticated users -->
-                <li *ngIf="authService.isLoggedIn()" [class.active]="isActive(['item/edit', 0])">
-                    <a class="add" [routerLink]="['item/edit', 0]">Add New</a>
+                <li *ngIf="authService.isLoggedIn()" [class.active]="isActive(['article/edit', 0])">
+                    <a class="add" [routerLink]="['article/edit', 0]">Add New</a>
                 </li>
 
                 <!-- Account-related commands -->

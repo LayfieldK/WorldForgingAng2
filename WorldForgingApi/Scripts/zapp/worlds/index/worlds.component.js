@@ -1,6 +1,5 @@
-System.register(['@angular/core', '../services/worldList.service'], function(exports_1, context_1) {
+System.register(["@angular/core", "../services/worldList.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(['@angular/core', '../services/worldList.service'], function(exp
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, worldList_service_1;
-    var Worlds;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, worldList_service_1, Worlds;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (worldList_service_1_1) {
                 worldList_service_1 = worldList_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             Worlds = (function () {
                 function Worlds(worldListService) {
                     this.worldListService = worldListService;
@@ -32,17 +32,17 @@ System.register(['@angular/core', '../services/worldList.service'], function(exp
                     this.worldListService.getWorlds()
                         .subscribe(function (worlds) { return _this.worlds = worlds; }, function (error) { return _this.errorMessage = error; });
                 };
-                Worlds = __decorate([
-                    core_1.Component({
-                        selector: 'worlds',
-                        templateUrl: '/Scripts/app/worlds/index/worlds.component.template.html',
-                        providers: [worldList_service_1.WorldListService]
-                    }), 
-                    __metadata('design:paramtypes', [worldList_service_1.WorldListService])
-                ], Worlds);
                 return Worlds;
             }());
+            Worlds = __decorate([
+                core_1.Component({
+                    selector: 'worlds',
+                    templateUrl: '/Scripts/app/worlds/index/worlds.component.template.html',
+                    providers: [worldList_service_1.WorldListService]
+                }),
+                __metadata("design:paramtypes", [worldList_service_1.WorldListService])
+            ], Worlds);
             exports_1("Worlds", Worlds);
         }
-    }
+    };
 });

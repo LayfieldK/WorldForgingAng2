@@ -92,7 +92,7 @@ namespace WorldForging.Controllers
         /// <returns>Updates an existing article and return it accordingly.</returns>
         [HttpPut("{id}")]
         [Authorize]
-        public IActionResult Update(int id, [FromBody]ArticleViewModel ivm)
+        public async Task<IActionResult> Update(int id, [FromBody]ArticleViewModel ivm)
         {
             if (ivm != null)
             {
@@ -100,13 +100,13 @@ namespace WorldForging.Controllers
                 if (article != null)
                 {
                     // handle the update (on per-property basis)
-                    article.UserId = ivm.UserId;
+                    article.UserId = await GetCurrentUserId();
                     article.Description = ivm.Description;
-                    article.Flags = ivm.Flags;
-                    article.Notes = ivm.Notes;
+                    //article.Flags = ivm.Flags;
+                    //article.Notes = ivm.Notes;
                     article.Text = ivm.Text;
                     article.Title = ivm.Title;
-                    article.Type = ivm.Type;
+                    //article.Type = ivm.Type;
 
                     // override any property that could be wise to set from server-side only
                     article.LastModifiedDate = DateTime.Now;

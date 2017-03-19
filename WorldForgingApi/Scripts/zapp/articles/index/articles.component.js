@@ -1,6 +1,5 @@
-System.register(['@angular/core', '../services/articleList.service'], function(exports_1, context_1) {
+System.register(["@angular/core", "../services/articleList.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(['@angular/core', '../services/articleList.service'], function(e
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, articleList_service_1;
-    var Articles;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, articleList_service_1, Articles;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (articleList_service_1_1) {
                 articleList_service_1 = articleList_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             Articles = (function () {
                 function Articles(articleListService) {
                     this.articleListService = articleListService;
@@ -32,17 +32,17 @@ System.register(['@angular/core', '../services/articleList.service'], function(e
                     this.articleListService.getArticles()
                         .subscribe(function (articles) { return _this.articles = articles; }, function (error) { return _this.errorMessage = error; });
                 };
-                Articles = __decorate([
-                    core_1.Component({
-                        selector: 'articles',
-                        templateUrl: '/Scripts/app/articles/index/articles.component.template.html',
-                        providers: [articleList_service_1.ArticleListService]
-                    }), 
-                    __metadata('design:paramtypes', [articleList_service_1.ArticleListService])
-                ], Articles);
                 return Articles;
             }());
+            Articles = __decorate([
+                core_1.Component({
+                    selector: 'articles',
+                    templateUrl: '/Scripts/app/articles/index/articles.component.template.html',
+                    providers: [articleList_service_1.ArticleListService]
+                }),
+                __metadata("design:paramtypes", [articleList_service_1.ArticleListService])
+            ], Articles);
             exports_1("Articles", Articles);
         }
-    }
+    };
 });

@@ -1,8 +1,10 @@
 ﻿import {Component, OnInit} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
 import {Article} from "./article";
 import {AuthService} from "./auth.service";
-import {ArticleService} from "./article.service";
+import { ArticleService } from "./article.service";
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/map';
 
 @Component({
     selector: "article-detail-view",
@@ -47,20 +49,37 @@ export class ArticleDetailViewComponent {
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
-        var id = +this.activatedRoute.snapshot.params["id"];
-        if (id) {
-            this.articleService.get(id).subscribe(
-                article => this.article = article
-            );
-        }
-        else if (id === 0) {
-            console.log("id is 0: switching to edit mode...");
-            this.router.navigate(["article/edit", 0]);
-        }
-        else {
-            console.log("Invalid id: routing back to home...");
-            this.router.navigate([""]);
-        }
+        var id;
+        this.activatedRoute.params
+            .map(params => +params['id'])
+            .do(id => {
+                console.log(id);
+                if (id) {
+                    console.log(id);
+                } else if (id === 0) {
+                    console.log("id is 0: switching to edit mode...");
+                    this.router.navigate(["article/edit", 0]);
+                } else {
+                    console.log("Invalid id: routing back to home...");
+                    this.router.navigate([""]);
+                }
+            })
+            .filter(id => id > 0)
+            .switchMap(id => this.articleService.get(id))
+            .subscribe(article => this.article = article);
+        //if (id) {
+        //    this.articleService.get(id).subscribe(
+        //        article => this.article = article
+        //    );
+        //}
+        //else if (id === 0) {
+        //    console.log("id is 0: switching to edit mode...");
+        //    this.router.navigate(["article/edit", 0]);
+        //}
+        //else {
+        //    console.log("Invalid id: routing back to home...");
+        //    this.router.navigate([""]);
+        //}
     }
 
     onArticleDetailEdit(article: Article) {

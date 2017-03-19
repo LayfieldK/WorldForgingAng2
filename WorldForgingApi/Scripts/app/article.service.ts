@@ -45,7 +45,7 @@ export class ArticleService {
     }
 
     // calls the [GET] /api/articles/{id} Web API method to retrieve the article with the given id.
-    get(id: number) {
+    get(id: number): Promise<Article> {
         if (id == null) { throw new Error("id is required."); }
         var url = this.baseUrl + id;
         return this.http.get(url)

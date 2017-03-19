@@ -1,10 +1,9 @@
-System.register(['@angular/router', './dashboard/dashboard.component', './personalCabinet/personalCabinet.component', './worlds/index/worlds.component', './worlds/details/worlddetails.component', './articles/index/articles.component', './articles/details/articleDetails.component', './stories/index/stories.component', './stories/details/storyDetails.component'], function(exports_1, context_1) {
+System.register(["@angular/router", "./dashboard/dashboard.component", "./personalCabinet/personalCabinet.component", "./worlds/index/worlds.component", "./worlds/details/worlddetails.component", "./articles/index/articles.component", "./articles/details/articleDetails.component", "./stories/index/stories.component", "./stories/details/storyDetails.component"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, dashboard_component_1, personalCabinet_component_1, worlds_component_1, worlddetails_component_1, articles_component_1, articleDetails_component_1, stories_component_1, storyDetails_component_1;
-    var appRoutes, routing;
+    var router_1, dashboard_component_1, personalCabinet_component_1, worlds_component_1, worlddetails_component_1, articles_component_1, articleDetails_component_1, stories_component_1, storyDetails_component_1, appRoutes, routing;
     return {
-        setters:[
+        setters: [
             function (router_1_1) {
                 router_1 = router_1_1;
             },
@@ -31,8 +30,9 @@ System.register(['@angular/router', './dashboard/dashboard.component', './person
             },
             function (storyDetails_component_1_1) {
                 storyDetails_component_1 = storyDetails_component_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             appRoutes = [
                 {
                     path: '',
@@ -69,5 +69,5 @@ System.register(['@angular/router', './dashboard/dashboard.component', './person
             ];
             exports_1("routing", routing = router_1.RouterModule.forRoot(appRoutes));
         }
-    }
+    };
 });

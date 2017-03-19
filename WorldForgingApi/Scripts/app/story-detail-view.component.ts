@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import { Router, ActivatedRoute, Params} from "@angular/router";
 import {Story} from "./story";
 import {AuthService} from "./auth.service";
 import {StoryService} from "./story.service";
@@ -47,7 +47,11 @@ export class StoryDetailViewComponent {
         private activatedRoute: ActivatedRoute) { }
 
     ngOnInit() {
-        var id = +this.activatedRoute.snapshot.params["id"];
+        var id;// = +this.activatedRoute.snapshot.params["id"];
+        this.activatedRoute.params.subscribe((params: Params) => {
+            id = params['id'];
+            console.log(params);
+        });
         if (id) {
             this.storyService.get(id).subscribe(
                 story => this.story = story

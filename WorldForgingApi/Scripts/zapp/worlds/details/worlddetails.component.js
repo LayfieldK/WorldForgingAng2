@@ -1,6 +1,5 @@
-System.register(['@angular/core', '../services/worldDetails.service', '@angular/router'], function(exports_1, context_1) {
+System.register(["@angular/core", "../services/worldDetails.service", "@angular/router"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(['@angular/core', '../services/worldDetails.service', '@angular/
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, worldDetails_service_1, router_1;
-    var WorldDetails;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, worldDetails_service_1, router_1, WorldDetails;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -22,8 +21,9 @@ System.register(['@angular/core', '../services/worldDetails.service', '@angular/
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             WorldDetails = (function () {
                 function WorldDetails(worldDetailsService, route) {
                     this.worldDetailsService = worldDetailsService;
@@ -52,17 +52,17 @@ System.register(['@angular/core', '../services/worldDetails.service', '@angular/
                 WorldDetails.prototype.ngOnDestroy = function () {
                     this.sub.unsubscribe();
                 };
-                WorldDetails = __decorate([
-                    core_1.Component({
-                        selector: 'worlddetails',
-                        templateUrl: '/Scripts/app/worlds/details/worlddetails.component.template.html',
-                        providers: [worldDetails_service_1.WorldDetailsService]
-                    }), 
-                    __metadata('design:paramtypes', [worldDetails_service_1.WorldDetailsService, router_1.ActivatedRoute])
-                ], WorldDetails);
                 return WorldDetails;
             }());
+            WorldDetails = __decorate([
+                core_1.Component({
+                    selector: 'worlddetails',
+                    templateUrl: '/Scripts/app/worlds/details/worlddetails.component.template.html',
+                    providers: [worldDetails_service_1.WorldDetailsService]
+                }),
+                __metadata("design:paramtypes", [worldDetails_service_1.WorldDetailsService, router_1.ActivatedRoute])
+            ], WorldDetails);
             exports_1("WorldDetails", WorldDetails);
         }
-    }
+    };
 });

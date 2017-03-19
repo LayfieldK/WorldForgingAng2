@@ -1,6 +1,5 @@
-System.register(['@angular/core', '../usefullLinksService/usefulllink.service'], function(exports_1, context_1) {
+System.register(["@angular/core", "../usefullLinksService/usefulllink.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,17 +9,18 @@ System.register(['@angular/core', '../usefullLinksService/usefulllink.service'],
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, usefulllink_service_1;
-    var PersonalCabinet;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, usefulllink_service_1, PersonalCabinet;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
             function (usefulllink_service_1_1) {
                 usefulllink_service_1 = usefulllink_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             PersonalCabinet = (function () {
                 function PersonalCabinet(linkService) {
                     this.linkService = linkService;
@@ -34,17 +34,17 @@ System.register(['@angular/core', '../usefullLinksService/usefulllink.service'],
                 PersonalCabinet.prototype.ngOnInit = function () {
                     this._linkList = this._usefullLinkService.GetLinks();
                 };
-                PersonalCabinet = __decorate([
-                    core_1.Component({
-                        selector: 'personal-cabinet',
-                        templateUrl: '/Scripts/app/personalCabinet/personalCabinet.component.template.html',
-                        providers: [usefulllink_service_1.UsefullLinkService]
-                    }), 
-                    __metadata('design:paramtypes', [usefulllink_service_1.UsefullLinkService])
-                ], PersonalCabinet);
                 return PersonalCabinet;
             }());
+            PersonalCabinet = __decorate([
+                core_1.Component({
+                    selector: 'personal-cabinet',
+                    templateUrl: '/Scripts/app/personalCabinet/personalCabinet.component.template.html',
+                    providers: [usefulllink_service_1.UsefullLinkService]
+                }),
+                __metadata("design:paramtypes", [usefulllink_service_1.UsefullLinkService])
+            ], PersonalCabinet);
             exports_1("PersonalCabinet", PersonalCabinet);
         }
-    }
+    };
 });

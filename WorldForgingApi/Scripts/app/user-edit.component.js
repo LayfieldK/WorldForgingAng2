@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.service", "./user"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.service", "./user"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, forms_1, router_1, auth_service_1, user_1;
-    var UserEditComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, forms_1, router_1, auth_service_1, user_1, UserEditComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -28,8 +27,9 @@ System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.s
             },
             function (user_1_1) {
                 user_1 = user_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             UserEditComponent = (function () {
                 function UserEditComponent(fb, router, activatedRoute, authService) {
                     this.fb = fb;
@@ -61,10 +61,12 @@ System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.s
                             ]],
                         password: ["", [
                                 forms_1.Validators.required,
-                                forms_1.Validators.minLength(6)]],
+                                forms_1.Validators.minLength(6)
+                            ]],
                         passwordConfirm: ["", [
                                 forms_1.Validators.required,
-                                forms_1.Validators.minLength(6)]],
+                                forms_1.Validators.minLength(6)
+                            ]],
                         displayName: ["", null]
                     }, {
                         validator: this.compareValidator('password', 'passwordConfirm')
@@ -145,16 +147,19 @@ System.register(["@angular/core", "@angular/forms", "@angular/router", "./auth.s
                         });
                     }
                 };
-                UserEditComponent = __decorate([
-                    core_1.Component({
-                        selector: "user-edit",
-                        template: "\n<div class=\"user-container\">\n    <form class=\"form-user\" [formGroup]=\"userForm\" (submit)=\"onSubmit()\">\n        <h2 class=\"form-user-heading\">{{title}}</h2>\n        <div class=\"form-group\">\n            <input [disabled]=\"!this.isRegister\" formControlName=\"username\" type=\"text\" class=\"form-control\" placeholder=\"Choose an Username\" autofocus />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.username.valid\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.username.valid && !this.userForm.controls.username.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"email\" type=\"text\" class=\"form-control\" placeholder=\"Type your e-mail address\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.email.valid\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.email.valid && !this.userForm.controls.email.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div *ngIf=\"!this.isRegister\" class=\"form-group\">\n            <input formControlName=\"passwordCurrent\" type=\"password\" class=\"form-control\" placeholder=\"Current Password\" />\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.passwordCurrent.valid\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                required\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"password\" type=\"password\" class=\"form-control\" placeholder=\"Choose a Password\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.password.valid && !this.userForm.controls.password.pristine\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.password.valid && !this.userForm.controls.password.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"passwordConfirm\" type=\"password\" class=\"form-control\" placeholder=\"Confirm your Password\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.passwordConfirm.valid && !this.userForm.controls.password.pristine && !this.userForm.hasError('compareFailed')\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"(!this.userForm.controls.passwordConfirm.valid && !this.userForm.controls.passwordConfirm.pristine) || this.userForm.hasError('compareFailed')\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"displayName\" type=\"text\" class=\"form-control\" placeholder=\"Choose a Display Name\" />\n        </div>\n        <div class=\"form-group\">\n            <input type=\"submit\" class=\"btn btn-primary btn-block\" [disabled]=\"!userForm.valid\" value=\"{{this.isRegister ? 'Register' : 'Save'}}\" />\n        </div>\n    </form>\n</div>\n    "
-                    }), 
-                    __metadata('design:paramtypes', [forms_1.FormBuilder, router_1.Router, router_1.ActivatedRoute, auth_service_1.AuthService])
-                ], UserEditComponent);
                 return UserEditComponent;
             }());
+            UserEditComponent = __decorate([
+                core_1.Component({
+                    selector: "user-edit",
+                    template: "\n<div class=\"user-container\">\n    <form class=\"form-user\" [formGroup]=\"userForm\" (submit)=\"onSubmit()\">\n        <h2 class=\"form-user-heading\">{{title}}</h2>\n        <div class=\"form-group\">\n            <input [disabled]=\"!this.isRegister\" formControlName=\"username\" type=\"text\" class=\"form-control\" placeholder=\"Choose an Username\" autofocus />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.username.valid\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.username.valid && !this.userForm.controls.username.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"email\" type=\"text\" class=\"form-control\" placeholder=\"Type your e-mail address\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.email.valid\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.email.valid && !this.userForm.controls.email.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div *ngIf=\"!this.isRegister\" class=\"form-group\">\n            <input formControlName=\"passwordCurrent\" type=\"password\" class=\"form-control\" placeholder=\"Current Password\" />\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.passwordCurrent.valid\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                required\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"password\" type=\"password\" class=\"form-control\" placeholder=\"Choose a Password\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.password.valid && !this.userForm.controls.password.pristine\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"!this.userForm.controls.password.valid && !this.userForm.controls.password.pristine\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"passwordConfirm\" type=\"password\" class=\"form-control\" placeholder=\"Confirm your Password\" />\n            <span class=\"validator-label valid\" *ngIf=\"this.userForm.controls.passwordConfirm.valid && !this.userForm.controls.password.pristine && !this.userForm.hasError('compareFailed')\">\n                <span class=\"glyphicon glyphicon-ok\" aria-hidden=\"true\"></span>\n                valid!\n            </span>\n            <span class=\"validator-label invalid\" *ngIf=\"(!this.userForm.controls.passwordConfirm.valid && !this.userForm.controls.passwordConfirm.pristine) || this.userForm.hasError('compareFailed')\">\n                <span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>\n                invalid\n            </span>\n        </div>\n        <div class=\"form-group\">\n            <input formControlName=\"displayName\" type=\"text\" class=\"form-control\" placeholder=\"Choose a Display Name\" />\n        </div>\n        <div class=\"form-group\">\n            <input type=\"submit\" class=\"btn btn-primary btn-block\" [disabled]=\"!userForm.valid\" value=\"{{this.isRegister ? 'Register' : 'Save'}}\" />\n        </div>\n    </form>\n</div>\n    "
+                }),
+                __metadata("design:paramtypes", [forms_1.FormBuilder,
+                    router_1.Router,
+                    router_1.ActivatedRoute,
+                    auth_service_1.AuthService])
+            ], UserEditComponent);
             exports_1("UserEditComponent", UserEditComponent);
         }
-    }
+    };
 });

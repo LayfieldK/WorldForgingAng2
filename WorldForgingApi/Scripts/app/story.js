@@ -1,10 +1,10 @@
-System.register([], function(exports_1, context_1) {
+System.register([], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var Story;
     return {
-        setters:[],
-        execute: function() {
+        setters: [],
+        execute: function () {
             Story = (function () {
                 function Story(Id, Title, Description, Genre) {
                     this.Id = Id;
@@ -16,5 +16,5 @@ System.register([], function(exports_1, context_1) {
             }());
             exports_1("Story", Story);
         }
-    }
+    };
 });

@@ -1,5 +1,5 @@
 ﻿import {Component, OnInit} from "@angular/core";
-import {Router, ActivatedRoute} from "@angular/router";
+import { Router, ActivatedRoute, Params} from "@angular/router";
 import {Story} from "./story";
 import {AuthService} from "./auth.service";
 import {StoryService} from "./story.service";
@@ -78,7 +78,11 @@ export class StoryDetailEditComponent {
         if (!this.authService.isLoggedIn()) {
             this.router.navigate([""]);
         }
-        var id = +this.activatedRoute.snapshot.params["id"];
+        var id;
+        this.activatedRoute.params.subscribe((params: Params) => {
+            id = params['id'];
+            console.log(params);
+        });
         if (id) {
             this.storyService.get(id).subscribe(
                 story => this.story = story
@@ -106,6 +110,9 @@ export class StoryDetailEditComponent {
     }
 
     onUpdate(story: Story) {
+        console.log("story object");
+        console.log(story);
+        console.log("end story object");
         this.storyService.update(story).subscribe(
             (data) => {
                 this.story = data;

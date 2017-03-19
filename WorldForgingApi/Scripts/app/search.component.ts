@@ -110,10 +110,14 @@ export class SearchComponent implements OnInit {
             });
     }
     gotoArticle(article: Article): void {
+        //this.router.navigateByUrl('/dummy', { skipLocationChange: true });
+
         let link = ['article/view', article.Id];
         this.router.navigate(link);
     }
     gotoStory(story: Story): void {
+        //this.router.navigateByUrl('/dummy', { skipLocationChange: true });
+
         let link = ['story/view', story.Id];
         this.router.navigate(link);
     }

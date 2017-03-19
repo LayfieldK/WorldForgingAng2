@@ -1,10 +1,9 @@
-System.register(["@angular/router", "./about.component", "./home.component", "./article-detail-edit.component", "./article-detail-view.component", "./story-detail-edit.component", "./story-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component"], function(exports_1, context_1) {
+System.register(["@angular/router", "./about.component", "./home.component", "./article-detail-edit.component", "./article-detail-view.component", "./story-detail-edit.component", "./story-detail-view.component", "./login.component", "./page-not-found.component", "./user-edit.component", "./dummy.component"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    var router_1, about_component_1, home_component_1, article_detail_edit_component_1, article_detail_view_component_1, story_detail_edit_component_1, story_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1;
-    var appRoutes, AppRoutingProviders, AppRouting;
+    var router_1, about_component_1, home_component_1, article_detail_edit_component_1, article_detail_view_component_1, story_detail_edit_component_1, story_detail_view_component_1, login_component_1, page_not_found_component_1, user_edit_component_1, dummy_component_1, appRoutes, AppRoutingProviders, AppRouting;
     return {
-        setters:[
+        setters: [
             function (router_1_1) {
                 router_1 = router_1_1;
             },
@@ -34,12 +33,20 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
             },
             function (user_edit_component_1_1) {
                 user_edit_component_1 = user_edit_component_1_1;
-            }],
-        execute: function() {
+            },
+            function (dummy_component_1_1) {
+                dummy_component_1 = dummy_component_1_1;
+            }
+        ],
+        execute: function () {
             appRoutes = [
                 {
                     path: "",
                     component: home_component_1.HomeComponent
+                },
+                {
+                    path: "dummy",
+                    component: dummy_component_1.DummyComponent
                 },
                 {
                     path: "home",
@@ -85,5 +92,5 @@ System.register(["@angular/router", "./about.component", "./home.component", "./
             exports_1("AppRoutingProviders", AppRoutingProviders = []);
             exports_1("AppRouting", AppRouting = router_1.RouterModule.forRoot(appRoutes));
         }
-    }
+    };
 });

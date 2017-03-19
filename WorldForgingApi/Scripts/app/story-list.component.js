@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/router", "./story.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./story.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/router", "./story.service"], functio
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, story_service_1;
-    var StoryListComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, router_1, story_service_1, StoryListComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -22,8 +21,9 @@ System.register(["@angular/core", "@angular/router", "./story.service"], functio
             },
             function (story_service_1_1) {
                 story_service_1 = story_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             StoryListComponent = (function () {
                 function StoryListComponent(storyService, router) {
                     this.storyService = storyService;
@@ -55,21 +55,21 @@ System.register(["@angular/core", "@angular/router", "./story.service"], functio
                     console.log("Story " + this.selectedStory.Id + " has been clicked: loading story viewer...");
                     this.router.navigate(["story/view", this.selectedStory.Id]);
                 };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], StoryListComponent.prototype, "class", void 0);
-                StoryListComponent = __decorate([
-                    core_1.Component({
-                        selector: "story-list",
-                        template: "\n<h3>{{title}}</h3>\n<ul class=\"stories\">\n    <li *ngFor=\"let story of stories\"\n        [class.selected]=\"story === selectedStory\"\n        (click)=\"onSelect(story)\">\n        <div class=\"title\">{{story.Title}}</div>\n        <div class=\"description\">{{story.Description}}</div>\n    </li>\n</ul>\n    ",
-                        styles: ["\n        ul.stories li { \n            cursor: pointer;\n        }\n        ul.stories li.selected { \n            background-color: #dddddd; \n        }\n    "]
-                    }), 
-                    __metadata('design:paramtypes', [story_service_1.StoryService, router_1.Router])
-                ], StoryListComponent);
                 return StoryListComponent;
             }());
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", String)
+            ], StoryListComponent.prototype, "class", void 0);
+            StoryListComponent = __decorate([
+                core_1.Component({
+                    selector: "story-list",
+                    template: "\n<h3>{{title}}</h3>\n<ul class=\"stories\">\n    <li *ngFor=\"let story of stories\"\n        [class.selected]=\"story === selectedStory\"\n        (click)=\"onSelect(story)\">\n        <div class=\"title\">{{story.Title}}</div>\n        <div class=\"description\">{{story.Description}}</div>\n    </li>\n</ul>\n    ",
+                    styles: ["\n        ul.stories li { \n            cursor: pointer;\n        }\n        ul.stories li.selected { \n            background-color: #dddddd; \n        }\n    "]
+                }),
+                __metadata("design:paramtypes", [story_service_1.StoryService, router_1.Router])
+            ], StoryListComponent);
             exports_1("StoryListComponent", StoryListComponent);
         }
-    }
+    };
 });

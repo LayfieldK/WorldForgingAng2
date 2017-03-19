@@ -9,12 +9,17 @@ import {StoryDetailEditComponent} from "./story-detail-edit.component";
 import {StoryDetailViewComponent} from "./story-detail-view.component";
 import {LoginComponent} from "./login.component";
 import {PageNotFoundComponent} from "./page-not-found.component";
-import {UserEditComponent} from "./user-edit.component";
+import { UserEditComponent } from "./user-edit.component";
+import { DummyComponent } from "./dummy.component";
 
 const appRoutes: Routes = [
     {
         path: "",
         component: HomeComponent
+    },
+    {
+        path: "dummy",
+        component: DummyComponent
     },
     {
         path: "home",

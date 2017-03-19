@@ -1,4 +1,4 @@
-System.register(["@angular/core", "./rxjs-operators"], function (exports_1, context_1) {
+System.register(["@angular/core"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,30 +7,26 @@ System.register(["@angular/core", "./rxjs-operators"], function (exports_1, cont
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, AppComponent;
+    var core_1, DummyComponent;
     return {
         setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (_1) {
             }
         ],
         execute: function () {
-            AppComponent = (function () {
-                function AppComponent() {
-                    this.title = 'World Forging';
+            DummyComponent = (function () {
+                function DummyComponent() {
                 }
-                return AppComponent;
+                return DummyComponent;
             }());
-            AppComponent = __decorate([
+            DummyComponent = __decorate([
                 core_1.Component({
-                    selector: 'my-app',
-                    templateUrl: '/Scripts/app/app.component.template.html',
-                    styleUrls: ['app/app.component.css'],
+                    template: "",
+                    styles: []
                 })
-            ], AppComponent);
-            exports_1("AppComponent", AppComponent);
+            ], DummyComponent);
+            exports_1("DummyComponent", DummyComponent);
         }
     };
 });

@@ -1,6 +1,5 @@
-System.register(["@angular/core", "@angular/router", "./article.service"], function(exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "./article.service"], function (exports_1, context_1) {
     "use strict";
-    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,10 +9,10 @@ System.register(["@angular/core", "@angular/router", "./article.service"], funct
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, article_service_1;
-    var ArticleListComponent;
+    var __moduleName = context_1 && context_1.id;
+    var core_1, router_1, article_service_1, ArticleListComponent;
     return {
-        setters:[
+        setters: [
             function (core_1_1) {
                 core_1 = core_1_1;
             },
@@ -22,8 +21,9 @@ System.register(["@angular/core", "@angular/router", "./article.service"], funct
             },
             function (article_service_1_1) {
                 article_service_1 = article_service_1_1;
-            }],
-        execute: function() {
+            }
+        ],
+        execute: function () {
             ArticleListComponent = (function () {
                 function ArticleListComponent(articleService, router) {
                     this.articleService = articleService;
@@ -55,21 +55,21 @@ System.register(["@angular/core", "@angular/router", "./article.service"], funct
                     console.log("Article " + this.selectedArticle.Id + " has been clicked: loading article viewer...");
                     this.router.navigate(["article/view", this.selectedArticle.Id]);
                 };
-                __decorate([
-                    core_1.Input(), 
-                    __metadata('design:type', String)
-                ], ArticleListComponent.prototype, "class", void 0);
-                ArticleListComponent = __decorate([
-                    core_1.Component({
-                        selector: "article-list",
-                        template: "\n<h3>{{title}}</h3>\n<ul class=\"articles\">\n    <li *ngFor=\"let article of articles\"\n        [class.selected]=\"article === selectedArticle\"\n        (click)=\"onSelect(article)\">\n        <div class=\"title\">{{article.Title}}</div>\n        <div class=\"description\">{{article.Description}}</div>\n    </li>\n</ul>\n    ",
-                        styles: ["\n        ul.articles li { \n            cursor: pointer;\n        }\n        ul.articles li.selected { \n            background-color: #dddddd; \n        }\n    "]
-                    }), 
-                    __metadata('design:paramtypes', [article_service_1.ArticleService, router_1.Router])
-                ], ArticleListComponent);
                 return ArticleListComponent;
             }());
+            __decorate([
+                core_1.Input(),
+                __metadata("design:type", String)
+            ], ArticleListComponent.prototype, "class", void 0);
+            ArticleListComponent = __decorate([
+                core_1.Component({
+                    selector: "article-list",
+                    template: "\n<h3>{{title}}</h3>\n<ul class=\"articles\">\n    <li *ngFor=\"let article of articles\"\n        [class.selected]=\"article === selectedArticle\"\n        (click)=\"onSelect(article)\">\n        <div class=\"title\">{{article.Title}}</div>\n        <div class=\"description\">{{article.Description}}</div>\n    </li>\n</ul>\n    ",
+                    styles: ["\n        ul.articles li { \n            cursor: pointer;\n        }\n        ul.articles li.selected { \n            background-color: #dddddd; \n        }\n    "]
+                }),
+                __metadata("design:paramtypes", [article_service_1.ArticleService, router_1.Router])
+            ], ArticleListComponent);
             exports_1("ArticleListComponent", ArticleListComponent);
         }
-    }
+    };
 });
