@@ -17,19 +17,13 @@ namespace WorldForging.Models
 
         [Required]
         public DateTime CreatedDate { get; set; }
+
         [Required]
         public DateTime LastModifiedDate { get; set; }
 
-        public  ICollection<EntityBelief> EntityBeliefs { get; set; }
-
-        public ICollection<EntityDesire> EntityDesires { get; set; }
-
-        public  ICollection<EntityConvention> EntityConventions { get; set; }
-
-        //public ICollection<EntityEntity> Entity1Relationships { get; set; }
-
-        //public ICollection<EntityEntity> Entity2Relationships { get; set; }
-
+        [InverseProperty("Entity1")]
+        public  ICollection<EntityRelationship> EntityRelationships { get; set; }
+        
         /// <summary>
         /// Current Item's Author: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>

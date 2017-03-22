@@ -23,6 +23,10 @@ namespace WorldForging.Models
         
         public string Description { get; set; }
 
+        public int? Entity1Id { get; set; }
+
+        public int? Entity2Id { get; set; }
+
         [Required]
         public string UserId { get; set; }
         [Required]
@@ -40,8 +44,10 @@ namespace WorldForging.Models
 
         public virtual EntityRelationship InverseEntityRelationship { get; set; }
 
-
+        [ForeignKey("Entity1Id")]
         public virtual Entity Entity1 { get; set; }
+
+        [ForeignKey("Entity2Id")]
         public virtual Entity Entity2 { get; set; }
 
         public virtual Relationship Relationship { get; set; }

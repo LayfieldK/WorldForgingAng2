@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WorldForging.Models.Comments;
 using WorldForging.Models.Users;
 
 namespace WorldForging.Models
@@ -24,6 +22,8 @@ namespace WorldForging.Models
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
+        
+        public int? InverseRelationshipId { get; set; }
 
 
 
@@ -43,7 +43,7 @@ namespace WorldForging.Models
         [ForeignKey("UserId")]
         public virtual ApplicationUser Author { get; set; }
 
-
+        [ForeignKey("InverseRelationshipId")]
         public virtual Relationship InverseRelationship { get; set; }
 
         #endregion Related Properties

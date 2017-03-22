@@ -8,9 +8,10 @@ using WorldForgingApi.Models;
 namespace WorldForgingApi.Migrations
 {
     [DbContext(typeof(WorldForgingDBContext))]
-    partial class WorldForgingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20170322004037_FixedTypoInEntityRelationship")]
+    partial class FixedTypoInEntityRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.3")
@@ -489,9 +490,9 @@ namespace WorldForgingApi.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int?>("Entity1Id");
+                    b.Property<int>("Entity1Id");
 
-                    b.Property<int?>("Entity2Id");
+                    b.Property<int>("Entity2Id");
 
                     b.Property<int?>("InverseEntityRelationshipId");
 
@@ -1080,11 +1081,13 @@ namespace WorldForgingApi.Migrations
                 {
                     b.HasOne("WorldForging.Models.Entity", "Entity1")
                         .WithMany("EntityRelationships")
-                        .HasForeignKey("Entity1Id");
+                        .HasForeignKey("Entity1Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WorldForging.Models.Entity", "Entity2")
                         .WithMany()
-                        .HasForeignKey("Entity2Id");
+                        .HasForeignKey("Entity2Id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("WorldForging.Models.EntityRelationship", "InverseEntityRelationship")
                         .WithMany()

@@ -45,7 +45,7 @@ public class DbSeeder
         // Create default Items (if there are none) and Comments
         if (await DbContext.Entities.CountAsync() == 0) CreateEntities();
 
-        if (await DbContext.Items.CountAsync() == 0) CreateStories();
+        if (await DbContext.Stories.CountAsync() == 0) CreateStories();
     }
     #endregion Public Methods
 
@@ -200,6 +200,52 @@ public class DbSeeder
             LastModifiedDate = lastModifiedDate
         });
 
+        //add relationships
+        EntityEntry<Relationship> rel1 = DbContext.Relationships.Add(new Relationship()
+        {
+            UserId = authorId,
+            Title = "Relationship 1",
+            Description = "Relationship 1",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Relationship> rel2 = DbContext.Relationships.Add(new Relationship()
+        {
+            UserId = authorId,
+            Title = "Relationship 2",
+            Description = "Relationship 2",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            InverseRelationship = rel1.Entity
+        });
+
+        EntityEntry<Relationship> rel3 = DbContext.Relationships.Add(new Relationship()
+        {
+            UserId = authorId,
+            Title = "Relationship 3",
+            Description = "Relationship 3",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<Relationship> rel4 = DbContext.Relationships.Add(new Relationship()
+        {
+            UserId = authorId,
+            Title = "Relationship 4",
+            Description = "Relationship 4",
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate,
+            InverseRelationship = rel3.Entity
+        });
+
+        DbContext.SaveChanges();
+
+        rel1.Entity.InverseRelationship = rel2.Entity;
+        rel3.Entity.InverseRelationship = rel4.Entity;
+
+        DbContext.SaveChanges();
+
         //add entities
         EntityEntry<Entity> ent1 = DbContext.Entities.Add(new Entity()
         {
@@ -250,6 +296,34 @@ public class DbSeeder
             EntityType = type3.Entity
             //EntityTypes = new List<EntityType>() { type3.Entity }
         });
+
+        //add EntityRelationships
+        EntityEntry<EntityRelationship> er1 = DbContext.EntityRelationships.Add(new EntityRelationship()
+        {
+            UserId = authorId,
+            Description = "Entity Relationship 1",
+            Entity1 = ent1.Entity,
+            Entity2 = ent2.Entity,
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        EntityEntry<EntityRelationship> er2 = DbContext.EntityRelationships.Add(new EntityRelationship()
+        {
+            UserId = authorId,
+            Description = "Entity Relationship 2",
+            Entity1 = ent2.Entity,
+            Entity2 = ent1.Entity,
+            InverseEntityRelationship = er1.Entity,
+            CreatedDate = createdDate,
+            LastModifiedDate = lastModifiedDate
+        });
+
+        DbContext.SaveChanges();
+
+        er1.Entity.InverseEntityRelationship = er2.Entity;
+
+        DbContext.SaveChanges();
 
 #if DEBUG
         var num = 1000;  // create 1000 sample articles

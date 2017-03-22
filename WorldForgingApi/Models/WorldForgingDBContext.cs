@@ -39,6 +39,13 @@ namespace WorldForgingApi.Models
             modelBuilder.Entity<Comment>().HasOne(c => c.Article).WithMany(i => i.Comments);
             modelBuilder.Entity<Comment>().HasOne(c => c.Parent).WithMany(c => c.Children);
             modelBuilder.Entity<Comment>().HasMany(c => c.Children).WithOne(c => c.Parent);
+
+            //modelBuilder.Entity<Relationship>().ToTable("Relationships");
+            //modelBuilder.Entity<Relationship>()
+            //    .HasOne(r => r.InverseRelationship)
+            //    .WithOne(r => r.InverseRelationship)
+            //    .HasForeignKey<Relationship>(r => r.InverseRelationshipId)
+            //    .IsRequired(false);
         }
         #endregion Methods
 
