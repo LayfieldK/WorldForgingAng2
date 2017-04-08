@@ -31,6 +31,7 @@ import 'rxjs/add/operator/map';
                 <h3>{{article.Title}}</h3>
                 <p>{{article.Description}}</p>
                 <p>{{article.Text}}</p>
+                <p *ngFor="let eRelationship of article.EntityRelationships">{{eRelationship.Entity1Name}} {{eRelationship.Relationship.Description}} {{eRelationship.Entity2Name}}</p>
             </div>
         </div>
     </div>
@@ -66,20 +67,12 @@ export class ArticleDetailViewComponent {
             })
             .filter(id => id > 0)
             .switchMap(id => this.articleService.get(id))
-            .subscribe(article => this.article = article);
-        //if (id) {
-        //    this.articleService.get(id).subscribe(
-        //        article => this.article = article
-        //    );
-        //}
-        //else if (id === 0) {
-        //    console.log("id is 0: switching to edit mode...");
-        //    this.router.navigate(["article/edit", 0]);
-        //}
-        //else {
-        //    console.log("Invalid id: routing back to home...");
-        //    this.router.navigate([""]);
-        //}
+            .subscribe(article => {
+                this.article = article;
+                console.log(article);
+
+            });
+
     }
 
     onArticleDetailEdit(article: Article) {

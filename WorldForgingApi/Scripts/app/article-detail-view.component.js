@@ -59,20 +59,10 @@ System.register(["@angular/core", "@angular/router", "./auth.service", "./articl
                     })
                         .filter(function (id) { return id > 0; })
                         .switchMap(function (id) { return _this.articleService.get(id); })
-                        .subscribe(function (article) { return _this.article = article; });
-                    //if (id) {
-                    //    this.articleService.get(id).subscribe(
-                    //        article => this.article = article
-                    //    );
-                    //}
-                    //else if (id === 0) {
-                    //    console.log("id is 0: switching to edit mode...");
-                    //    this.router.navigate(["article/edit", 0]);
-                    //}
-                    //else {
-                    //    console.log("Invalid id: routing back to home...");
-                    //    this.router.navigate([""]);
-                    //}
+                        .subscribe(function (article) {
+                        _this.article = article;
+                        console.log(article);
+                    });
                 };
                 ArticleDetailViewComponent.prototype.onArticleDetailEdit = function (article) {
                     this.router.navigate(["article/edit", article.Id]);
@@ -86,7 +76,7 @@ System.register(["@angular/core", "@angular/router", "./auth.service", "./articl
             ArticleDetailViewComponent = __decorate([
                 core_1.Component({
                     selector: "article-detail-view",
-                    template: "\n<div *ngIf=\"article\">\n    <h2>\n        <a href=\"javascript:void(0)\" (click)=\"onBack()\">&laquo; Back to Home</a>\n    </h2>\n    <div class=\"article-container\">\n        <ul class=\"nav nav-tabs\">\n            <li *ngIf=\"authService.isLoggedIn()\" role=\"presentation\">\n                <a href=\"javascript:void(0)\" (click)=\"onArticleDetailEdit(article)\">Edit</a>\n            </li>\n            <li role=\"presentation\" class=\"active\">\n                <a href=\"javascript:void(0)\">View</a>\n            </li>\n        </ul>\n        <div class=\"panel panel-default\">\n            <div class=\"panel-body\">\n                <div class=\"article-image-panel\">\n                    <img src=\"/img/article-image-sample.png\" alt=\"{{article.Title}}\" />\n                    <div class=\"caption\">Sample image with caption.</div>\n                </div>\n                <h3>{{article.Title}}</h3>\n                <p>{{article.Description}}</p>\n                <p>{{article.Text}}</p>\n            </div>\n        </div>\n    </div>\n</div>\n    ",
+                    template: "\n<div *ngIf=\"article\">\n    <h2>\n        <a href=\"javascript:void(0)\" (click)=\"onBack()\">&laquo; Back to Home</a>\n    </h2>\n    <div class=\"article-container\">\n        <ul class=\"nav nav-tabs\">\n            <li *ngIf=\"authService.isLoggedIn()\" role=\"presentation\">\n                <a href=\"javascript:void(0)\" (click)=\"onArticleDetailEdit(article)\">Edit</a>\n            </li>\n            <li role=\"presentation\" class=\"active\">\n                <a href=\"javascript:void(0)\">View</a>\n            </li>\n        </ul>\n        <div class=\"panel panel-default\">\n            <div class=\"panel-body\">\n                <div class=\"article-image-panel\">\n                    <img src=\"/img/article-image-sample.png\" alt=\"{{article.Title}}\" />\n                    <div class=\"caption\">Sample image with caption.</div>\n                </div>\n                <h3>{{article.Title}}</h3>\n                <p>{{article.Description}}</p>\n                <p>{{article.Text}}</p>\n                <p *ngFor=\"let eRelationship of article.EntityRelationships\">{{eRelationship.Entity1Name}} {{eRelationship.Relationship.Description}} {{eRelationship.Entity2Name}}</p>\n            </div>\n        </div>\n    </div>\n</div>\n    ",
                     styles: []
                 }),
                 __metadata("design:paramtypes", [auth_service_1.AuthService,

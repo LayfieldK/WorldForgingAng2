@@ -3,7 +3,9 @@ import { Router, ActivatedRoute, Params} from "@angular/router";
 import {Article} from "./article";
 import {AuthService} from "./auth.service";
 import { ArticleService } from "./article.service";
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { EntityRelationshipEditComponent } from "./entity-relationship-edit.component";
+import { EntityRelationship } from "./entity-relationship";
 
 @Component({
     selector: "article-detail-edit",
@@ -48,6 +50,25 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
                         <label for="input-text">Text</label>
                         <textarea id="input-text" name="input-text" class="form-control" formControlName="description" placeholder="Insert a suitable description..."></textarea>
                     </div>
+                    <!--entityRelationships-->
+                    <div formArrayName="entityRelationships">
+                      <div *ngFor="let entityRelationship of editArticleForm.controls.entityRelationships.controls; let i=index" class="panel panel-default">
+                        <div class="panel-heading">
+                          <span>Relationship {{i + 1}}</span>
+                          <span class="glyphicon glyphicon-remove pull-right" *ngIf="editArticleForm.controls.entityRelationships.controls.length > 1" (click)="removeEntityRelationship(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship"></entity-relationship-edit>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="margin-20">
+                      <a (click)="addEntityRelationship()" style="cursor: default">
+                        Add another relationship +
+                      </a>
+                    </div>
+
                     <div *ngIf="article.Id == 0" class="commands insert">
                         <input type="button" class="btn btn-primary" value="Save" (click)="onInsert()" />
                         <input type="button" class="btn btn-default" value="Cancel" (click)="onBack()" />
@@ -84,7 +105,8 @@ export class ArticleDetailEditComponent {
         this.editArticleForm = this.formBuilder.group({
             title: ['', Validators.required],
             description: ['', Validators.required],
-            text: ['', Validators.required]
+            text: ['', Validators.required],
+            entityRelationships: this.formBuilder.array([this.initEntityRelationship()])
         });
 
         if (!this.authService.isLoggedIn()) {
@@ -99,7 +121,7 @@ export class ArticleDetailEditComponent {
                     console.log(id);
                 } else if (id === 0) {
                     console.log("id is 0: adding a new article...");
-                    this.article = new Article(0, "New Article", null, null);
+                    this.article = new Article(0, "New Article", null, null, null);
                 } else {
                     console.log("Invalid id: routing back to home...");
                     this.router.navigate([""]);
@@ -109,12 +131,16 @@ export class ArticleDetailEditComponent {
             .switchMap(id => this.articleService.get(id))
             .subscribe(article => {
                 this.article = article;
-                this.editArticleForm.setValue({
+                this.editArticleForm.patchValue({
                     title: this.article.Title,
                     description: this.article.Description,
-                    text: ""
+                    text: ""//,
+                    ////entityRelationships: this.article.EntityRelationships
+                    //entityRelationships: this.editArticleForm.value.entityRelationships
                 });
-            });
+                this.setEntityRelationships(article.EntityRelationships);
+            })
+            ;
     }
 
     onInsert() {
@@ -164,13 +190,44 @@ export class ArticleDetailEditComponent {
         this.router.navigate(["article/view", article.Id]);
     }
 
+    initEntityRelationship() {
+        return this.formBuilder.group({
+            Entity1Name: "test"
+            //street: ['street address', Validators.required]
+            //postcode: ['']
+        });
+    }
+
+    setEntityRelationships(entityRelationships: EntityRelationship[]) {
+        const entityRelationshipFGs = entityRelationships.map(entityRelationship => this.formBuilder.group(entityRelationship));
+        const entityRelationshipFormArray = this.formBuilder.array(entityRelationshipFGs);
+        this.editArticleForm.setControl('entityRelationships', entityRelationshipFormArray);
+    }
+
+    //get secretLairs(): FormArray {
+    //    return this.heroForm.get('secretLairs') as FormArray;
+    //};
+
+    addEntityRelationship() {
+        // add EntityRelationship to the list
+        const control = <FormArray>this.editArticleForm.controls['entityRelationships'];
+        control.push(this.initEntityRelationship());
+    }
+
+    removeEntityRelationship(i: number) {
+        // remove EntityRelationship from the list
+        const control = <FormArray>this.editArticleForm.controls['entityRelationships'];
+        control.removeAt(i);
+    }
+
     prepareSaveArticle(): Article {
         const formModel = this.editArticleForm.value;
         const saveArticle: Article = {
             Id: this.article.Id,
             Title: formModel.title,
             Description: formModel.description,
-            Text: formModel.text
+            Text: formModel.text,
+            EntityRelationships: null
         };
         return saveArticle;
     }

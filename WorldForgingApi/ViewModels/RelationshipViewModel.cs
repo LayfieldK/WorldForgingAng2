@@ -9,10 +9,10 @@ using WorldForging.Models;
 namespace WorldForging.ViewModels
 {
     [JsonObject(MemberSerialization.OptOut)]
-    public class ArticleViewModel
+    public class RelationshipViewModel
     {
         #region Constructor
-        public ArticleViewModel()
+        public RelationshipViewModel()
         {
 
         }
@@ -24,7 +24,7 @@ namespace WorldForging.ViewModels
         public string Description { get; set; }
         public string Text { get; set; }
         public string Notes { get; set; }
-        public ICollection<EntityRelationshipDTO> EntityRelationships { get; set; }
+        public ICollection<EntityRelationship> EntityRelationships { get; set; }
         [DefaultValue(0)]
         public int Type { get; set; }
         [DefaultValue(0)]

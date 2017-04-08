@@ -10,7 +10,8 @@ import {AboutComponent} from "./about.component";
 import {AppComponent} from "./app.component";
 import {HomeComponent} from "./home.component";
 import {ArticleDetailViewComponent} from "./article-detail-view.component";
-import {ArticleDetailEditComponent} from "./article-detail-edit.component";
+import { ArticleDetailEditComponent } from "./article-detail-edit.component";
+import { EntityRelationshipEditComponent } from "./entity-relationship-edit.component";
 import {ArticleListComponent} from "./article-list.component";
 import {StoryDetailViewComponent} from "./story-detail-view.component";
 import {StoryDetailEditComponent} from "./story-detail-edit.component";
@@ -36,6 +37,7 @@ import {StoryService} from "./story.service";
         ArticleListComponent,
         ArticleDetailViewComponent,
         ArticleDetailEditComponent,
+        EntityRelationshipEditComponent,
         StoryListComponent,
         StoryDetailViewComponent,
         StoryDetailEditComponent,

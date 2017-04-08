@@ -212,7 +212,17 @@ namespace WorldForgingApi
 
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<Article, ArticleViewModel>().ReverseMap();
+                var articleClientModelMap = cfg.CreateMap<Article, ArticleViewModel>()
+                    .ForMember(dest=>dest.EntityRelationships, source => source.MapFrom(x => x.Entity.EntityRelationships))
+                    //.ForMember(dest => dest.EntityRelationships., opt => opt.Ignore())
+                //ForMember(dest => dest.Id, source => source.MapFrom(x => x.ClientId))
+                .ReverseMap();
+
+                cfg.CreateMap<EntityRelationship, EntityRelationshipDTO>()
+                    .ForMember(dest => dest.Entity1Name, source => source.MapFrom(x => x.Entity1.Name))
+                    .ForMember(dest => dest.Entity2Name, source => source.MapFrom(x => x.Entity2.Name));
+                //cfg.CreateMap<FlatEntity, Entity>().ReverseMap();
+
                 cfg.CreateMap<Story, StoryViewModel>().ReverseMap();
                 
             });

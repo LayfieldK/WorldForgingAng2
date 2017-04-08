@@ -1,11 +1,9 @@
 ﻿import { EntityRelationship } from "./entity-relationship";
 
-export class Article {
+export class Entity {
     constructor(
         public Id: number,
-        public Title: string,
-        public Description: string,
-        public Text: string,
+        public Name: string,
         public EntityRelationships: EntityRelationship[]
     ) { }
 }

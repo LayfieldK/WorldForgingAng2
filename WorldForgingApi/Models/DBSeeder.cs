@@ -304,6 +304,7 @@ public class DbSeeder
             Description = "Entity Relationship 1",
             Entity1 = ent1.Entity,
             Entity2 = ent2.Entity,
+            Relationship = rel1.Entity,
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate
         });
@@ -314,6 +315,7 @@ public class DbSeeder
             Description = "Entity Relationship 2",
             Entity1 = ent2.Entity,
             Entity2 = ent1.Entity,
+            Relationship = rel2.Entity,
             InverseEntityRelationship = er1.Entity,
             CreatedDate = createdDate,
             LastModifiedDate = lastModifiedDate

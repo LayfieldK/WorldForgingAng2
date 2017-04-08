@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using WorldForging.Models.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace WorldForging.Controllers
 {
@@ -48,8 +49,21 @@ namespace WorldForging.Controllers
         public IActionResult Get(int id)
         {
             //ArticleViewModel avm = Mapper.Map<ArticleViewModel>(Article);
-            var article = DbContext.Articles.Where(i => i.Id == id).FirstOrDefault();
-            if (article != null) return new JsonResult(Mapper.Map<ArticleViewModel>(article), DefaultJsonSettings);
+            var article = DbContext.Articles
+                .Where(i => i.Id == id)
+                //.Include(a=>a.Entity )
+                .Include(a => a.Entity.EntityRelationships)
+                    .ThenInclude(e => e.Relationship)
+                .Include(a => a.Entity.EntityRelationships)
+                    .ThenInclude(e => e.Entity1)
+                .Include(a => a.Entity.EntityRelationships)
+                    .ThenInclude(e => e.Entity2)
+
+                .FirstOrDefault();
+            
+            var avm = Mapper.Map<ArticleViewModel>(article);
+            
+            if (article != null) return new JsonResult(avm, DefaultJsonSettings);
             else return NotFound(new { Error = String.Format("Article ID {0} has not been found", id) });
         }
 
