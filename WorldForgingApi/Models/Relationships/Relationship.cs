@@ -48,4 +48,37 @@ namespace WorldForging.Models
 
         #endregion Related Properties
     }
+
+    public class RelationshipDTO
+    {
+        #region Constructor
+        public RelationshipDTO()
+        {
+
+        }
+        #endregion Constructor
+
+        #region Properties
+        [Key]
+        [Required]
+        public int Id { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Required]
+        public string Description { get; set; }
+
+        public int? InverseRelationshipId { get; set; }
+
+
+
+        [Required]
+        public string UserId { get; set; }
+
+        [Required]
+        public DateTime CreatedDate { get; set; }
+        [Required]
+        public DateTime LastModifiedDate { get; set; }
+        #endregion Properties
+
+    }
 }

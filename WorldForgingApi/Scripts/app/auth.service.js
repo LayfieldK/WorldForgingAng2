@@ -30,7 +30,6 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
             AuthService = (function () {
                 function AuthService(http) {
                     this.http = http;
-                    this.authKey = "auth";
                 }
                 AuthService.prototype.login = function (username, password) {
                     var _this = this;
@@ -102,6 +101,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                 };
                 // Returns TRUE if the user is logged in, FALSE otherwise.
                 AuthService.prototype.isLoggedIn = function () {
+                    //console.log(this.authKey);
                     return localStorage.getItem(this.authKey) != null;
                 };
                 AuthService.prototype.get = function () {

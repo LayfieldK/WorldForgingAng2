@@ -198,6 +198,11 @@ namespace WorldForgingApi
                 }
             });
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseMvc();
 
             // Seed the Database (if needed)
@@ -220,8 +225,12 @@ namespace WorldForgingApi
 
                 cfg.CreateMap<EntityRelationship, EntityRelationshipDTO>()
                     .ForMember(dest => dest.Entity1Name, source => source.MapFrom(x => x.Entity1.Name))
-                    .ForMember(dest => dest.Entity2Name, source => source.MapFrom(x => x.Entity2.Name));
+                    .ForMember(dest => dest.Entity2Name, source => source.MapFrom(x => x.Entity2.Name))
+                    .ForMember(dest => dest.RelationshipDescription, source => source.MapFrom(x => x.Relationship.Description))
+                    .ForMember(dest => dest.RelationshipId, source => source.MapFrom(x => x.Relationship.Id));
                 //cfg.CreateMap<FlatEntity, Entity>().ReverseMap();
+
+                cfg.CreateMap<Relationship, RelationshipDTO>();
 
                 cfg.CreateMap<Story, StoryViewModel>().ReverseMap();
                 

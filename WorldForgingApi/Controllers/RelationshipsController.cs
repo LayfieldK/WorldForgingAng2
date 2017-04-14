@@ -36,7 +36,7 @@ namespace WorldForging.Controllers
         [HttpGet()]
         public IActionResult Get()
         {
-            return NotFound(new { Error = "not found" });
+            return new JsonResult(Mapper.Map<RelationshipDTO[]>(DbContext.Relationships.ToArray()), DefaultJsonSettings);
         }
 
         /// <summary>

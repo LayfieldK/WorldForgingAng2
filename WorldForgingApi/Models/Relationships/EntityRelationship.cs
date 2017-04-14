@@ -71,6 +71,10 @@ namespace WorldForging.Models
 
         public string Description { get; set; }
 
+        public string RelationshipDescription { get; set; }
+
+        public string RelationshipId { get; set; }
+
         public int? Entity1Id { get; set; }
 
         public string Entity1Name { get; set; }

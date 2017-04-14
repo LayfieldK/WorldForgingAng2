@@ -7,7 +7,7 @@ import {User} from "./user";
 
 @Injectable()
 export class AuthService {
-    authKey = "auth";
+    authKey : any;
 
     constructor(private http: AuthHttp) {
     }
@@ -92,6 +92,7 @@ export class AuthService {
 
     // Returns TRUE if the user is logged in, FALSE otherwise.
     isLoggedIn(): boolean {
+        //console.log(this.authKey);
         return localStorage.getItem(this.authKey) != null;
     }
 

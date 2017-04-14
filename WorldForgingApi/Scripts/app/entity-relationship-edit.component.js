@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/forms"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/forms", "./entity-relationship"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/forms"], function (exports_1, contex
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, forms_1, EntityRelationshipEditComponent;
+    var core_1, forms_1, entity_relationship_1, EntityRelationshipEditComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -18,6 +18,9 @@ System.register(["@angular/core", "@angular/forms"], function (exports_1, contex
             },
             function (forms_1_1) {
                 forms_1 = forms_1_1;
+            },
+            function (entity_relationship_1_1) {
+                entity_relationship_1 = entity_relationship_1_1;
             }
         ],
         execute: function () {
@@ -30,10 +33,18 @@ System.register(["@angular/core", "@angular/forms"], function (exports_1, contex
                 core_1.Input('group'),
                 __metadata("design:type", forms_1.FormGroup)
             ], EntityRelationshipEditComponent.prototype, "entityRelationshipForm", void 0);
+            __decorate([
+                core_1.Input('entityRelationship'),
+                __metadata("design:type", entity_relationship_1.EntityRelationship)
+            ], EntityRelationshipEditComponent.prototype, "entityRelationship", void 0);
+            __decorate([
+                core_1.Input('relationships'),
+                __metadata("design:type", Array)
+            ], EntityRelationshipEditComponent.prototype, "relationships", void 0);
             EntityRelationshipEditComponent = __decorate([
                 core_1.Component({
                     selector: "entity-relationship-edit",
-                    template: "\n          <div [formGroup]=\"entity-relationship-form\" id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              {{eRelationship.Entity1Name}} {{eRelationship.Relationship.Description}} {{eRelationship.Entity2Name}}\n                <select></select>\n                <select></select>\n            </div>\n          </div>\n    ",
+                    template: "\n          <div [formGroup]=\"entityRelationshipForm\"  id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              <input type=\"text\" class=\"form-control\" formControlName=\"Entity1Name\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"Description\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"RelationshipDescription\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"RelationshipId\">\n              {{entityRelationship.Entity1Name}} {{entityRelationship.Description}} {{entityRelationship.Entity2Name}}\n              <select class=\"form-control\" formControlName=\"Relationship\">\n                    <option *ngFor=\"let relationship of relationships\" [value]=\"relationship.Id\">{{relationship.Description}}</option>\n              </select>\n            </div>\n          </div>\n    ",
                     styles: []
                 }),
                 __metadata("design:paramtypes", [])

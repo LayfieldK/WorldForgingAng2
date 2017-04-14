@@ -3,9 +3,11 @@ import { Router, ActivatedRoute, Params} from "@angular/router";
 import {Article} from "./article";
 import {AuthService} from "./auth.service";
 import { ArticleService } from "./article.service";
+import { RelationshipService } from "./relationship.service";
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { EntityRelationshipEditComponent } from "./entity-relationship-edit.component";
 import { EntityRelationship } from "./entity-relationship";
+import { Relationship } from "./relationship";
 
 @Component({
     selector: "article-detail-edit",
@@ -58,7 +60,7 @@ import { EntityRelationship } from "./entity-relationship";
                           <span class="glyphicon glyphicon-remove pull-right" *ngIf="editArticleForm.controls.entityRelationships.controls.length > 1" (click)="removeEntityRelationship(i)"></span>
                         </div>
                         <div class="panel-body" [formGroupName]="i">
-                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship"></entity-relationship-edit>
+                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship.value" [relationships]="relationships"></entity-relationship-edit>
                         </div>
                       </div>
                     </div>
@@ -89,6 +91,7 @@ import { EntityRelationship } from "./entity-relationship";
 
 export class ArticleDetailEditComponent {
     article: Article;
+    relationships: Relationship[];
 
     editArticleForm: FormGroup;
     
@@ -96,6 +99,7 @@ export class ArticleDetailEditComponent {
     constructor(
         private authService: AuthService,
         private articleService: ArticleService,
+        private relationshipService: RelationshipService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
         private formBuilder: FormBuilder) { }
@@ -108,6 +112,11 @@ export class ArticleDetailEditComponent {
             text: ['', Validators.required],
             entityRelationships: this.formBuilder.array([this.initEntityRelationship()])
         });
+
+        this.relationshipService.getAll().subscribe(
+            (data) => this.relationships = data,
+            (error) => console.log(error)
+        );
 
         if (!this.authService.isLoggedIn()) {
             this.router.navigate([""]);
@@ -192,7 +201,8 @@ export class ArticleDetailEditComponent {
 
     initEntityRelationship() {
         return this.formBuilder.group({
-            Entity1Name: "test"
+            Entity1Name: "test",
+            Relationship: new FormControl()
             //street: ['street address', Validators.required]
             //postcode: ['']
         });
@@ -200,6 +210,7 @@ export class ArticleDetailEditComponent {
 
     setEntityRelationships(entityRelationships: EntityRelationship[]) {
         const entityRelationshipFGs = entityRelationships.map(entityRelationship => this.formBuilder.group(entityRelationship));
+
         const entityRelationshipFormArray = this.formBuilder.array(entityRelationshipFGs);
         this.editArticleForm.setControl('entityRelationships', entityRelationshipFormArray);
     }
