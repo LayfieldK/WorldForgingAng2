@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./about.component", "./app.component", "./home.component", "./article-detail-view.component", "./article-detail-edit.component", "./entity-relationship-edit.component", "./article-list.component", "./story-detail-view.component", "./story-detail-edit.component", "./story-list.component", "./login.component", "./page-not-found.component", "./user-edit.component", "./search.component", "./dummy.component", "./app.routing", "./auth.http", "./auth.service", "./article.service", "./story.service", "./relationship.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/http", "@angular/forms", "@angular/router", "rxjs/Rx", "./about.component", "./app.component", "./home.component", "./article-detail-view.component", "./article-detail-edit.component", "./entity-relationship-edit.component", "./article-list.component", "./story-detail-view.component", "./story-detail-edit.component", "./story-list.component", "./login.component", "./page-not-found.component", "./user-edit.component", "./search.component", "./dummy.component", "./app.routing", "./auth.http", "./auth.service", "./article.service", "./story.service", "./relationship.service", "./entity.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, http_1, forms_1, router_1, about_component_1, app_component_1, home_component_1, article_detail_view_component_1, article_detail_edit_component_1, entity_relationship_edit_component_1, article_list_component_1, story_detail_view_component_1, story_detail_edit_component_1, story_list_component_1, login_component_1, page_not_found_component_1, user_edit_component_1, search_component_1, dummy_component_1, app_routing_1, auth_http_1, auth_service_1, article_service_1, story_service_1, relationship_service_1, AppModule;
+    var core_1, platform_browser_1, http_1, forms_1, router_1, about_component_1, app_component_1, home_component_1, article_detail_view_component_1, article_detail_edit_component_1, entity_relationship_edit_component_1, article_list_component_1, story_detail_view_component_1, story_detail_edit_component_1, story_list_component_1, login_component_1, page_not_found_component_1, user_edit_component_1, search_component_1, dummy_component_1, app_routing_1, auth_http_1, auth_service_1, article_service_1, story_service_1, relationship_service_1, entity_service_1, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -89,6 +89,9 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
             },
             function (relationship_service_1_1) {
                 relationship_service_1 = relationship_service_1_1;
+            },
+            function (entity_service_1_1) {
+                entity_service_1 = entity_service_1_1;
             }
         ],
         execute: function () {
@@ -132,6 +135,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/http", 
                         article_service_1.ArticleService,
                         story_service_1.StoryService,
                         relationship_service_1.RelationshipService,
+                        entity_service_1.EntityService,
                         auth_service_1.AuthService
                     ],
                     bootstrap: [

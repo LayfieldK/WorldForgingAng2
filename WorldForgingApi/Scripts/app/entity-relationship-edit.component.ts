@@ -2,6 +2,7 @@
 import { FormGroup } from '@angular/forms';
 import { EntityRelationship } from "./entity-relationship"
 import { Relationship } from "./relationship"
+import { Entity } from "./entity"
 
 
 @Component({
@@ -9,11 +10,12 @@ import { Relationship } from "./relationship"
     template: `
           <div [formGroup]="entityRelationshipForm"  id="entity-relationship-edit-component">
             <div  class="relationship-item" >
-              <input type="text" class="form-control" formControlName="Entity1Name">
-              <input type="text" class="form-control" formControlName="Description">
-              <input type="text" class="form-control" formControlName="RelationshipDescription">
-              <input type="text" class="form-control" formControlName="RelationshipId">
-              <input type="text" class="form-control" formControlName="Entity2Name">
+              
+
+              
+              <select class="form-control" formControlName="Entity2Id">
+                    <option *ngFor="let entity of entities" [value]="entity.Id">{{entity.Name}}</option>
+              </select>
               
               <select class="form-control" formControlName="Relationship">
                     <option *ngFor="let relationship of relationships" [value]="relationship.Id">{{relationship.Description}}</option>
@@ -35,6 +37,9 @@ export class EntityRelationshipEditComponent {
     @Input('relationships')
     public relationships: Relationship[];
 
+    @Input('entities')
+    public entities: Entity[];
+
     constructor() {
         //this.entityRelationshipForm.patchValue({
         //    Relationship: this.entityRelationship.RelationshipId
@@ -42,11 +47,14 @@ export class EntityRelationshipEditComponent {
     }
 
     ngOnInit() {
-        console.log(this.entityRelationship);
-        console.log(this.entityRelationshipForm);
-        console.log(this.relationships);
+        //console.log(this.entityRelationship);
+        //console.log(this.entityRelationshipForm);
+        //console.log(this.relationships);
         this.entityRelationshipForm.patchValue({
             Relationship: this.entityRelationship.RelationshipId
+        });
+        this.entityRelationshipForm.patchValue({
+            Entity2Id: this.entityRelationship.Entity2Id
         });
     }
         

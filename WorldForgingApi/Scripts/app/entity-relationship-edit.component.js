@@ -26,7 +26,21 @@ System.register(["@angular/core", "@angular/forms", "./entity-relationship"], fu
         execute: function () {
             EntityRelationshipEditComponent = (function () {
                 function EntityRelationshipEditComponent() {
+                    //this.entityRelationshipForm.patchValue({
+                    //    Relationship: this.entityRelationship.RelationshipId
+                    //});
                 }
+                EntityRelationshipEditComponent.prototype.ngOnInit = function () {
+                    console.log(this.entityRelationship);
+                    console.log(this.entityRelationshipForm);
+                    console.log(this.relationships);
+                    this.entityRelationshipForm.patchValue({
+                        Relationship: this.entityRelationship.RelationshipId
+                    });
+                    this.entityRelationshipForm.patchValue({
+                        Entity2Id: this.entityRelationship.Entity2Id
+                    });
+                };
                 return EntityRelationshipEditComponent;
             }());
             __decorate([
@@ -41,10 +55,14 @@ System.register(["@angular/core", "@angular/forms", "./entity-relationship"], fu
                 core_1.Input('relationships'),
                 __metadata("design:type", Array)
             ], EntityRelationshipEditComponent.prototype, "relationships", void 0);
+            __decorate([
+                core_1.Input('entities'),
+                __metadata("design:type", Array)
+            ], EntityRelationshipEditComponent.prototype, "entities", void 0);
             EntityRelationshipEditComponent = __decorate([
                 core_1.Component({
                     selector: "entity-relationship-edit",
-                    template: "\n          <div [formGroup]=\"entityRelationshipForm\"  id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              <input type=\"text\" class=\"form-control\" formControlName=\"Entity1Name\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"Description\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"RelationshipDescription\">\n              <input type=\"text\" class=\"form-control\" formControlName=\"RelationshipId\">\n              {{entityRelationship.Entity1Name}} {{entityRelationship.Description}} {{entityRelationship.Entity2Name}}\n              <select class=\"form-control\" formControlName=\"Relationship\">\n                    <option *ngFor=\"let relationship of relationships\" [value]=\"relationship.Id\">{{relationship.Description}}</option>\n              </select>\n            </div>\n          </div>\n    ",
+                    template: "\n          <div [formGroup]=\"entityRelationshipForm\"  id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              \n\n              \n              <select class=\"form-control\" formControlName=\"Entity2Id\">\n                    <option *ngFor=\"let entity of entities\" [value]=\"entity.Id\">{{entity.Name}}</option>\n              </select>\n              \n              <select class=\"form-control\" formControlName=\"Relationship\">\n                    <option *ngFor=\"let relationship of relationships\" [value]=\"relationship.Id\">{{relationship.Description}}</option>\n              </select>\n            </div>\n          </div>\n    ",
                     styles: []
                 }),
                 __metadata("design:paramtypes", [])

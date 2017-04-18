@@ -3,11 +3,13 @@ import { Router, ActivatedRoute, Params} from "@angular/router";
 import {Article} from "./article";
 import {AuthService} from "./auth.service";
 import { ArticleService } from "./article.service";
+import { EntityService } from "./entity.service";
 import { RelationshipService } from "./relationship.service";
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { EntityRelationshipEditComponent } from "./entity-relationship-edit.component";
 import { EntityRelationship } from "./entity-relationship";
 import { Relationship } from "./relationship";
+import { Entity } from "./entity"
 
 @Component({
     selector: "article-detail-edit",
@@ -60,7 +62,7 @@ import { Relationship } from "./relationship";
                           <span class="glyphicon glyphicon-remove pull-right" *ngIf="editArticleForm.controls.entityRelationships.controls.length > 1" (click)="removeEntityRelationship(i)"></span>
                         </div>
                         <div class="panel-body" [formGroupName]="i">
-                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship.value" [relationships]="relationships"></entity-relationship-edit>
+                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship.value" [relationships]="relationships" [entities]="entities"></entity-relationship-edit>
                         </div>
                       </div>
                     </div>
@@ -92,6 +94,7 @@ import { Relationship } from "./relationship";
 export class ArticleDetailEditComponent {
     article: Article;
     relationships: Relationship[];
+    entities: Entity[];
 
     editArticleForm: FormGroup;
     
@@ -99,6 +102,7 @@ export class ArticleDetailEditComponent {
     constructor(
         private authService: AuthService,
         private articleService: ArticleService,
+        private entityService: EntityService,
         private relationshipService: RelationshipService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
@@ -118,6 +122,11 @@ export class ArticleDetailEditComponent {
             (error) => console.log(error)
         );
 
+        this.entityService.getAll().subscribe(
+            (data) => this.entities = data,
+            (error) => console.log(error)
+        );
+
         if (!this.authService.isLoggedIn()) {
             this.router.navigate([""]);
         }
@@ -127,12 +136,12 @@ export class ArticleDetailEditComponent {
             .do(id => {
                 console.log(id);
                 if (id) {
-                    console.log(id);
+                    //console.log(id);
                 } else if (id === 0) {
-                    console.log("id is 0: adding a new article...");
+                    //console.log("id is 0: adding a new article...");
                     this.article = new Article(0, "New Article", null, null, null);
                 } else {
-                    console.log("Invalid id: routing back to home...");
+                    //console.log("Invalid id: routing back to home...");
                     this.router.navigate([""]);
                 }
             })
@@ -201,7 +210,8 @@ export class ArticleDetailEditComponent {
 
     initEntityRelationship() {
         return this.formBuilder.group({
-            Entity1Name: "test",
+            Entity2Id: 0,
+            Entity2Name: "test",
             Relationship: new FormControl()
             //street: ['street address', Validators.required]
             //postcode: ['']

@@ -32,4 +32,23 @@ namespace WorldForging.Models
 
         public virtual EntityType EntityType { get; set; }
     }
+
+    public class EntityDTO
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
+        [Required]
+        public DateTime CreatedDate { get; set; }
+
+        [Required]
+        public DateTime LastModifiedDate { get; set; }
+
+        
+        public virtual EntityType EntityType { get; set; }
+    }
 }

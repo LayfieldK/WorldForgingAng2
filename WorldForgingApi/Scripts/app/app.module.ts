@@ -28,6 +28,7 @@ import {AuthService} from "./auth.service";
 import {ArticleService} from "./article.service";
 import { StoryService } from "./story.service";
 import { RelationshipService } from "./relationship.service";
+import { EntityService } from "./entity.service";
 
 @NgModule({
     // directives, components, and pipes
@@ -63,6 +64,7 @@ import { RelationshipService } from "./relationship.service";
         ArticleService,
         StoryService,
         RelationshipService,
+        EntityService,
         AuthService
     ],
     bootstrap: [

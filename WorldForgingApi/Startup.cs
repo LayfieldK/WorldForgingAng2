@@ -232,6 +232,8 @@ namespace WorldForgingApi
 
                 cfg.CreateMap<Relationship, RelationshipDTO>();
 
+                cfg.CreateMap<Entity, EntityDTO>();
+
                 cfg.CreateMap<Story, StoryViewModel>().ReverseMap();
                 
             });
