@@ -54,24 +54,6 @@ import { Entity } from "./entity"
                         <label for="input-text">Text</label>
                         <textarea id="input-text" name="input-text" class="form-control" formControlName="description" placeholder="Insert a suitable description..."></textarea>
                     </div>
-                    <!--entityRelationships-->
-                    <div formArrayName="entityRelationships">
-                      <div *ngFor="let entityRelationship of editArticleForm.controls.entityRelationships.controls; let i=index" class="panel panel-default">
-                        <div class="panel-heading">
-                          <span>Relationship {{i + 1}}</span>
-                          <span class="glyphicon glyphicon-remove pull-right" *ngIf="editArticleForm.controls.entityRelationships.controls.length > 1" (click)="removeEntityRelationship(i)"></span>
-                        </div>
-                        <div class="panel-body" [formGroupName]="i">
-                          <entity-relationship-edit [group]="editArticleForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship.value" [relationships]="relationships" [entities]="entities"></entity-relationship-edit>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="margin-20">
-                      <a (click)="addEntityRelationship()" style="cursor: default">
-                        Add another relationship +
-                      </a>
-                    </div>
 
                     <div *ngIf="article.Id == 0" class="commands insert">
                         <input type="button" class="btn btn-primary" value="Save" (click)="onInsert()" />
@@ -81,6 +63,29 @@ import { Entity } from "./entity"
                         <input type="button" class="btn btn-primary" value="Update" (click)="onUpdate()" />
                         <input type="button" class="btn btn-danger" value="Delete" (click)="onDelete(article)" />
                         <input type="button" class="btn btn-default" value="Cancel" (click)="onArticleDetailView(article)" />
+                    </div>
+                    
+
+                    
+                </form>
+                <form class="article-detail-edit" novalidate [formGroup]="editEntityRelationshipsForm">
+                    <!--entityRelationships-->
+                    <div formArrayName="entityRelationships">
+                      <div *ngFor="let entityRelationship of editEntityRelationshipsForm.controls.entityRelationships.controls; let i=index" class="panel panel-default">
+                        <div class="panel-heading">
+                          <span>Relationship {{i + 1}}</span>
+                          <span class="glyphicon glyphicon-remove pull-right" *ngIf="editEntityRelationshipsForm.controls.entityRelationships.controls.length > 1" (click)="removeEntityRelationship(i)"></span>
+                        </div>
+                        <div class="panel-body" [formGroupName]="i">
+                          <entity-relationship-edit [group]="editEntityRelationshipsForm.controls.entityRelationships.controls[i]" [entityRelationship]="entityRelationship.value" [relationships]="relationships" [entities]="entities"></entity-relationship-edit>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="margin-20">
+                      <a (click)="addEntityRelationship()" style="cursor: default">
+                        Add another relationship +
+                      </a>
                     </div>
                 </form>
             </div>
@@ -97,6 +102,7 @@ export class ArticleDetailEditComponent {
     entities: Entity[];
 
     editArticleForm: FormGroup;
+    editEntityRelationshipsForm: FormGroup;
     
 
     constructor(
@@ -109,11 +115,14 @@ export class ArticleDetailEditComponent {
         private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        console.log('article detail edit init');
+        
         this.editArticleForm = this.formBuilder.group({
             title: ['', Validators.required],
             description: ['', Validators.required],
-            text: ['', Validators.required],
+            text: ['', Validators.required]
+        });
+
+        this.editEntityRelationshipsForm = this.formBuilder.group({
             entityRelationships: this.formBuilder.array([this.initEntityRelationship()])
         });
 
@@ -222,7 +231,7 @@ export class ArticleDetailEditComponent {
         const entityRelationshipFGs = entityRelationships.map(entityRelationship => this.formBuilder.group(entityRelationship));
 
         const entityRelationshipFormArray = this.formBuilder.array(entityRelationshipFGs);
-        this.editArticleForm.setControl('entityRelationships', entityRelationshipFormArray);
+        this.editEntityRelationshipsForm.setControl('entityRelationships', entityRelationshipFormArray);
     }
 
     //get secretLairs(): FormArray {
@@ -231,13 +240,13 @@ export class ArticleDetailEditComponent {
 
     addEntityRelationship() {
         // add EntityRelationship to the list
-        const control = <FormArray>this.editArticleForm.controls['entityRelationships'];
+        const control = <FormArray>this.editEntityRelationshipsForm.controls['entityRelationships'];
         control.push(this.initEntityRelationship());
     }
 
     removeEntityRelationship(i: number) {
         // remove EntityRelationship from the list
-        const control = <FormArray>this.editArticleForm.controls['entityRelationships'];
+        const control = <FormArray>this.editEntityRelationshipsForm.controls['entityRelationships'];
         control.removeAt(i);
     }
 

@@ -31,9 +31,9 @@ System.register(["@angular/core", "@angular/forms", "./entity-relationship"], fu
                     //});
                 }
                 EntityRelationshipEditComponent.prototype.ngOnInit = function () {
-                    console.log(this.entityRelationship);
-                    console.log(this.entityRelationshipForm);
-                    console.log(this.relationships);
+                    //console.log(this.entityRelationship);
+                    //console.log(this.entityRelationshipForm);
+                    //console.log(this.relationships);
                     this.entityRelationshipForm.patchValue({
                         Relationship: this.entityRelationship.RelationshipId
                     });
