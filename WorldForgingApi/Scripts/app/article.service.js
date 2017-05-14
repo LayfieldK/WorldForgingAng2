@@ -87,6 +87,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
                 };
                 // calls the [PUT] /api/articles/{id} Web API method to update an existing article.
                 ArticleService.prototype.update = function (article) {
+                    console.log(article);
                     var url = this.baseUrl + article.Id;
                     return this.http.put(url, JSON.stringify(article), this.getRequestOptions())
                         .map(function (response) { return response.json(); })

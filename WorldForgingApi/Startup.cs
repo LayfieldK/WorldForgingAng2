@@ -32,12 +32,12 @@ namespace WorldForgingApi
             if (env.IsEnvironment("Development"))
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets<Startup>();
+                builder.AddUserSecrets();
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 //builder.AddApplicationInsightsSettings(developerMode: true);
 
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets<Startup>();
+                builder.AddUserSecrets();
 
             }
 
@@ -227,12 +227,12 @@ namespace WorldForgingApi
                     .ForMember(dest => dest.Entity1Name, source => source.MapFrom(x => x.Entity1.Name))
                     .ForMember(dest => dest.Entity2Name, source => source.MapFrom(x => x.Entity2.Name))
                     .ForMember(dest => dest.RelationshipDescription, source => source.MapFrom(x => x.Relationship.Description))
-                    .ForMember(dest => dest.RelationshipId, source => source.MapFrom(x => x.Relationship.Id));
+                    .ForMember(dest => dest.RelationshipId, source => source.MapFrom(x => x.Relationship.Id)).ReverseMap();
                 //cfg.CreateMap<FlatEntity, Entity>().ReverseMap();
 
-                cfg.CreateMap<Relationship, RelationshipDTO>();
+                cfg.CreateMap<Relationship, RelationshipDTO>().ReverseMap();
 
-                cfg.CreateMap<Entity, EntityDTO>();
+                cfg.CreateMap<Entity, EntityDTO>().ReverseMap();
 
                 cfg.CreateMap<Story, StoryViewModel>().ReverseMap();
                 

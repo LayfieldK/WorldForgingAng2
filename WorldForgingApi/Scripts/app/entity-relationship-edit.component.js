@@ -35,7 +35,7 @@ System.register(["@angular/core", "@angular/forms", "./entity-relationship"], fu
                     //console.log(this.entityRelationshipForm);
                     //console.log(this.relationships);
                     this.entityRelationshipForm.patchValue({
-                        Relationship: this.entityRelationship.RelationshipId
+                        RelationshipId: this.entityRelationship.RelationshipId
                     });
                     this.entityRelationshipForm.patchValue({
                         Entity2Id: this.entityRelationship.Entity2Id
@@ -62,7 +62,7 @@ System.register(["@angular/core", "@angular/forms", "./entity-relationship"], fu
             EntityRelationshipEditComponent = __decorate([
                 core_1.Component({
                     selector: "entity-relationship-edit",
-                    template: "\n          <div [formGroup]=\"entityRelationshipForm\"  id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              \n\n              \n              <select class=\"form-control\" formControlName=\"Entity2Id\">\n                    <option *ngFor=\"let entity of entities\" [value]=\"entity.Id\">{{entity.Name}}</option>\n              </select>\n              \n              <select class=\"form-control\" formControlName=\"Relationship\">\n                    <option *ngFor=\"let relationship of relationships\" [value]=\"relationship.Id\">{{relationship.Description}}</option>\n              </select>\n            </div>\n          </div>\n    ",
+                    template: "\n          <div [formGroup]=\"entityRelationshipForm\"  id=\"entity-relationship-edit-component\">\n            <div  class=\"relationship-item\" >\n              \n              <select  formControlName=\"RelationshipId\">\n                    <option *ngFor=\"let relationship of relationships\" [value]=\"relationship.Id\">{{relationship.Description}}</option>\n              </select>\n              \n              <select formControlName=\"Entity2Id\">\n                    <option *ngFor=\"let entity of entities\" [value]=\"entity.Id\">{{entity.Name}}</option>\n              </select>\n              \n              \n            </div>\n          </div>\n    ",
                     styles: []
                 }),
                 __metadata("design:paramtypes", [])

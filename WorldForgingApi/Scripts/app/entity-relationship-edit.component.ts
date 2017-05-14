@@ -11,15 +11,15 @@ import { Entity } from "./entity"
           <div [formGroup]="entityRelationshipForm"  id="entity-relationship-edit-component">
             <div  class="relationship-item" >
               
-
+              <select  formControlName="RelationshipId">
+                    <option *ngFor="let relationship of relationships" [value]="relationship.Id">{{relationship.Description}}</option>
+              </select>
               
-              <select class="form-control" formControlName="Entity2Id">
+              <select formControlName="Entity2Id">
                     <option *ngFor="let entity of entities" [value]="entity.Id">{{entity.Name}}</option>
               </select>
               
-              <select class="form-control" formControlName="Relationship">
-                    <option *ngFor="let relationship of relationships" [value]="relationship.Id">{{relationship.Description}}</option>
-              </select>
+              
             </div>
           </div>
     `,
@@ -51,7 +51,7 @@ export class EntityRelationshipEditComponent {
         //console.log(this.entityRelationshipForm);
         //console.log(this.relationships);
         this.entityRelationshipForm.patchValue({
-            Relationship: this.entityRelationship.RelationshipId
+            RelationshipId: this.entityRelationship.RelationshipId
         });
         this.entityRelationshipForm.patchValue({
             Entity2Id: this.entityRelationship.Entity2Id

@@ -63,6 +63,7 @@ export class ArticleService {
 
     // calls the [PUT] /api/articles/{id} Web API method to update an existing article.
     update(article: Article) {
+        console.log(article);
         var url = this.baseUrl + article.Id;
         return this.http.put(url, JSON.stringify(article), this.getRequestOptions())
             .map(response => response.json())

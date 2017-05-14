@@ -31,7 +31,7 @@ import 'rxjs/add/operator/map';
                 <h3>{{article.Title}}</h3>
                 <p>{{article.Description}}</p>
                 <p>{{article.Text}}</p>
-                <p *ngFor="let eRelationship of article.EntityRelationships">{{eRelationship.Entity1Name}} {{eRelationship.Relationship.Description}} {{eRelationship.Entity2Name}}</p>
+                <p *ngFor="let eRelationship of article.EntityRelationships">{{eRelationship.Entity1Name}} {{eRelationship.RelationshipDescription}} {{eRelationship.Entity2Name}}</p>
             </div>
         </div>
     </div>

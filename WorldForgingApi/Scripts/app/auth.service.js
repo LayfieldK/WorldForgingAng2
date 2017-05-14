@@ -30,6 +30,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/Observable", "./auth.ht
             AuthService = (function () {
                 function AuthService(http) {
                     this.http = http;
+                    this.authKey = "auth";
                 }
                 AuthService.prototype.login = function (username, password) {
                     var _this = this;

@@ -119,7 +119,8 @@ export class ArticleDetailEditComponent {
         this.editArticleForm = this.formBuilder.group({
             title: ['', Validators.required],
             description: ['', Validators.required],
-            text: ['', Validators.required]
+            text: ['', Validators.required],
+            entityRelationships: this.formBuilder.array([])
         });
 
         this.editEntityRelationshipsForm = this.formBuilder.group({
@@ -250,14 +251,26 @@ export class ArticleDetailEditComponent {
         control.removeAt(i);
     }
 
+    get entityRelationships(): FormArray {
+        console.log("get entityRelationships");
+        return this.editArticleForm.get('entityRelationships') as FormArray;
+    };
+
     prepareSaveArticle(): Article {
         const formModel = this.editArticleForm.value;
+        const erFormModel = this.editEntityRelationshipsForm.value;
+        console.log("get entityRelationships");
+        console.log(erFormModel.entityRelationships);
+        const entityRelationshipsDeepCopy: EntityRelationship[] = erFormModel.entityRelationships.map(
+            (entityRelationship: EntityRelationship) => Object.assign({}, entityRelationship)
+        );
+
         const saveArticle: Article = {
             Id: this.article.Id,
             Title: formModel.title,
             Description: formModel.description,
             Text: formModel.text,
-            EntityRelationships: null
+            EntityRelationships: entityRelationshipsDeepCopy
         };
         return saveArticle;
     }

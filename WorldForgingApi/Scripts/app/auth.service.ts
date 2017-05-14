@@ -7,7 +7,7 @@ import {User} from "./user";
 
 @Injectable()
 export class AuthService {
-    authKey : any;
+    authKey = "auth";
 
     constructor(private http: AuthHttp) {
     }

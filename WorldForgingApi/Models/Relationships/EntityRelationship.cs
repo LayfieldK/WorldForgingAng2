@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -95,9 +96,11 @@ namespace WorldForging.Models
         /// <summary>
         /// Current Item's Author: this property will be loaded on first use using EF's Lazy-Loading feature.
         /// </summary>
+        
+        [JsonIgnore]
         [ForeignKey("UserId")]
         public virtual ApplicationUser Author { get; set; }
-
+        [JsonIgnore]
         public virtual Relationship Relationship { get; set; }
 
         #endregion Related Properties

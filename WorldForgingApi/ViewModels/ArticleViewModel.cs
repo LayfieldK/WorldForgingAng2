@@ -24,7 +24,7 @@ namespace WorldForging.ViewModels
         public string Description { get; set; }
         public string Text { get; set; }
         public string Notes { get; set; }
-        public ICollection<EntityRelationshipDTO> EntityRelationships { get; set; }
+        public EntityRelationshipDTO[] EntityRelationships { get; set; }
         [DefaultValue(0)]
         public int Type { get; set; }
         [DefaultValue(0)]
